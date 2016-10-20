@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_sinapay_transactions">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND sinapay_transactions.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND sinapay_transactions.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND sinapay_transactions.last_modified_dt = #{lastModified_dt}</if> <if test="userId != null and '' != userId" > AND sinapay_transactions.user_id = #{userId}</if> <if test="dt != null and '' != dt" > AND sinapay_transactions.dt = #{dt}</if> <if test="amount != null and '' != amount" > AND sinapay_transactions.amount = #{amount}</if> <if test="balanceAfter != null and '' != balanceAfter" > AND sinapay_transactions.balance_after = #{balanceAfter}</if> <if test="type != null and '' != type" > AND sinapay_transactions.type = #{type}</if> <if test="summary != null and '' != summary" > AND sinapay_transactions.summary = #{summary}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="dt != null and '' != dt" > AND dt = #{dt}</if> <if test="amount != null and '' != amount" > AND amount = #{amount}</if> <if test="balanceAfter != null and '' != balanceAfter" > AND balance_after = #{balanceAfter}</if> <if test="type != null and '' != type" > AND type = #{type}</if> <if test="summary != null and '' != summary" > AND summary = #{summary}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_sinapay_transactions AS sinapay_transactions
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT sinapay_transactions.id as id, sinapay_transactions.created_dt as createdDt, sinapay_transactions.last_modified_dt as lastModified_dt, sinapay_transactions.user_id as userId, sinapay_transactions.dt as dt, sinapay_transactions.amount as amount, sinapay_transactions.balance_after as balanceAfter, sinapay_transactions.type as type, sinapay_transactions.summary as summary FROM v2_sinapay_transactions AS sinapay_transactions WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT sinapay_transactions.id as id, sinapay_transactions.created_dt as createdDt, sinapay_transactions.last_modified_dt as lastModified_dt, sinapay_transactions.user_id as userId, sinapay_transactions.dt as dt, sinapay_transactions.amount as amount, sinapay_transactions.balance_after as balanceAfter, sinapay_transactions.type as type, sinapay_transactions.summary as summary FROM v2_sinapay_transactions AS sinapay_transactions
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT sinapay_transactions.id as id, sinapay_transactions.created_dt as createdDt, sinapay_transactions.last_modified_dt as lastModified_dt, sinapay_transactions.user_id as userId, sinapay_transactions.dt as dt, sinapay_transactions.amount as amount, sinapay_transactions.balance_after as balanceAfter, sinapay_transactions.type as type, sinapay_transactions.summary as summary FROM v2_sinapay_transactions AS sinapay_transactions  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_sinapay_transactions 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="userId != null">user_id,</if><if test="dt != null">dt,</if><if test="amount != null">amount,</if><if test="balanceAfter != null">balance_after,</if><if test="type != null">type,</if><if test="summary != null">summary,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="userId != null">#{userId},</if><if test="dt != null">#{dt},</if><if test="amount != null">#{amount},</if><if test="balanceAfter != null">#{balanceAfter},</if><if test="type != null">#{type},</if><if test="summary != null">#{summary},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_sinapay_transactions (id,created_dt,last_modified_dt,user_id,dt,amount,balance_after,type,summary)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.userId},#{item.dt},#{item.amount},#{item.balanceAfter},#{item.type},#{item.summary})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_sinapay_transactions
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="dt != null" >  dt = #{dt}, </if><if test="amount != null" >  amount = #{amount}, </if><if test="balanceAfter != null" >  balance_after = #{balanceAfter}, </if><if test="type != null" >  type = #{type}, </if><if test="summary != null" >  summary = #{summary}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_sinapay_transactions 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_sinapay_transactions 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

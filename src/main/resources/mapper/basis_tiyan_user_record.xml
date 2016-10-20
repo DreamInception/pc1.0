@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_user_record">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="urId != null and '' != urId" > AND tiyan_user_record.ur_id = #{urId}</if> <if test="otId != null and '' != otId" > AND tiyan_user_record.ot_id = #{otId}</if> <if test="userId != null and '' != userId" > AND tiyan_user_record.user_id = #{userId}</if> <if test="relatedType != null and '' != relatedType" > AND tiyan_user_record.related_type = #{relatedType}</if> <if test="relatedId != null and '' != relatedId" > AND tiyan_user_record.related_id = #{relatedId}</if> <if test="rtSource != null and '' != rtSource" > AND tiyan_user_record.rt_source = #{rtSource}</if> <if test="orderId != null and '' != orderId" > AND tiyan_user_record.order_id = #{orderId}</if> <if test="otTrigger_condition != null and '' != otTrigger_condition" > AND tiyan_user_record.ot_trigger_condition = #{otTrigger_condition}</if> <if test="planId != null and '' != planId" > AND tiyan_user_record.plan_id = #{planId}</if> <if test="urTiyan_amount != null and '' != urTiyan_amount" > AND tiyan_user_record.ur_tiyan_amount = #{urTiyan_amount}</if> <if test="urPromise_rate != null and '' != urPromise_rate" > AND tiyan_user_record.ur_promise_rate = #{urPromise_rate}</if> <if test="urState != null and '' != urState" > AND tiyan_user_record.ur_state = #{urState}</if> <if test="urType != null and '' != urType" > AND tiyan_user_record.ur_type = #{urType}</if> <if test="urStart_date != null and '' != urStart_date" > AND tiyan_user_record.ur_start_date = #{urStart_date}</if> <if test="urEnd_date != null and '' != urEnd_date" > AND tiyan_user_record.ur_end_date = #{urEnd_date}</if> <if test="urDay_profit != null and '' != urDay_profit" > AND tiyan_user_record.ur_day_profit = #{urDay_profit}</if> <if test="urAccu_profit != null and '' != urAccu_profit" > AND tiyan_user_record.ur_accu_profit = #{urAccu_profit}</if> <if test="urCreate_time != null and '' != urCreate_time" > AND tiyan_user_record.ur_create_time = #{urCreate_time}</if> <if test="urModified_time != null and '' != urModified_time" > AND tiyan_user_record.ur_modified_time = #{urModified_time}</if> <if test="urTransfer_time != null and '' != urTransfer_time" > AND tiyan_user_record.ur_transfer_time = #{urTransfer_time}</if> <if test="urCollect_request_id != null and '' != urCollect_request_id" > AND tiyan_user_record.ur_collect_request_id = #{urCollect_request_id}</if> <if test="urPay_request_id != null and '' != urPay_request_id" > AND tiyan_user_record.ur_pay_request_id = #{urPay_request_id}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="urId != null and '' != urId" > AND ur_id = #{urId}</if> <if test="otId != null and '' != otId" > AND ot_id = #{otId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="relatedType != null and '' != relatedType" > AND related_type = #{relatedType}</if> <if test="relatedId != null and '' != relatedId" > AND related_id = #{relatedId}</if> <if test="rtSource != null and '' != rtSource" > AND rt_source = #{rtSource}</if> <if test="orderId != null and '' != orderId" > AND order_id = #{orderId}</if> <if test="otTrigger_condition != null and '' != otTrigger_condition" > AND ot_trigger_condition = #{otTrigger_condition}</if> <if test="planId != null and '' != planId" > AND plan_id = #{planId}</if> <if test="urTiyan_amount != null and '' != urTiyan_amount" > AND ur_tiyan_amount = #{urTiyan_amount}</if> <if test="urPromise_rate != null and '' != urPromise_rate" > AND ur_promise_rate = #{urPromise_rate}</if> <if test="urState != null and '' != urState" > AND ur_state = #{urState}</if> <if test="urType != null and '' != urType" > AND ur_type = #{urType}</if> <if test="urStart_date != null and '' != urStart_date" > AND ur_start_date = #{urStart_date}</if> <if test="urEnd_date != null and '' != urEnd_date" > AND ur_end_date = #{urEnd_date}</if> <if test="urDay_profit != null and '' != urDay_profit" > AND ur_day_profit = #{urDay_profit}</if> <if test="urAccu_profit != null and '' != urAccu_profit" > AND ur_accu_profit = #{urAccu_profit}</if> <if test="urCreate_time != null and '' != urCreate_time" > AND ur_create_time = #{urCreate_time}</if> <if test="urModified_time != null and '' != urModified_time" > AND ur_modified_time = #{urModified_time}</if> <if test="urTransfer_time != null and '' != urTransfer_time" > AND ur_transfer_time = #{urTransfer_time}</if> <if test="urCollect_request_id != null and '' != urCollect_request_id" > AND ur_collect_request_id = #{urCollect_request_id}</if> <if test="urPay_request_id != null and '' != urPay_request_id" > AND ur_pay_request_id = #{urPay_request_id}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_user_record AS tiyan_user_record
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_user_record.ur_id as urId, tiyan_user_record.ot_id as otId, tiyan_user_record.user_id as userId, tiyan_user_record.related_type as relatedType, tiyan_user_record.related_id as relatedId, tiyan_user_record.rt_source as rtSource, tiyan_user_record.order_id as orderId, tiyan_user_record.ot_trigger_condition as otTrigger_condition, tiyan_user_record.plan_id as planId, tiyan_user_record.ur_tiyan_amount as urTiyan_amount, tiyan_user_record.ur_promise_rate as urPromise_rate, tiyan_user_record.ur_state as urState, tiyan_user_record.ur_type as urType, tiyan_user_record.ur_start_date as urStart_date, tiyan_user_record.ur_end_date as urEnd_date, tiyan_user_record.ur_day_profit as urDay_profit, tiyan_user_record.ur_accu_profit as urAccu_profit, tiyan_user_record.ur_create_time as urCreate_time, tiyan_user_record.ur_modified_time as urModified_time, tiyan_user_record.ur_transfer_time as urTransfer_time, tiyan_user_record.ur_collect_request_id as urCollect_request_id, tiyan_user_record.ur_pay_request_id as urPay_request_id FROM dr_tiyan_user_record AS tiyan_user_record WHERE ur_id = #{urId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_user_record.ur_id as urId, tiyan_user_record.ot_id as otId, tiyan_user_record.user_id as userId, tiyan_user_record.related_type as relatedType, tiyan_user_record.related_id as relatedId, tiyan_user_record.rt_source as rtSource, tiyan_user_record.order_id as orderId, tiyan_user_record.ot_trigger_condition as otTrigger_condition, tiyan_user_record.plan_id as planId, tiyan_user_record.ur_tiyan_amount as urTiyan_amount, tiyan_user_record.ur_promise_rate as urPromise_rate, tiyan_user_record.ur_state as urState, tiyan_user_record.ur_type as urType, tiyan_user_record.ur_start_date as urStart_date, tiyan_user_record.ur_end_date as urEnd_date, tiyan_user_record.ur_day_profit as urDay_profit, tiyan_user_record.ur_accu_profit as urAccu_profit, tiyan_user_record.ur_create_time as urCreate_time, tiyan_user_record.ur_modified_time as urModified_time, tiyan_user_record.ur_transfer_time as urTransfer_time, tiyan_user_record.ur_collect_request_id as urCollect_request_id, tiyan_user_record.ur_pay_request_id as urPay_request_id FROM dr_tiyan_user_record AS tiyan_user_record
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_user_record.ur_id as urId, tiyan_user_record.ot_id as otId, tiyan_user_record.user_id as userId, tiyan_user_record.related_type as relatedType, tiyan_user_record.related_id as relatedId, tiyan_user_record.rt_source as rtSource, tiyan_user_record.order_id as orderId, tiyan_user_record.ot_trigger_condition as otTrigger_condition, tiyan_user_record.plan_id as planId, tiyan_user_record.ur_tiyan_amount as urTiyan_amount, tiyan_user_record.ur_promise_rate as urPromise_rate, tiyan_user_record.ur_state as urState, tiyan_user_record.ur_type as urType, tiyan_user_record.ur_start_date as urStart_date, tiyan_user_record.ur_end_date as urEnd_date, tiyan_user_record.ur_day_profit as urDay_profit, tiyan_user_record.ur_accu_profit as urAccu_profit, tiyan_user_record.ur_create_time as urCreate_time, tiyan_user_record.ur_modified_time as urModified_time, tiyan_user_record.ur_transfer_time as urTransfer_time, tiyan_user_record.ur_collect_request_id as urCollect_request_id, tiyan_user_record.ur_pay_request_id as urPay_request_id FROM dr_tiyan_user_record AS tiyan_user_record  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_user_record 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="urId != null">ur_id,</if><if test="otId != null">ot_id,</if><if test="userId != null">user_id,</if><if test="relatedType != null">related_type,</if><if test="relatedId != null">related_id,</if><if test="rtSource != null">rt_source,</if><if test="orderId != null">order_id,</if><if test="otTrigger_condition != null">ot_trigger_condition,</if><if test="planId != null">plan_id,</if><if test="urTiyan_amount != null">ur_tiyan_amount,</if><if test="urPromise_rate != null">ur_promise_rate,</if><if test="urState != null">ur_state,</if><if test="urType != null">ur_type,</if><if test="urStart_date != null">ur_start_date,</if><if test="urEnd_date != null">ur_end_date,</if><if test="urDay_profit != null">ur_day_profit,</if><if test="urAccu_profit != null">ur_accu_profit,</if><if test="urCreate_time != null">ur_create_time,</if><if test="urModified_time != null">ur_modified_time,</if><if test="urTransfer_time != null">ur_transfer_time,</if><if test="urCollect_request_id != null">ur_collect_request_id,</if><if test="urPay_request_id != null">ur_pay_request_id,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="urId != null">#{urId},</if><if test="otId != null">#{otId},</if><if test="userId != null">#{userId},</if><if test="relatedType != null">#{relatedType},</if><if test="relatedId != null">#{relatedId},</if><if test="rtSource != null">#{rtSource},</if><if test="orderId != null">#{orderId},</if><if test="otTrigger_condition != null">#{otTrigger_condition},</if><if test="planId != null">#{planId},</if><if test="urTiyan_amount != null">#{urTiyan_amount},</if><if test="urPromise_rate != null">#{urPromise_rate},</if><if test="urState != null">#{urState},</if><if test="urType != null">#{urType},</if><if test="urStart_date != null">#{urStart_date},</if><if test="urEnd_date != null">#{urEnd_date},</if><if test="urDay_profit != null">#{urDay_profit},</if><if test="urAccu_profit != null">#{urAccu_profit},</if><if test="urCreate_time != null">#{urCreate_time},</if><if test="urModified_time != null">#{urModified_time},</if><if test="urTransfer_time != null">#{urTransfer_time},</if><if test="urCollect_request_id != null">#{urCollect_request_id},</if><if test="urPay_request_id != null">#{urPay_request_id},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_user_record (ur_id,ot_id,user_id,related_type,related_id,rt_source,order_id,ot_trigger_condition,plan_id,ur_tiyan_amount,ur_promise_rate,ur_state,ur_type,ur_start_date,ur_end_date,ur_day_profit,ur_accu_profit,ur_create_time,ur_modified_time,ur_transfer_time,ur_collect_request_id,ur_pay_request_id)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.urId},#{item.otId},#{item.userId},#{item.relatedType},#{item.relatedId},#{item.rtSource},#{item.orderId},#{item.otTrigger_condition},#{item.planId},#{item.urTiyan_amount},#{item.urPromise_rate},#{item.urState},#{item.urType},#{item.urStart_date},#{item.urEnd_date},#{item.urDay_profit},#{item.urAccu_profit},#{item.urCreate_time},#{item.urModified_time},#{item.urTransfer_time},#{item.urCollect_request_id},#{item.urPay_request_id})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_user_record
+    <set>
+     <if test="urId != null" >  ur_id = #{urId}, </if><if test="otId != null" >  ot_id = #{otId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="relatedType != null" >  related_type = #{relatedType}, </if><if test="relatedId != null" >  related_id = #{relatedId}, </if><if test="rtSource != null" >  rt_source = #{rtSource}, </if><if test="orderId != null" >  order_id = #{orderId}, </if><if test="otTrigger_condition != null" >  ot_trigger_condition = #{otTrigger_condition}, </if><if test="planId != null" >  plan_id = #{planId}, </if><if test="urTiyan_amount != null" >  ur_tiyan_amount = #{urTiyan_amount}, </if><if test="urPromise_rate != null" >  ur_promise_rate = #{urPromise_rate}, </if><if test="urState != null" >  ur_state = #{urState}, </if><if test="urType != null" >  ur_type = #{urType}, </if><if test="urStart_date != null" >  ur_start_date = #{urStart_date}, </if><if test="urEnd_date != null" >  ur_end_date = #{urEnd_date}, </if><if test="urDay_profit != null" >  ur_day_profit = #{urDay_profit}, </if><if test="urAccu_profit != null" >  ur_accu_profit = #{urAccu_profit}, </if><if test="urCreate_time != null" >  ur_create_time = #{urCreate_time}, </if><if test="urModified_time != null" >  ur_modified_time = #{urModified_time}, </if><if test="urTransfer_time != null" >  ur_transfer_time = #{urTransfer_time}, </if><if test="urCollect_request_id != null" >  ur_collect_request_id = #{urCollect_request_id}, </if><if test="urPay_request_id != null" >  ur_pay_request_id = #{urPay_request_id}, </if>
+      </set>
+	  WHERE ur_id = #{urId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_user_record 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_user_record 
+		WHERE ur_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

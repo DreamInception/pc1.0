@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="gettercomment_context" deleted="false" description="getter 方法的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.gettercomment" name="gettercomment">/**
+ * @return ${bare_field_name} of return。
+ */ </template><template autoinsert="false" context="fieldcomment_context" deleted="false" description="字段的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.fieldcomment" name="fieldcomment">/**
+ * &lt;code&gt;${field}&lt;/code&gt; of comment
+ */</template><template autoinsert="false" context="typecomment_context" deleted="false" description="创建的类的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.typecomment" name="typecomment">/**
+ * @包名 :${package_name}
+ * @文件名 :${file_name} 
+ * ${todo} 类作用：
+ * @系统名称 : 上海景源金服PC端
+ * @Author: 陈吉秋特
+ * @Date: ${date} ${time}
+ * @版本号   :v1.0.0-16010415
+ */</template><template autoinsert="false" context="constructorcomment_context" deleted="false" description="创建的构造函数的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.constructorcomment" name="constructorcomment">/**
+ * constructor
+ * ${tags} 
+ * @Author: 陈吉秋特
+ * @Date: ${date} ${time}
+ */</template><template autoinsert="false" context="settercomment_context" deleted="false" description="setter 方法的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.settercomment" name="settercomment">/**
+ * ${todo} 方法作用：
+ * @param ${param} ${bare_field_name} of setting。 
+ * @Author: 陈吉秋特
+ * @Date: ${date} ${time}
+ */ </template><template autoinsert="false" context="overridecomment_context" deleted="false" description="覆盖方法的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.overridecomment" name="overridecomment">/**
+ * ${todo} 方法作用：
+ * ${tags}
+ * @Author: 陈吉秋特
+ * @Date: ${date} ${time}
+ */ </template><template autoinsert="false" context="methodcomment_context" deleted="false" description="非覆盖方法的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.methodcomment" name="methodcomment">/**
+ * ${todo} 方法作用：
+ * ${tags}
+ * @Author: 陈吉秋特
+ * @Date: ${date} ${time}
+ */ </template><template autoinsert="false" context="delegatecomment_context" deleted="false" description="代表方法的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.delegatecomment" name="delegatecomment">/**
+ * ${tags}
+ * ${see_to_target}
+ * @Author:陈吉秋特
+ * @Date: ${date} ${time}
+ */ </template><template autoinsert="false" context="filecomment_context" deleted="false" description="已创建的 Java 文件的注释" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/*************************************************************************
+ * @system name：  :上海景源金服PC端
+ * @Author: 陈吉秋特 604969793@qq.com
+ * @Date: ${date} ${time}
+ * @(c) Copyright 上海景源金融信息服务有限公司
+**************************************************************************/
+    </template></templates>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_system_events">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND system_events.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND system_events.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND system_events.last_modified_dt = #{lastModified_dt}</if> <if test="level != null and '' != level" > AND system_events.level = #{level}</if> <if test="category != null and '' != category" > AND system_events.category = #{category}</if> <if test="myId != null and '' != myId" > AND system_events.my_id = #{myId}</if> <if test="myType != null and '' != myType" > AND system_events.my_type = #{myType}</if> <if test="yourId != null and '' != yourId" > AND system_events.your_id = #{yourId}</if> <if test="yourType != null and '' != yourType" > AND system_events.your_type = #{yourType}</if> <if test="itsId != null and '' != itsId" > AND system_events.its_id = #{itsId}</if> <if test="itsType != null and '' != itsType" > AND system_events.its_type = #{itsType}</if> <if test="tpl != null and '' != tpl" > AND system_events.tpl = #{tpl}</if> <if test="vars != null and '' != vars" > AND system_events.vars = #{vars}</if> <if test="app != null and '' != app" > AND system_events.app = #{app}</if> <if test="thread != null and '' != thread" > AND system_events.thread = #{thread}</if> <if test="codePath != null and '' != codePath" > AND system_events.code_path = #{codePath}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="level != null and '' != level" > AND level = #{level}</if> <if test="category != null and '' != category" > AND category = #{category}</if> <if test="myId != null and '' != myId" > AND my_id = #{myId}</if> <if test="myType != null and '' != myType" > AND my_type = #{myType}</if> <if test="yourId != null and '' != yourId" > AND your_id = #{yourId}</if> <if test="yourType != null and '' != yourType" > AND your_type = #{yourType}</if> <if test="itsId != null and '' != itsId" > AND its_id = #{itsId}</if> <if test="itsType != null and '' != itsType" > AND its_type = #{itsType}</if> <if test="tpl != null and '' != tpl" > AND tpl = #{tpl}</if> <if test="vars != null and '' != vars" > AND vars = #{vars}</if> <if test="app != null and '' != app" > AND app = #{app}</if> <if test="thread != null and '' != thread" > AND thread = #{thread}</if> <if test="codePath != null and '' != codePath" > AND code_path = #{codePath}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_system_events AS system_events
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT system_events.id as id, system_events.created_dt as createdDt, system_events.last_modified_dt as lastModified_dt, system_events.level as level, system_events.category as category, system_events.my_id as myId, system_events.my_type as myType, system_events.your_id as yourId, system_events.your_type as yourType, system_events.its_id as itsId, system_events.its_type as itsType, system_events.tpl as tpl, system_events.vars as vars, system_events.app as app, system_events.thread as thread, system_events.code_path as codePath FROM v2_system_events AS system_events WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT system_events.id as id, system_events.created_dt as createdDt, system_events.last_modified_dt as lastModified_dt, system_events.level as level, system_events.category as category, system_events.my_id as myId, system_events.my_type as myType, system_events.your_id as yourId, system_events.your_type as yourType, system_events.its_id as itsId, system_events.its_type as itsType, system_events.tpl as tpl, system_events.vars as vars, system_events.app as app, system_events.thread as thread, system_events.code_path as codePath FROM v2_system_events AS system_events
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT system_events.id as id, system_events.created_dt as createdDt, system_events.last_modified_dt as lastModified_dt, system_events.level as level, system_events.category as category, system_events.my_id as myId, system_events.my_type as myType, system_events.your_id as yourId, system_events.your_type as yourType, system_events.its_id as itsId, system_events.its_type as itsType, system_events.tpl as tpl, system_events.vars as vars, system_events.app as app, system_events.thread as thread, system_events.code_path as codePath FROM v2_system_events AS system_events  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_system_events 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="level != null">level,</if><if test="category != null">category,</if><if test="myId != null">my_id,</if><if test="myType != null">my_type,</if><if test="yourId != null">your_id,</if><if test="yourType != null">your_type,</if><if test="itsId != null">its_id,</if><if test="itsType != null">its_type,</if><if test="tpl != null">tpl,</if><if test="vars != null">vars,</if><if test="app != null">app,</if><if test="thread != null">thread,</if><if test="codePath != null">code_path,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="level != null">#{level},</if><if test="category != null">#{category},</if><if test="myId != null">#{myId},</if><if test="myType != null">#{myType},</if><if test="yourId != null">#{yourId},</if><if test="yourType != null">#{yourType},</if><if test="itsId != null">#{itsId},</if><if test="itsType != null">#{itsType},</if><if test="tpl != null">#{tpl},</if><if test="vars != null">#{vars},</if><if test="app != null">#{app},</if><if test="thread != null">#{thread},</if><if test="codePath != null">#{codePath},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_system_events (id,created_dt,last_modified_dt,level,category,my_id,my_type,your_id,your_type,its_id,its_type,tpl,vars,app,thread,code_path)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.level},#{item.category},#{item.myId},#{item.myType},#{item.yourId},#{item.yourType},#{item.itsId},#{item.itsType},#{item.tpl},#{item.vars},#{item.app},#{item.thread},#{item.codePath})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_system_events
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="level != null" >  level = #{level}, </if><if test="category != null" >  category = #{category}, </if><if test="myId != null" >  my_id = #{myId}, </if><if test="myType != null" >  my_type = #{myType}, </if><if test="yourId != null" >  your_id = #{yourId}, </if><if test="yourType != null" >  your_type = #{yourType}, </if><if test="itsId != null" >  its_id = #{itsId}, </if><if test="itsType != null" >  its_type = #{itsType}, </if><if test="tpl != null" >  tpl = #{tpl}, </if><if test="vars != null" >  vars = #{vars}, </if><if test="app != null" >  app = #{app}, </if><if test="thread != null" >  thread = #{thread}, </if><if test="codePath != null" >  code_path = #{codePath}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_system_events 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_system_events 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_bank">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="bankId != null and '' != bankId" > AND bank.bank_id = #{bankId}</if> <if test="bankName != null and '' != bankName" > AND bank.bank_name = #{bankName}</if> <if test="bankHead_py_name != null and '' != bankHead_py_name" > AND bank.bank_head_py_name = #{bankHead_py_name}</if> <if test="bankCode != null and '' != bankCode" > AND bank.bank_code = #{bankCode}</if> <if test="bankStatus != null and '' != bankStatus" > AND bank.bank_status = #{bankStatus}</if> <if test="bankOrder != null and '' != bankOrder" > AND bank.bank_order = #{bankOrder}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="bankId != null and '' != bankId" > AND bank_id = #{bankId}</if> <if test="bankName != null and '' != bankName" > AND bank_name = #{bankName}</if> <if test="bankHead_py_name != null and '' != bankHead_py_name" > AND bank_head_py_name = #{bankHead_py_name}</if> <if test="bankCode != null and '' != bankCode" > AND bank_code = #{bankCode}</if> <if test="bankStatus != null and '' != bankStatus" > AND bank_status = #{bankStatus}</if> <if test="bankOrder != null and '' != bankOrder" > AND bank_order = #{bankOrder}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_bank AS bank
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT bank.bank_id as bankId, bank.bank_name as bankName, bank.bank_head_py_name as bankHead_py_name, bank.bank_code as bankCode, bank.bank_status as bankStatus, bank.bank_order as bankOrder FROM dr_bank AS bank WHERE bank_id = #{bankId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT bank.bank_id as bankId, bank.bank_name as bankName, bank.bank_head_py_name as bankHead_py_name, bank.bank_code as bankCode, bank.bank_status as bankStatus, bank.bank_order as bankOrder FROM dr_bank AS bank
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT bank.bank_id as bankId, bank.bank_name as bankName, bank.bank_head_py_name as bankHead_py_name, bank.bank_code as bankCode, bank.bank_status as bankStatus, bank.bank_order as bankOrder FROM dr_bank AS bank  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_bank 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bankId != null">bank_id,</if><if test="bankName != null">bank_name,</if><if test="bankHead_py_name != null">bank_head_py_name,</if><if test="bankCode != null">bank_code,</if><if test="bankStatus != null">bank_status,</if><if test="bankOrder != null">bank_order,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="bankId != null">#{bankId},</if><if test="bankName != null">#{bankName},</if><if test="bankHead_py_name != null">#{bankHead_py_name},</if><if test="bankCode != null">#{bankCode},</if><if test="bankStatus != null">#{bankStatus},</if><if test="bankOrder != null">#{bankOrder},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_bank (bank_id,bank_name,bank_head_py_name,bank_code,bank_status,bank_order)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.bankId},#{item.bankName},#{item.bankHead_py_name},#{item.bankCode},#{item.bankStatus},#{item.bankOrder})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_bank
+    <set>
+     <if test="bankId != null" >  bank_id = #{bankId}, </if><if test="bankName != null" >  bank_name = #{bankName}, </if><if test="bankHead_py_name != null" >  bank_head_py_name = #{bankHead_py_name}, </if><if test="bankCode != null" >  bank_code = #{bankCode}, </if><if test="bankStatus != null" >  bank_status = #{bankStatus}, </if><if test="bankOrder != null" >  bank_order = #{bankOrder}, </if>
+      </set>
+	  WHERE bank_id = #{bankId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_bank 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_bank 
+		WHERE bank_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

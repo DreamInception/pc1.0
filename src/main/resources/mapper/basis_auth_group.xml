@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_auth_group">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND auth_group.id = #{id}</if> <if test="module != null and '' != module" > AND auth_group.module = #{module}</if> <if test="type != null and '' != type" > AND auth_group.type = #{type}</if> <if test="title != null and '' != title" > AND auth_group.title = #{title}</if> <if test="description != null and '' != description" > AND auth_group.description = #{description}</if> <if test="status != null and '' != status" > AND auth_group.status = #{status}</if> <if test="rules != null and '' != rules" > AND auth_group.rules = #{rules}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="module != null and '' != module" > AND module = #{module}</if> <if test="type != null and '' != type" > AND type = #{type}</if> <if test="title != null and '' != title" > AND title = #{title}</if> <if test="description != null and '' != description" > AND description = #{description}</if> <if test="status != null and '' != status" > AND status = #{status}</if> <if test="rules != null and '' != rules" > AND rules = #{rules}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_auth_group AS auth_group
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT auth_group.id as id, auth_group.module as module, auth_group.type as type, auth_group.title as title, auth_group.description as description, auth_group.status as status, auth_group.rules as rules FROM dr_auth_group AS auth_group WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT auth_group.id as id, auth_group.module as module, auth_group.type as type, auth_group.title as title, auth_group.description as description, auth_group.status as status, auth_group.rules as rules FROM dr_auth_group AS auth_group
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT auth_group.id as id, auth_group.module as module, auth_group.type as type, auth_group.title as title, auth_group.description as description, auth_group.status as status, auth_group.rules as rules FROM dr_auth_group AS auth_group  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_auth_group 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="module != null">module,</if><if test="type != null">type,</if><if test="title != null">title,</if><if test="description != null">description,</if><if test="status != null">status,</if><if test="rules != null">rules,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="module != null">#{module},</if><if test="type != null">#{type},</if><if test="title != null">#{title},</if><if test="description != null">#{description},</if><if test="status != null">#{status},</if><if test="rules != null">#{rules},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_auth_group (id,module,type,title,description,status,rules)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.module},#{item.type},#{item.title},#{item.description},#{item.status},#{item.rules})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_auth_group
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="module != null" >  module = #{module}, </if><if test="type != null" >  type = #{type}, </if><if test="title != null" >  title = #{title}, </if><if test="description != null" >  description = #{description}, </if><if test="status != null" >  status = #{status}, </if><if test="rules != null" >  rules = #{rules}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_auth_group 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_auth_group 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

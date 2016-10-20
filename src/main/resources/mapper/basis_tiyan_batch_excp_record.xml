@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_batch_excp_record">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND tiyan_batch_excp_record.id = #{id}</if> <if test="batchCode != null and '' != batchCode" > AND tiyan_batch_excp_record.batch_code = #{batchCode}</if> <if test="batchName != null and '' != batchName" > AND tiyan_batch_excp_record.batch_name = #{batchName}</if> <if test="excpDesc != null and '' != excpDesc" > AND tiyan_batch_excp_record.excp_desc = #{excpDesc}</if> <if test="createTime != null and '' != createTime" > AND tiyan_batch_excp_record.create_time = #{createTime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="batchCode != null and '' != batchCode" > AND batch_code = #{batchCode}</if> <if test="batchName != null and '' != batchName" > AND batch_name = #{batchName}</if> <if test="excpDesc != null and '' != excpDesc" > AND excp_desc = #{excpDesc}</if> <if test="createTime != null and '' != createTime" > AND create_time = #{createTime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_batch_excp_record AS tiyan_batch_excp_record
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_batch_excp_record.id as id, tiyan_batch_excp_record.batch_code as batchCode, tiyan_batch_excp_record.batch_name as batchName, tiyan_batch_excp_record.excp_desc as excpDesc, tiyan_batch_excp_record.create_time as createTime FROM dr_tiyan_batch_excp_record AS tiyan_batch_excp_record WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_batch_excp_record.id as id, tiyan_batch_excp_record.batch_code as batchCode, tiyan_batch_excp_record.batch_name as batchName, tiyan_batch_excp_record.excp_desc as excpDesc, tiyan_batch_excp_record.create_time as createTime FROM dr_tiyan_batch_excp_record AS tiyan_batch_excp_record
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_batch_excp_record.id as id, tiyan_batch_excp_record.batch_code as batchCode, tiyan_batch_excp_record.batch_name as batchName, tiyan_batch_excp_record.excp_desc as excpDesc, tiyan_batch_excp_record.create_time as createTime FROM dr_tiyan_batch_excp_record AS tiyan_batch_excp_record  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_batch_excp_record 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="batchCode != null">batch_code,</if><if test="batchName != null">batch_name,</if><if test="excpDesc != null">excp_desc,</if><if test="createTime != null">create_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="batchCode != null">#{batchCode},</if><if test="batchName != null">#{batchName},</if><if test="excpDesc != null">#{excpDesc},</if><if test="createTime != null">#{createTime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_batch_excp_record (id,batch_code,batch_name,excp_desc,create_time)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.batchCode},#{item.batchName},#{item.excpDesc},#{item.createTime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_batch_excp_record
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="batchCode != null" >  batch_code = #{batchCode}, </if><if test="batchName != null" >  batch_name = #{batchName}, </if><if test="excpDesc != null" >  excp_desc = #{excpDesc}, </if><if test="createTime != null" >  create_time = #{createTime}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_batch_excp_record 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_batch_excp_record 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

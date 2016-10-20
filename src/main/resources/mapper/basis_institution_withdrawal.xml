@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_institution_withdrawal">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="iwId != null and '' != iwId" > AND institution_withdrawal.iw_id = #{iwId}</if> <if test="instId != null and '' != instId" > AND institution_withdrawal.inst_id = #{instId}</if> <if test="instBank_income_id != null and '' != instBank_income_id" > AND institution_withdrawal.inst_bank_income_id = #{instBank_income_id}</if> <if test="iwNo != null and '' != iwNo" > AND institution_withdrawal.iw_no = #{iwNo}</if> <if test="iwSina_inner_trade_no != null and '' != iwSina_inner_trade_no" > AND institution_withdrawal.iw_sina_inner_trade_no = #{iwSina_inner_trade_no}</if> <if test="iwAmount != null and '' != iwAmount" > AND institution_withdrawal.iw_amount = #{iwAmount}</if> <if test="iwCharge != null and '' != iwCharge" > AND institution_withdrawal.iw_charge = #{iwCharge}</if> <if test="iwActual_amount != null and '' != iwActual_amount" > AND institution_withdrawal.iw_actual_amount = #{iwActual_amount}</if> <if test="iwBank_code != null and '' != iwBank_code" > AND institution_withdrawal.iw_bank_code = #{iwBank_code}</if> <if test="iwBank_account != null and '' != iwBank_account" > AND institution_withdrawal.iw_bank_account = #{iwBank_account}</if> <if test="iwIp != null and '' != iwIp" > AND institution_withdrawal.iw_ip = #{iwIp}</if> <if test="iwApplytime != null and '' != iwApplytime" > AND institution_withdrawal.iw_applytime = #{iwApplytime}</if> <if test="iwPaytime != null and '' != iwPaytime" > AND institution_withdrawal.iw_paytime = #{iwPaytime}</if> <if test="iwStatus != null and '' != iwStatus" > AND institution_withdrawal.iw_status = #{iwStatus}</if> <if test="iwRemark != null and '' != iwRemark" > AND institution_withdrawal.iw_remark = #{iwRemark}</if> <if test="iwCreatetime != null and '' != iwCreatetime" > AND institution_withdrawal.iw_createtime = #{iwCreatetime}</if> <if test="iwModiftime != null and '' != iwModiftime" > AND institution_withdrawal.iw_modiftime = #{iwModiftime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="iwId != null and '' != iwId" > AND iw_id = #{iwId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="instBank_income_id != null and '' != instBank_income_id" > AND inst_bank_income_id = #{instBank_income_id}</if> <if test="iwNo != null and '' != iwNo" > AND iw_no = #{iwNo}</if> <if test="iwSina_inner_trade_no != null and '' != iwSina_inner_trade_no" > AND iw_sina_inner_trade_no = #{iwSina_inner_trade_no}</if> <if test="iwAmount != null and '' != iwAmount" > AND iw_amount = #{iwAmount}</if> <if test="iwCharge != null and '' != iwCharge" > AND iw_charge = #{iwCharge}</if> <if test="iwActual_amount != null and '' != iwActual_amount" > AND iw_actual_amount = #{iwActual_amount}</if> <if test="iwBank_code != null and '' != iwBank_code" > AND iw_bank_code = #{iwBank_code}</if> <if test="iwBank_account != null and '' != iwBank_account" > AND iw_bank_account = #{iwBank_account}</if> <if test="iwIp != null and '' != iwIp" > AND iw_ip = #{iwIp}</if> <if test="iwApplytime != null and '' != iwApplytime" > AND iw_applytime = #{iwApplytime}</if> <if test="iwPaytime != null and '' != iwPaytime" > AND iw_paytime = #{iwPaytime}</if> <if test="iwStatus != null and '' != iwStatus" > AND iw_status = #{iwStatus}</if> <if test="iwRemark != null and '' != iwRemark" > AND iw_remark = #{iwRemark}</if> <if test="iwCreatetime != null and '' != iwCreatetime" > AND iw_createtime = #{iwCreatetime}</if> <if test="iwModiftime != null and '' != iwModiftime" > AND iw_modiftime = #{iwModiftime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_institution_withdrawal AS institution_withdrawal
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT institution_withdrawal.iw_id as iwId, institution_withdrawal.inst_id as instId, institution_withdrawal.inst_bank_income_id as instBank_income_id, institution_withdrawal.iw_no as iwNo, institution_withdrawal.iw_sina_inner_trade_no as iwSina_inner_trade_no, institution_withdrawal.iw_amount as iwAmount, institution_withdrawal.iw_charge as iwCharge, institution_withdrawal.iw_actual_amount as iwActual_amount, institution_withdrawal.iw_bank_code as iwBank_code, institution_withdrawal.iw_bank_account as iwBank_account, institution_withdrawal.iw_ip as iwIp, institution_withdrawal.iw_applytime as iwApplytime, institution_withdrawal.iw_paytime as iwPaytime, institution_withdrawal.iw_status as iwStatus, institution_withdrawal.iw_remark as iwRemark, institution_withdrawal.iw_createtime as iwCreatetime, institution_withdrawal.iw_modiftime as iwModiftime FROM dr_institution_withdrawal AS institution_withdrawal WHERE iw_id = #{iwId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT institution_withdrawal.iw_id as iwId, institution_withdrawal.inst_id as instId, institution_withdrawal.inst_bank_income_id as instBank_income_id, institution_withdrawal.iw_no as iwNo, institution_withdrawal.iw_sina_inner_trade_no as iwSina_inner_trade_no, institution_withdrawal.iw_amount as iwAmount, institution_withdrawal.iw_charge as iwCharge, institution_withdrawal.iw_actual_amount as iwActual_amount, institution_withdrawal.iw_bank_code as iwBank_code, institution_withdrawal.iw_bank_account as iwBank_account, institution_withdrawal.iw_ip as iwIp, institution_withdrawal.iw_applytime as iwApplytime, institution_withdrawal.iw_paytime as iwPaytime, institution_withdrawal.iw_status as iwStatus, institution_withdrawal.iw_remark as iwRemark, institution_withdrawal.iw_createtime as iwCreatetime, institution_withdrawal.iw_modiftime as iwModiftime FROM dr_institution_withdrawal AS institution_withdrawal
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT institution_withdrawal.iw_id as iwId, institution_withdrawal.inst_id as instId, institution_withdrawal.inst_bank_income_id as instBank_income_id, institution_withdrawal.iw_no as iwNo, institution_withdrawal.iw_sina_inner_trade_no as iwSina_inner_trade_no, institution_withdrawal.iw_amount as iwAmount, institution_withdrawal.iw_charge as iwCharge, institution_withdrawal.iw_actual_amount as iwActual_amount, institution_withdrawal.iw_bank_code as iwBank_code, institution_withdrawal.iw_bank_account as iwBank_account, institution_withdrawal.iw_ip as iwIp, institution_withdrawal.iw_applytime as iwApplytime, institution_withdrawal.iw_paytime as iwPaytime, institution_withdrawal.iw_status as iwStatus, institution_withdrawal.iw_remark as iwRemark, institution_withdrawal.iw_createtime as iwCreatetime, institution_withdrawal.iw_modiftime as iwModiftime FROM dr_institution_withdrawal AS institution_withdrawal  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_institution_withdrawal 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="iwId != null">iw_id,</if><if test="instId != null">inst_id,</if><if test="instBank_income_id != null">inst_bank_income_id,</if><if test="iwNo != null">iw_no,</if><if test="iwSina_inner_trade_no != null">iw_sina_inner_trade_no,</if><if test="iwAmount != null">iw_amount,</if><if test="iwCharge != null">iw_charge,</if><if test="iwActual_amount != null">iw_actual_amount,</if><if test="iwBank_code != null">iw_bank_code,</if><if test="iwBank_account != null">iw_bank_account,</if><if test="iwIp != null">iw_ip,</if><if test="iwApplytime != null">iw_applytime,</if><if test="iwPaytime != null">iw_paytime,</if><if test="iwStatus != null">iw_status,</if><if test="iwRemark != null">iw_remark,</if><if test="iwCreatetime != null">iw_createtime,</if><if test="iwModiftime != null">iw_modiftime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="iwId != null">#{iwId},</if><if test="instId != null">#{instId},</if><if test="instBank_income_id != null">#{instBank_income_id},</if><if test="iwNo != null">#{iwNo},</if><if test="iwSina_inner_trade_no != null">#{iwSina_inner_trade_no},</if><if test="iwAmount != null">#{iwAmount},</if><if test="iwCharge != null">#{iwCharge},</if><if test="iwActual_amount != null">#{iwActual_amount},</if><if test="iwBank_code != null">#{iwBank_code},</if><if test="iwBank_account != null">#{iwBank_account},</if><if test="iwIp != null">#{iwIp},</if><if test="iwApplytime != null">#{iwApplytime},</if><if test="iwPaytime != null">#{iwPaytime},</if><if test="iwStatus != null">#{iwStatus},</if><if test="iwRemark != null">#{iwRemark},</if><if test="iwCreatetime != null">#{iwCreatetime},</if><if test="iwModiftime != null">#{iwModiftime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_institution_withdrawal (iw_id,inst_id,inst_bank_income_id,iw_no,iw_sina_inner_trade_no,iw_amount,iw_charge,iw_actual_amount,iw_bank_code,iw_bank_account,iw_ip,iw_applytime,iw_paytime,iw_status,iw_remark,iw_createtime,iw_modiftime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.iwId},#{item.instId},#{item.instBank_income_id},#{item.iwNo},#{item.iwSina_inner_trade_no},#{item.iwAmount},#{item.iwCharge},#{item.iwActual_amount},#{item.iwBank_code},#{item.iwBank_account},#{item.iwIp},#{item.iwApplytime},#{item.iwPaytime},#{item.iwStatus},#{item.iwRemark},#{item.iwCreatetime},#{item.iwModiftime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_institution_withdrawal
+    <set>
+     <if test="iwId != null" >  iw_id = #{iwId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="instBank_income_id != null" >  inst_bank_income_id = #{instBank_income_id}, </if><if test="iwNo != null" >  iw_no = #{iwNo}, </if><if test="iwSina_inner_trade_no != null" >  iw_sina_inner_trade_no = #{iwSina_inner_trade_no}, </if><if test="iwAmount != null" >  iw_amount = #{iwAmount}, </if><if test="iwCharge != null" >  iw_charge = #{iwCharge}, </if><if test="iwActual_amount != null" >  iw_actual_amount = #{iwActual_amount}, </if><if test="iwBank_code != null" >  iw_bank_code = #{iwBank_code}, </if><if test="iwBank_account != null" >  iw_bank_account = #{iwBank_account}, </if><if test="iwIp != null" >  iw_ip = #{iwIp}, </if><if test="iwApplytime != null" >  iw_applytime = #{iwApplytime}, </if><if test="iwPaytime != null" >  iw_paytime = #{iwPaytime}, </if><if test="iwStatus != null" >  iw_status = #{iwStatus}, </if><if test="iwRemark != null" >  iw_remark = #{iwRemark}, </if><if test="iwCreatetime != null" >  iw_createtime = #{iwCreatetime}, </if><if test="iwModiftime != null" >  iw_modiftime = #{iwModiftime}, </if>
+      </set>
+	  WHERE iw_id = #{iwId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_institution_withdrawal 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_institution_withdrawal 
+		WHERE iw_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

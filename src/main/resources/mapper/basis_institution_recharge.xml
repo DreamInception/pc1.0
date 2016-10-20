@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_institution_recharge">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="irId != null and '' != irId" > AND institution_recharge.ir_id = #{irId}</if> <if test="instId != null and '' != instId" > AND institution_recharge.inst_id = #{instId}</if> <if test="instBank_pay_id != null and '' != instBank_pay_id" > AND institution_recharge.inst_bank_pay_id = #{instBank_pay_id}</if> <if test="irNo != null and '' != irNo" > AND institution_recharge.ir_no = #{irNo}</if> <if test="irSina_inner_trade_no != null and '' != irSina_inner_trade_no" > AND institution_recharge.ir_sina_inner_trade_no = #{irSina_inner_trade_no}</if> <if test="irAmount != null and '' != irAmount" > AND institution_recharge.ir_amount = #{irAmount}</if> <if test="irCharge != null and '' != irCharge" > AND institution_recharge.ir_charge = #{irCharge}</if> <if test="irActual_amount != null and '' != irActual_amount" > AND institution_recharge.ir_actual_amount = #{irActual_amount}</if> <if test="irBank_code != null and '' != irBank_code" > AND institution_recharge.ir_bank_code = #{irBank_code}</if> <if test="irBank_account != null and '' != irBank_account" > AND institution_recharge.ir_bank_account = #{irBank_account}</if> <if test="irIp != null and '' != irIp" > AND institution_recharge.ir_ip = #{irIp}</if> <if test="irTicket != null and '' != irTicket" > AND institution_recharge.ir_ticket = #{irTicket}</if> <if test="irStatus != null and '' != irStatus" > AND institution_recharge.ir_status = #{irStatus}</if> <if test="irRemark != null and '' != irRemark" > AND institution_recharge.ir_remark = #{irRemark}</if> <if test="irCreatetime != null and '' != irCreatetime" > AND institution_recharge.ir_createtime = #{irCreatetime}</if> <if test="irModfiytime != null and '' != irModfiytime" > AND institution_recharge.ir_modfiytime = #{irModfiytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="irId != null and '' != irId" > AND ir_id = #{irId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="instBank_pay_id != null and '' != instBank_pay_id" > AND inst_bank_pay_id = #{instBank_pay_id}</if> <if test="irNo != null and '' != irNo" > AND ir_no = #{irNo}</if> <if test="irSina_inner_trade_no != null and '' != irSina_inner_trade_no" > AND ir_sina_inner_trade_no = #{irSina_inner_trade_no}</if> <if test="irAmount != null and '' != irAmount" > AND ir_amount = #{irAmount}</if> <if test="irCharge != null and '' != irCharge" > AND ir_charge = #{irCharge}</if> <if test="irActual_amount != null and '' != irActual_amount" > AND ir_actual_amount = #{irActual_amount}</if> <if test="irBank_code != null and '' != irBank_code" > AND ir_bank_code = #{irBank_code}</if> <if test="irBank_account != null and '' != irBank_account" > AND ir_bank_account = #{irBank_account}</if> <if test="irIp != null and '' != irIp" > AND ir_ip = #{irIp}</if> <if test="irTicket != null and '' != irTicket" > AND ir_ticket = #{irTicket}</if> <if test="irStatus != null and '' != irStatus" > AND ir_status = #{irStatus}</if> <if test="irRemark != null and '' != irRemark" > AND ir_remark = #{irRemark}</if> <if test="irCreatetime != null and '' != irCreatetime" > AND ir_createtime = #{irCreatetime}</if> <if test="irModfiytime != null and '' != irModfiytime" > AND ir_modfiytime = #{irModfiytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_institution_recharge AS institution_recharge
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT institution_recharge.ir_id as irId, institution_recharge.inst_id as instId, institution_recharge.inst_bank_pay_id as instBank_pay_id, institution_recharge.ir_no as irNo, institution_recharge.ir_sina_inner_trade_no as irSina_inner_trade_no, institution_recharge.ir_amount as irAmount, institution_recharge.ir_charge as irCharge, institution_recharge.ir_actual_amount as irActual_amount, institution_recharge.ir_bank_code as irBank_code, institution_recharge.ir_bank_account as irBank_account, institution_recharge.ir_ip as irIp, institution_recharge.ir_ticket as irTicket, institution_recharge.ir_status as irStatus, institution_recharge.ir_remark as irRemark, institution_recharge.ir_createtime as irCreatetime, institution_recharge.ir_modfiytime as irModfiytime FROM dr_institution_recharge AS institution_recharge WHERE ir_id = #{irId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT institution_recharge.ir_id as irId, institution_recharge.inst_id as instId, institution_recharge.inst_bank_pay_id as instBank_pay_id, institution_recharge.ir_no as irNo, institution_recharge.ir_sina_inner_trade_no as irSina_inner_trade_no, institution_recharge.ir_amount as irAmount, institution_recharge.ir_charge as irCharge, institution_recharge.ir_actual_amount as irActual_amount, institution_recharge.ir_bank_code as irBank_code, institution_recharge.ir_bank_account as irBank_account, institution_recharge.ir_ip as irIp, institution_recharge.ir_ticket as irTicket, institution_recharge.ir_status as irStatus, institution_recharge.ir_remark as irRemark, institution_recharge.ir_createtime as irCreatetime, institution_recharge.ir_modfiytime as irModfiytime FROM dr_institution_recharge AS institution_recharge
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT institution_recharge.ir_id as irId, institution_recharge.inst_id as instId, institution_recharge.inst_bank_pay_id as instBank_pay_id, institution_recharge.ir_no as irNo, institution_recharge.ir_sina_inner_trade_no as irSina_inner_trade_no, institution_recharge.ir_amount as irAmount, institution_recharge.ir_charge as irCharge, institution_recharge.ir_actual_amount as irActual_amount, institution_recharge.ir_bank_code as irBank_code, institution_recharge.ir_bank_account as irBank_account, institution_recharge.ir_ip as irIp, institution_recharge.ir_ticket as irTicket, institution_recharge.ir_status as irStatus, institution_recharge.ir_remark as irRemark, institution_recharge.ir_createtime as irCreatetime, institution_recharge.ir_modfiytime as irModfiytime FROM dr_institution_recharge AS institution_recharge  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_institution_recharge 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="irId != null">ir_id,</if><if test="instId != null">inst_id,</if><if test="instBank_pay_id != null">inst_bank_pay_id,</if><if test="irNo != null">ir_no,</if><if test="irSina_inner_trade_no != null">ir_sina_inner_trade_no,</if><if test="irAmount != null">ir_amount,</if><if test="irCharge != null">ir_charge,</if><if test="irActual_amount != null">ir_actual_amount,</if><if test="irBank_code != null">ir_bank_code,</if><if test="irBank_account != null">ir_bank_account,</if><if test="irIp != null">ir_ip,</if><if test="irTicket != null">ir_ticket,</if><if test="irStatus != null">ir_status,</if><if test="irRemark != null">ir_remark,</if><if test="irCreatetime != null">ir_createtime,</if><if test="irModfiytime != null">ir_modfiytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="irId != null">#{irId},</if><if test="instId != null">#{instId},</if><if test="instBank_pay_id != null">#{instBank_pay_id},</if><if test="irNo != null">#{irNo},</if><if test="irSina_inner_trade_no != null">#{irSina_inner_trade_no},</if><if test="irAmount != null">#{irAmount},</if><if test="irCharge != null">#{irCharge},</if><if test="irActual_amount != null">#{irActual_amount},</if><if test="irBank_code != null">#{irBank_code},</if><if test="irBank_account != null">#{irBank_account},</if><if test="irIp != null">#{irIp},</if><if test="irTicket != null">#{irTicket},</if><if test="irStatus != null">#{irStatus},</if><if test="irRemark != null">#{irRemark},</if><if test="irCreatetime != null">#{irCreatetime},</if><if test="irModfiytime != null">#{irModfiytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_institution_recharge (ir_id,inst_id,inst_bank_pay_id,ir_no,ir_sina_inner_trade_no,ir_amount,ir_charge,ir_actual_amount,ir_bank_code,ir_bank_account,ir_ip,ir_ticket,ir_status,ir_remark,ir_createtime,ir_modfiytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.irId},#{item.instId},#{item.instBank_pay_id},#{item.irNo},#{item.irSina_inner_trade_no},#{item.irAmount},#{item.irCharge},#{item.irActual_amount},#{item.irBank_code},#{item.irBank_account},#{item.irIp},#{item.irTicket},#{item.irStatus},#{item.irRemark},#{item.irCreatetime},#{item.irModfiytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_institution_recharge
+    <set>
+     <if test="irId != null" >  ir_id = #{irId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="instBank_pay_id != null" >  inst_bank_pay_id = #{instBank_pay_id}, </if><if test="irNo != null" >  ir_no = #{irNo}, </if><if test="irSina_inner_trade_no != null" >  ir_sina_inner_trade_no = #{irSina_inner_trade_no}, </if><if test="irAmount != null" >  ir_amount = #{irAmount}, </if><if test="irCharge != null" >  ir_charge = #{irCharge}, </if><if test="irActual_amount != null" >  ir_actual_amount = #{irActual_amount}, </if><if test="irBank_code != null" >  ir_bank_code = #{irBank_code}, </if><if test="irBank_account != null" >  ir_bank_account = #{irBank_account}, </if><if test="irIp != null" >  ir_ip = #{irIp}, </if><if test="irTicket != null" >  ir_ticket = #{irTicket}, </if><if test="irStatus != null" >  ir_status = #{irStatus}, </if><if test="irRemark != null" >  ir_remark = #{irRemark}, </if><if test="irCreatetime != null" >  ir_createtime = #{irCreatetime}, </if><if test="irModfiytime != null" >  ir_modfiytime = #{irModfiytime}, </if>
+      </set>
+	  WHERE ir_id = #{irId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_institution_recharge 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_institution_recharge 
+		WHERE ir_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

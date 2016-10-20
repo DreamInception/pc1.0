@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_profit_schedul_result">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="psrId != null and '' != psrId" > AND tiyan_profit_schedul_result.psr_id = #{psrId}</if> <if test="psrResult != null and '' != psrResult" > AND tiyan_profit_schedul_result.psr_result = #{psrResult}</if> <if test="psrDetail != null and '' != psrDetail" > AND tiyan_profit_schedul_result.psr_detail = #{psrDetail}</if> <if test="psrCreate_time != null and '' != psrCreate_time" > AND tiyan_profit_schedul_result.psr_create_time = #{psrCreate_time}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="psrId != null and '' != psrId" > AND psr_id = #{psrId}</if> <if test="psrResult != null and '' != psrResult" > AND psr_result = #{psrResult}</if> <if test="psrDetail != null and '' != psrDetail" > AND psr_detail = #{psrDetail}</if> <if test="psrCreate_time != null and '' != psrCreate_time" > AND psr_create_time = #{psrCreate_time}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_profit_schedul_result AS tiyan_profit_schedul_result
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_profit_schedul_result.psr_id as psrId, tiyan_profit_schedul_result.psr_result as psrResult, tiyan_profit_schedul_result.psr_detail as psrDetail, tiyan_profit_schedul_result.psr_create_time as psrCreate_time FROM dr_tiyan_profit_schedul_result AS tiyan_profit_schedul_result WHERE psr_id = #{psrId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_profit_schedul_result.psr_id as psrId, tiyan_profit_schedul_result.psr_result as psrResult, tiyan_profit_schedul_result.psr_detail as psrDetail, tiyan_profit_schedul_result.psr_create_time as psrCreate_time FROM dr_tiyan_profit_schedul_result AS tiyan_profit_schedul_result
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_profit_schedul_result.psr_id as psrId, tiyan_profit_schedul_result.psr_result as psrResult, tiyan_profit_schedul_result.psr_detail as psrDetail, tiyan_profit_schedul_result.psr_create_time as psrCreate_time FROM dr_tiyan_profit_schedul_result AS tiyan_profit_schedul_result  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_profit_schedul_result 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="psrId != null">psr_id,</if><if test="psrResult != null">psr_result,</if><if test="psrDetail != null">psr_detail,</if><if test="psrCreate_time != null">psr_create_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="psrId != null">#{psrId},</if><if test="psrResult != null">#{psrResult},</if><if test="psrDetail != null">#{psrDetail},</if><if test="psrCreate_time != null">#{psrCreate_time},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_profit_schedul_result (psr_id,psr_result,psr_detail,psr_create_time)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.psrId},#{item.psrResult},#{item.psrDetail},#{item.psrCreate_time})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_profit_schedul_result
+    <set>
+     <if test="psrId != null" >  psr_id = #{psrId}, </if><if test="psrResult != null" >  psr_result = #{psrResult}, </if><if test="psrDetail != null" >  psr_detail = #{psrDetail}, </if><if test="psrCreate_time != null" >  psr_create_time = #{psrCreate_time}, </if>
+      </set>
+	  WHERE psr_id = #{psrId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_profit_schedul_result 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_profit_schedul_result 
+		WHERE psr_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

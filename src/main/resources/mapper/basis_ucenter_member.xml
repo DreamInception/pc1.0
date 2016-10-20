@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_ucenter_member">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND ucenter_member.id = #{id}</if> <if test="username != null and '' != username" > AND ucenter_member.username = #{username}</if> <if test="password != null and '' != password" > AND ucenter_member.password = #{password}</if> <if test="email != null and '' != email" > AND ucenter_member.email = #{email}</if> <if test="mobile != null and '' != mobile" > AND ucenter_member.mobile = #{mobile}</if> <if test="regTime != null and '' != regTime" > AND ucenter_member.reg_time = #{regTime}</if> <if test="regIp != null and '' != regIp" > AND ucenter_member.reg_ip = #{regIp}</if> <if test="lastLogin_time != null and '' != lastLogin_time" > AND ucenter_member.last_login_time = #{lastLogin_time}</if> <if test="lastLogin_ip != null and '' != lastLogin_ip" > AND ucenter_member.last_login_ip = #{lastLogin_ip}</if> <if test="updateTime != null and '' != updateTime" > AND ucenter_member.update_time = #{updateTime}</if> <if test="status != null and '' != status" > AND ucenter_member.status = #{status}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="username != null and '' != username" > AND username = #{username}</if> <if test="password != null and '' != password" > AND password = #{password}</if> <if test="email != null and '' != email" > AND email = #{email}</if> <if test="mobile != null and '' != mobile" > AND mobile = #{mobile}</if> <if test="regTime != null and '' != regTime" > AND reg_time = #{regTime}</if> <if test="regIp != null and '' != regIp" > AND reg_ip = #{regIp}</if> <if test="lastLogin_time != null and '' != lastLogin_time" > AND last_login_time = #{lastLogin_time}</if> <if test="lastLogin_ip != null and '' != lastLogin_ip" > AND last_login_ip = #{lastLogin_ip}</if> <if test="updateTime != null and '' != updateTime" > AND update_time = #{updateTime}</if> <if test="status != null and '' != status" > AND status = #{status}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_ucenter_member AS ucenter_member
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT ucenter_member.id as id, ucenter_member.username as username, ucenter_member.password as password, ucenter_member.email as email, ucenter_member.mobile as mobile, ucenter_member.reg_time as regTime, ucenter_member.reg_ip as regIp, ucenter_member.last_login_time as lastLogin_time, ucenter_member.last_login_ip as lastLogin_ip, ucenter_member.update_time as updateTime, ucenter_member.status as status FROM dr_ucenter_member AS ucenter_member WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT ucenter_member.id as id, ucenter_member.username as username, ucenter_member.password as password, ucenter_member.email as email, ucenter_member.mobile as mobile, ucenter_member.reg_time as regTime, ucenter_member.reg_ip as regIp, ucenter_member.last_login_time as lastLogin_time, ucenter_member.last_login_ip as lastLogin_ip, ucenter_member.update_time as updateTime, ucenter_member.status as status FROM dr_ucenter_member AS ucenter_member
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT ucenter_member.id as id, ucenter_member.username as username, ucenter_member.password as password, ucenter_member.email as email, ucenter_member.mobile as mobile, ucenter_member.reg_time as regTime, ucenter_member.reg_ip as regIp, ucenter_member.last_login_time as lastLogin_time, ucenter_member.last_login_ip as lastLogin_ip, ucenter_member.update_time as updateTime, ucenter_member.status as status FROM dr_ucenter_member AS ucenter_member  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_ucenter_member 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="username != null">username,</if><if test="password != null">password,</if><if test="email != null">email,</if><if test="mobile != null">mobile,</if><if test="regTime != null">reg_time,</if><if test="regIp != null">reg_ip,</if><if test="lastLogin_time != null">last_login_time,</if><if test="lastLogin_ip != null">last_login_ip,</if><if test="updateTime != null">update_time,</if><if test="status != null">status,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="username != null">#{username},</if><if test="password != null">#{password},</if><if test="email != null">#{email},</if><if test="mobile != null">#{mobile},</if><if test="regTime != null">#{regTime},</if><if test="regIp != null">#{regIp},</if><if test="lastLogin_time != null">#{lastLogin_time},</if><if test="lastLogin_ip != null">#{lastLogin_ip},</if><if test="updateTime != null">#{updateTime},</if><if test="status != null">#{status},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_ucenter_member (id,username,password,email,mobile,reg_time,reg_ip,last_login_time,last_login_ip,update_time,status)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.username},#{item.password},#{item.email},#{item.mobile},#{item.regTime},#{item.regIp},#{item.lastLogin_time},#{item.lastLogin_ip},#{item.updateTime},#{item.status})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_ucenter_member
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="username != null" >  username = #{username}, </if><if test="password != null" >  password = #{password}, </if><if test="email != null" >  email = #{email}, </if><if test="mobile != null" >  mobile = #{mobile}, </if><if test="regTime != null" >  reg_time = #{regTime}, </if><if test="regIp != null" >  reg_ip = #{regIp}, </if><if test="lastLogin_time != null" >  last_login_time = #{lastLogin_time}, </if><if test="lastLogin_ip != null" >  last_login_ip = #{lastLogin_ip}, </if><if test="updateTime != null" >  update_time = #{updateTime}, </if><if test="status != null" >  status = #{status}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_ucenter_member 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_ucenter_member 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

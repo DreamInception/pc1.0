@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_asset_yield_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND asset_yield_log.log_id = #{logId}</if> <if test="assetId != null and '' != assetId" > AND asset_yield_log.asset_id = #{assetId}</if> <if test="userId != null and '' != userId" > AND asset_yield_log.user_id = #{userId}</if> <if test="pdtId != null and '' != pdtId" > AND asset_yield_log.pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND asset_yield_log.inst_id = #{instId}</if> <if test="logYield_date != null and '' != logYield_date" > AND asset_yield_log.log_yield_date = #{logYield_date}</if> <if test="logYield != null and '' != logYield" > AND asset_yield_log.log_yield = #{logYield}</if> <if test="logAsset_amount != null and '' != logAsset_amount" > AND asset_yield_log.log_asset_amount = #{logAsset_amount}</if> <if test="logAccumulated_yield != null and '' != logAccumulated_yield" > AND asset_yield_log.log_accumulated_yield = #{logAccumulated_yield}</if> <if test="logBuymoney != null and '' != logBuymoney" > AND asset_yield_log.log_buymoney = #{logBuymoney}</if> <if test="logYield_rate != null and '' != logYield_rate" > AND asset_yield_log.log_yield_rate = #{logYield_rate}</if> <if test="logType != null and '' != logType" > AND asset_yield_log.log_type = #{logType}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND asset_yield_log.log_createtime = #{logCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND log_id = #{logId}</if> <if test="assetId != null and '' != assetId" > AND asset_id = #{assetId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="logYield_date != null and '' != logYield_date" > AND log_yield_date = #{logYield_date}</if> <if test="logYield != null and '' != logYield" > AND log_yield = #{logYield}</if> <if test="logAsset_amount != null and '' != logAsset_amount" > AND log_asset_amount = #{logAsset_amount}</if> <if test="logAccumulated_yield != null and '' != logAccumulated_yield" > AND log_accumulated_yield = #{logAccumulated_yield}</if> <if test="logBuymoney != null and '' != logBuymoney" > AND log_buymoney = #{logBuymoney}</if> <if test="logYield_rate != null and '' != logYield_rate" > AND log_yield_rate = #{logYield_rate}</if> <if test="logType != null and '' != logType" > AND log_type = #{logType}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_asset_yield_log AS asset_yield_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT asset_yield_log.log_id as logId, asset_yield_log.asset_id as assetId, asset_yield_log.user_id as userId, asset_yield_log.pdt_id as pdtId, asset_yield_log.inst_id as instId, asset_yield_log.log_yield_date as logYield_date, asset_yield_log.log_yield as logYield, asset_yield_log.log_asset_amount as logAsset_amount, asset_yield_log.log_accumulated_yield as logAccumulated_yield, asset_yield_log.log_buymoney as logBuymoney, asset_yield_log.log_yield_rate as logYield_rate, asset_yield_log.log_type as logType, asset_yield_log.log_createtime as logCreatetime FROM dr_asset_yield_log AS asset_yield_log WHERE log_id = #{logId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT asset_yield_log.log_id as logId, asset_yield_log.asset_id as assetId, asset_yield_log.user_id as userId, asset_yield_log.pdt_id as pdtId, asset_yield_log.inst_id as instId, asset_yield_log.log_yield_date as logYield_date, asset_yield_log.log_yield as logYield, asset_yield_log.log_asset_amount as logAsset_amount, asset_yield_log.log_accumulated_yield as logAccumulated_yield, asset_yield_log.log_buymoney as logBuymoney, asset_yield_log.log_yield_rate as logYield_rate, asset_yield_log.log_type as logType, asset_yield_log.log_createtime as logCreatetime FROM dr_asset_yield_log AS asset_yield_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT asset_yield_log.log_id as logId, asset_yield_log.asset_id as assetId, asset_yield_log.user_id as userId, asset_yield_log.pdt_id as pdtId, asset_yield_log.inst_id as instId, asset_yield_log.log_yield_date as logYield_date, asset_yield_log.log_yield as logYield, asset_yield_log.log_asset_amount as logAsset_amount, asset_yield_log.log_accumulated_yield as logAccumulated_yield, asset_yield_log.log_buymoney as logBuymoney, asset_yield_log.log_yield_rate as logYield_rate, asset_yield_log.log_type as logType, asset_yield_log.log_createtime as logCreatetime FROM dr_asset_yield_log AS asset_yield_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_asset_yield_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">log_id,</if><if test="assetId != null">asset_id,</if><if test="userId != null">user_id,</if><if test="pdtId != null">pdt_id,</if><if test="instId != null">inst_id,</if><if test="logYield_date != null">log_yield_date,</if><if test="logYield != null">log_yield,</if><if test="logAsset_amount != null">log_asset_amount,</if><if test="logAccumulated_yield != null">log_accumulated_yield,</if><if test="logBuymoney != null">log_buymoney,</if><if test="logYield_rate != null">log_yield_rate,</if><if test="logType != null">log_type,</if><if test="logCreatetime != null">log_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logId != null">#{logId},</if><if test="assetId != null">#{assetId},</if><if test="userId != null">#{userId},</if><if test="pdtId != null">#{pdtId},</if><if test="instId != null">#{instId},</if><if test="logYield_date != null">#{logYield_date},</if><if test="logYield != null">#{logYield},</if><if test="logAsset_amount != null">#{logAsset_amount},</if><if test="logAccumulated_yield != null">#{logAccumulated_yield},</if><if test="logBuymoney != null">#{logBuymoney},</if><if test="logYield_rate != null">#{logYield_rate},</if><if test="logType != null">#{logType},</if><if test="logCreatetime != null">#{logCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_asset_yield_log (log_id,asset_id,user_id,pdt_id,inst_id,log_yield_date,log_yield,log_asset_amount,log_accumulated_yield,log_buymoney,log_yield_rate,log_type,log_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logId},#{item.assetId},#{item.userId},#{item.pdtId},#{item.instId},#{item.logYield_date},#{item.logYield},#{item.logAsset_amount},#{item.logAccumulated_yield},#{item.logBuymoney},#{item.logYield_rate},#{item.logType},#{item.logCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_asset_yield_log
+    <set>
+     <if test="logId != null" >  log_id = #{logId}, </if><if test="assetId != null" >  asset_id = #{assetId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="logYield_date != null" >  log_yield_date = #{logYield_date}, </if><if test="logYield != null" >  log_yield = #{logYield}, </if><if test="logAsset_amount != null" >  log_asset_amount = #{logAsset_amount}, </if><if test="logAccumulated_yield != null" >  log_accumulated_yield = #{logAccumulated_yield}, </if><if test="logBuymoney != null" >  log_buymoney = #{logBuymoney}, </if><if test="logYield_rate != null" >  log_yield_rate = #{logYield_rate}, </if><if test="logType != null" >  log_type = #{logType}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if>
+      </set>
+	  WHERE log_id = #{logId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_asset_yield_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_asset_yield_log 
+		WHERE log_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_user_week_profit">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="uwpId != null and '' != uwpId" > AND user_week_profit.uwp_id = #{uwpId}</if> <if test="userId != null and '' != userId" > AND user_week_profit.user_id = #{userId}</if> <if test="openId != null and '' != openId" > AND user_week_profit.open_id = #{openId}</if> <if test="userNickname != null and '' != userNickname" > AND user_week_profit.user_nickname = #{userNickname}</if> <if test="weekProfit != null and '' != weekProfit" > AND user_week_profit.week_profit = #{weekProfit}</if> <if test="accuProfit != null and '' != accuProfit" > AND user_week_profit.accu_profit = #{accuProfit}</if> <if test="userAsset != null and '' != userAsset" > AND user_week_profit.user_asset = #{userAsset}</if> <if test="uwpYield_date != null and '' != uwpYield_date" > AND user_week_profit.uwp_yield_date = #{uwpYield_date}</if> <if test="uwpCreatetime != null and '' != uwpCreatetime" > AND user_week_profit.uwp_createtime = #{uwpCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="uwpId != null and '' != uwpId" > AND uwp_id = #{uwpId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="openId != null and '' != openId" > AND open_id = #{openId}</if> <if test="userNickname != null and '' != userNickname" > AND user_nickname = #{userNickname}</if> <if test="weekProfit != null and '' != weekProfit" > AND week_profit = #{weekProfit}</if> <if test="accuProfit != null and '' != accuProfit" > AND accu_profit = #{accuProfit}</if> <if test="userAsset != null and '' != userAsset" > AND user_asset = #{userAsset}</if> <if test="uwpYield_date != null and '' != uwpYield_date" > AND uwp_yield_date = #{uwpYield_date}</if> <if test="uwpCreatetime != null and '' != uwpCreatetime" > AND uwp_createtime = #{uwpCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_week_profit AS user_week_profit
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT user_week_profit.uwp_id as uwpId, user_week_profit.user_id as userId, user_week_profit.open_id as openId, user_week_profit.user_nickname as userNickname, user_week_profit.week_profit as weekProfit, user_week_profit.accu_profit as accuProfit, user_week_profit.user_asset as userAsset, user_week_profit.uwp_yield_date as uwpYield_date, user_week_profit.uwp_createtime as uwpCreatetime FROM dr_user_week_profit AS user_week_profit WHERE uwp_id = #{uwpId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT user_week_profit.uwp_id as uwpId, user_week_profit.user_id as userId, user_week_profit.open_id as openId, user_week_profit.user_nickname as userNickname, user_week_profit.week_profit as weekProfit, user_week_profit.accu_profit as accuProfit, user_week_profit.user_asset as userAsset, user_week_profit.uwp_yield_date as uwpYield_date, user_week_profit.uwp_createtime as uwpCreatetime FROM dr_user_week_profit AS user_week_profit
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT user_week_profit.uwp_id as uwpId, user_week_profit.user_id as userId, user_week_profit.open_id as openId, user_week_profit.user_nickname as userNickname, user_week_profit.week_profit as weekProfit, user_week_profit.accu_profit as accuProfit, user_week_profit.user_asset as userAsset, user_week_profit.uwp_yield_date as uwpYield_date, user_week_profit.uwp_createtime as uwpCreatetime FROM dr_user_week_profit AS user_week_profit  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_user_week_profit 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uwpId != null">uwp_id,</if><if test="userId != null">user_id,</if><if test="openId != null">open_id,</if><if test="userNickname != null">user_nickname,</if><if test="weekProfit != null">week_profit,</if><if test="accuProfit != null">accu_profit,</if><if test="userAsset != null">user_asset,</if><if test="uwpYield_date != null">uwp_yield_date,</if><if test="uwpCreatetime != null">uwp_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="uwpId != null">#{uwpId},</if><if test="userId != null">#{userId},</if><if test="openId != null">#{openId},</if><if test="userNickname != null">#{userNickname},</if><if test="weekProfit != null">#{weekProfit},</if><if test="accuProfit != null">#{accuProfit},</if><if test="userAsset != null">#{userAsset},</if><if test="uwpYield_date != null">#{uwpYield_date},</if><if test="uwpCreatetime != null">#{uwpCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_user_week_profit (uwp_id,user_id,open_id,user_nickname,week_profit,accu_profit,user_asset,uwp_yield_date,uwp_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.uwpId},#{item.userId},#{item.openId},#{item.userNickname},#{item.weekProfit},#{item.accuProfit},#{item.userAsset},#{item.uwpYield_date},#{item.uwpCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_user_week_profit
+    <set>
+     <if test="uwpId != null" >  uwp_id = #{uwpId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="openId != null" >  open_id = #{openId}, </if><if test="userNickname != null" >  user_nickname = #{userNickname}, </if><if test="weekProfit != null" >  week_profit = #{weekProfit}, </if><if test="accuProfit != null" >  accu_profit = #{accuProfit}, </if><if test="userAsset != null" >  user_asset = #{userAsset}, </if><if test="uwpYield_date != null" >  uwp_yield_date = #{uwpYield_date}, </if><if test="uwpCreatetime != null" >  uwp_createtime = #{uwpCreatetime}, </if>
+      </set>
+	  WHERE uwp_id = #{uwpId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_user_week_profit 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_user_week_profit 
+		WHERE uwp_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

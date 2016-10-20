@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_order">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="orderId != null and '' != orderId" > AND order.order_id = #{orderId}</if> <if test="orderNo != null and '' != orderNo" > AND order.order_no = #{orderNo}</if> <if test="userId != null and '' != userId" > AND order.user_id = #{userId}</if> <if test="pdtId != null and '' != pdtId" > AND order.pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND order.inst_id = #{instId}</if> <if test="orderInst_name != null and '' != orderInst_name" > AND order.order_inst_name = #{orderInst_name}</if> <if test="orderProduct_name != null and '' != orderProduct_name" > AND order.order_product_name = #{orderProduct_name}</if> <if test="orderProduct_price != null and '' != orderProduct_price" > AND order.order_product_price = #{orderProduct_price}</if> <if test="orderBuycount != null and '' != orderBuycount" > AND order.order_buycount = #{orderBuycount}</if> <if test="orderAmount != null and '' != orderAmount" > AND order.order_amount = #{orderAmount}</if> <if test="orderCharge != null and '' != orderCharge" > AND order.order_charge = #{orderCharge}</if> <if test="orderActual_amount != null and '' != orderActual_amount" > AND order.order_actual_amount = #{orderActual_amount}</if> <if test="orderBail_money != null and '' != orderBail_money" > AND order.order_bail_money = #{orderBail_money}</if> <if test="orderFreeze_id != null and '' != orderFreeze_id" > AND order.order_freeze_id = #{orderFreeze_id}</if> <if test="orderUnfreeze_id != null and '' != orderUnfreeze_id" > AND order.order_unfreeze_id = #{orderUnfreeze_id}</if> <if test="orderConfirmtime != null and '' != orderConfirmtime" > AND order.order_confirmtime = #{orderConfirmtime}</if> <if test="orderPaytime != null and '' != orderPaytime" > AND order.order_paytime = #{orderPaytime}</if> <if test="orderCollect_no != null and '' != orderCollect_no" > AND order.order_collect_no = #{orderCollect_no}</if> <if test="orderPay_no != null and '' != orderPay_no" > AND order.order_pay_no = #{orderPay_no}</if> <if test="orderExpire_next_step != null and '' != orderExpire_next_step" > AND order.order_expire_next_step = #{orderExpire_next_step}</if> <if test="orderRemark != null and '' != orderRemark" > AND order.order_remark = #{orderRemark}</if> <if test="orderStatus != null and '' != orderStatus" > AND order.order_status = #{orderStatus}</if> <if test="orderCreatetime != null and '' != orderCreatetime" > AND order.order_createtime = #{orderCreatetime}</if> <if test="orderModifytime != null and '' != orderModifytime" > AND order.order_modifytime = #{orderModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="orderId != null and '' != orderId" > AND order_id = #{orderId}</if> <if test="orderNo != null and '' != orderNo" > AND order_no = #{orderNo}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="orderInst_name != null and '' != orderInst_name" > AND order_inst_name = #{orderInst_name}</if> <if test="orderProduct_name != null and '' != orderProduct_name" > AND order_product_name = #{orderProduct_name}</if> <if test="orderProduct_price != null and '' != orderProduct_price" > AND order_product_price = #{orderProduct_price}</if> <if test="orderBuycount != null and '' != orderBuycount" > AND order_buycount = #{orderBuycount}</if> <if test="orderAmount != null and '' != orderAmount" > AND order_amount = #{orderAmount}</if> <if test="orderCharge != null and '' != orderCharge" > AND order_charge = #{orderCharge}</if> <if test="orderActual_amount != null and '' != orderActual_amount" > AND order_actual_amount = #{orderActual_amount}</if> <if test="orderBail_money != null and '' != orderBail_money" > AND order_bail_money = #{orderBail_money}</if> <if test="orderFreeze_id != null and '' != orderFreeze_id" > AND order_freeze_id = #{orderFreeze_id}</if> <if test="orderUnfreeze_id != null and '' != orderUnfreeze_id" > AND order_unfreeze_id = #{orderUnfreeze_id}</if> <if test="orderConfirmtime != null and '' != orderConfirmtime" > AND order_confirmtime = #{orderConfirmtime}</if> <if test="orderPaytime != null and '' != orderPaytime" > AND order_paytime = #{orderPaytime}</if> <if test="orderCollect_no != null and '' != orderCollect_no" > AND order_collect_no = #{orderCollect_no}</if> <if test="orderPay_no != null and '' != orderPay_no" > AND order_pay_no = #{orderPay_no}</if> <if test="orderExpire_next_step != null and '' != orderExpire_next_step" > AND order_expire_next_step = #{orderExpire_next_step}</if> <if test="orderRemark != null and '' != orderRemark" > AND order_remark = #{orderRemark}</if> <if test="orderStatus != null and '' != orderStatus" > AND order_status = #{orderStatus}</if> <if test="orderCreatetime != null and '' != orderCreatetime" > AND order_createtime = #{orderCreatetime}</if> <if test="orderModifytime != null and '' != orderModifytime" > AND order_modifytime = #{orderModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_order AS order
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT order.order_id as orderId, order.order_no as orderNo, order.user_id as userId, order.pdt_id as pdtId, order.inst_id as instId, order.order_inst_name as orderInst_name, order.order_product_name as orderProduct_name, order.order_product_price as orderProduct_price, order.order_buycount as orderBuycount, order.order_amount as orderAmount, order.order_charge as orderCharge, order.order_actual_amount as orderActual_amount, order.order_bail_money as orderBail_money, order.order_freeze_id as orderFreeze_id, order.order_unfreeze_id as orderUnfreeze_id, order.order_confirmtime as orderConfirmtime, order.order_paytime as orderPaytime, order.order_collect_no as orderCollect_no, order.order_pay_no as orderPay_no, order.order_expire_next_step as orderExpire_next_step, order.order_remark as orderRemark, order.order_status as orderStatus, order.order_createtime as orderCreatetime, order.order_modifytime as orderModifytime FROM dr_order AS order WHERE order_id = #{orderId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT order.order_id as orderId, order.order_no as orderNo, order.user_id as userId, order.pdt_id as pdtId, order.inst_id as instId, order.order_inst_name as orderInst_name, order.order_product_name as orderProduct_name, order.order_product_price as orderProduct_price, order.order_buycount as orderBuycount, order.order_amount as orderAmount, order.order_charge as orderCharge, order.order_actual_amount as orderActual_amount, order.order_bail_money as orderBail_money, order.order_freeze_id as orderFreeze_id, order.order_unfreeze_id as orderUnfreeze_id, order.order_confirmtime as orderConfirmtime, order.order_paytime as orderPaytime, order.order_collect_no as orderCollect_no, order.order_pay_no as orderPay_no, order.order_expire_next_step as orderExpire_next_step, order.order_remark as orderRemark, order.order_status as orderStatus, order.order_createtime as orderCreatetime, order.order_modifytime as orderModifytime FROM dr_order AS order
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT order.order_id as orderId, order.order_no as orderNo, order.user_id as userId, order.pdt_id as pdtId, order.inst_id as instId, order.order_inst_name as orderInst_name, order.order_product_name as orderProduct_name, order.order_product_price as orderProduct_price, order.order_buycount as orderBuycount, order.order_amount as orderAmount, order.order_charge as orderCharge, order.order_actual_amount as orderActual_amount, order.order_bail_money as orderBail_money, order.order_freeze_id as orderFreeze_id, order.order_unfreeze_id as orderUnfreeze_id, order.order_confirmtime as orderConfirmtime, order.order_paytime as orderPaytime, order.order_collect_no as orderCollect_no, order.order_pay_no as orderPay_no, order.order_expire_next_step as orderExpire_next_step, order.order_remark as orderRemark, order.order_status as orderStatus, order.order_createtime as orderCreatetime, order.order_modifytime as orderModifytime FROM dr_order AS order  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_order 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">order_id,</if><if test="orderNo != null">order_no,</if><if test="userId != null">user_id,</if><if test="pdtId != null">pdt_id,</if><if test="instId != null">inst_id,</if><if test="orderInst_name != null">order_inst_name,</if><if test="orderProduct_name != null">order_product_name,</if><if test="orderProduct_price != null">order_product_price,</if><if test="orderBuycount != null">order_buycount,</if><if test="orderAmount != null">order_amount,</if><if test="orderCharge != null">order_charge,</if><if test="orderActual_amount != null">order_actual_amount,</if><if test="orderBail_money != null">order_bail_money,</if><if test="orderFreeze_id != null">order_freeze_id,</if><if test="orderUnfreeze_id != null">order_unfreeze_id,</if><if test="orderConfirmtime != null">order_confirmtime,</if><if test="orderPaytime != null">order_paytime,</if><if test="orderCollect_no != null">order_collect_no,</if><if test="orderPay_no != null">order_pay_no,</if><if test="orderExpire_next_step != null">order_expire_next_step,</if><if test="orderRemark != null">order_remark,</if><if test="orderStatus != null">order_status,</if><if test="orderCreatetime != null">order_createtime,</if><if test="orderModifytime != null">order_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="orderId != null">#{orderId},</if><if test="orderNo != null">#{orderNo},</if><if test="userId != null">#{userId},</if><if test="pdtId != null">#{pdtId},</if><if test="instId != null">#{instId},</if><if test="orderInst_name != null">#{orderInst_name},</if><if test="orderProduct_name != null">#{orderProduct_name},</if><if test="orderProduct_price != null">#{orderProduct_price},</if><if test="orderBuycount != null">#{orderBuycount},</if><if test="orderAmount != null">#{orderAmount},</if><if test="orderCharge != null">#{orderCharge},</if><if test="orderActual_amount != null">#{orderActual_amount},</if><if test="orderBail_money != null">#{orderBail_money},</if><if test="orderFreeze_id != null">#{orderFreeze_id},</if><if test="orderUnfreeze_id != null">#{orderUnfreeze_id},</if><if test="orderConfirmtime != null">#{orderConfirmtime},</if><if test="orderPaytime != null">#{orderPaytime},</if><if test="orderCollect_no != null">#{orderCollect_no},</if><if test="orderPay_no != null">#{orderPay_no},</if><if test="orderExpire_next_step != null">#{orderExpire_next_step},</if><if test="orderRemark != null">#{orderRemark},</if><if test="orderStatus != null">#{orderStatus},</if><if test="orderCreatetime != null">#{orderCreatetime},</if><if test="orderModifytime != null">#{orderModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_order (order_id,order_no,user_id,pdt_id,inst_id,order_inst_name,order_product_name,order_product_price,order_buycount,order_amount,order_charge,order_actual_amount,order_bail_money,order_freeze_id,order_unfreeze_id,order_confirmtime,order_paytime,order_collect_no,order_pay_no,order_expire_next_step,order_remark,order_status,order_createtime,order_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.orderId},#{item.orderNo},#{item.userId},#{item.pdtId},#{item.instId},#{item.orderInst_name},#{item.orderProduct_name},#{item.orderProduct_price},#{item.orderBuycount},#{item.orderAmount},#{item.orderCharge},#{item.orderActual_amount},#{item.orderBail_money},#{item.orderFreeze_id},#{item.orderUnfreeze_id},#{item.orderConfirmtime},#{item.orderPaytime},#{item.orderCollect_no},#{item.orderPay_no},#{item.orderExpire_next_step},#{item.orderRemark},#{item.orderStatus},#{item.orderCreatetime},#{item.orderModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_order
+    <set>
+     <if test="orderId != null" >  order_id = #{orderId}, </if><if test="orderNo != null" >  order_no = #{orderNo}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="orderInst_name != null" >  order_inst_name = #{orderInst_name}, </if><if test="orderProduct_name != null" >  order_product_name = #{orderProduct_name}, </if><if test="orderProduct_price != null" >  order_product_price = #{orderProduct_price}, </if><if test="orderBuycount != null" >  order_buycount = #{orderBuycount}, </if><if test="orderAmount != null" >  order_amount = #{orderAmount}, </if><if test="orderCharge != null" >  order_charge = #{orderCharge}, </if><if test="orderActual_amount != null" >  order_actual_amount = #{orderActual_amount}, </if><if test="orderBail_money != null" >  order_bail_money = #{orderBail_money}, </if><if test="orderFreeze_id != null" >  order_freeze_id = #{orderFreeze_id}, </if><if test="orderUnfreeze_id != null" >  order_unfreeze_id = #{orderUnfreeze_id}, </if><if test="orderConfirmtime != null" >  order_confirmtime = #{orderConfirmtime}, </if><if test="orderPaytime != null" >  order_paytime = #{orderPaytime}, </if><if test="orderCollect_no != null" >  order_collect_no = #{orderCollect_no}, </if><if test="orderPay_no != null" >  order_pay_no = #{orderPay_no}, </if><if test="orderExpire_next_step != null" >  order_expire_next_step = #{orderExpire_next_step}, </if><if test="orderRemark != null" >  order_remark = #{orderRemark}, </if><if test="orderStatus != null" >  order_status = #{orderStatus}, </if><if test="orderCreatetime != null" >  order_createtime = #{orderCreatetime}, </if><if test="orderModifytime != null" >  order_modifytime = #{orderModifytime}, </if>
+      </set>
+	  WHERE order_id = #{orderId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_order 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_order 
+		WHERE order_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

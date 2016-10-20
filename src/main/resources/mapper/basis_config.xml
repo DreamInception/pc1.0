@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_config">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND config.id = #{id}</if> <if test="name != null and '' != name" > AND config.name = #{name}</if> <if test="type != null and '' != type" > AND config.type = #{type}</if> <if test="title != null and '' != title" > AND config.title = #{title}</if> <if test="group != null and '' != group" > AND config.group = #{group}</if> <if test="extra != null and '' != extra" > AND config.extra = #{extra}</if> <if test="remark != null and '' != remark" > AND config.remark = #{remark}</if> <if test="createTime != null and '' != createTime" > AND config.create_time = #{createTime}</if> <if test="updateTime != null and '' != updateTime" > AND config.update_time = #{updateTime}</if> <if test="status != null and '' != status" > AND config.status = #{status}</if> <if test="value != null and '' != value" > AND config.value = #{value}</if> <if test="sort != null and '' != sort" > AND config.sort = #{sort}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="name != null and '' != name" > AND name = #{name}</if> <if test="type != null and '' != type" > AND type = #{type}</if> <if test="title != null and '' != title" > AND title = #{title}</if> <if test="group != null and '' != group" > AND group = #{group}</if> <if test="extra != null and '' != extra" > AND extra = #{extra}</if> <if test="remark != null and '' != remark" > AND remark = #{remark}</if> <if test="createTime != null and '' != createTime" > AND create_time = #{createTime}</if> <if test="updateTime != null and '' != updateTime" > AND update_time = #{updateTime}</if> <if test="status != null and '' != status" > AND status = #{status}</if> <if test="value != null and '' != value" > AND value = #{value}</if> <if test="sort != null and '' != sort" > AND sort = #{sort}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_config AS config
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT config.id as id, config.name as name, config.type as type, config.title as title, config.group as group, config.extra as extra, config.remark as remark, config.create_time as createTime, config.update_time as updateTime, config.status as status, config.value as value, config.sort as sort FROM dr_config AS config WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT config.id as id, config.name as name, config.type as type, config.title as title, config.group as group, config.extra as extra, config.remark as remark, config.create_time as createTime, config.update_time as updateTime, config.status as status, config.value as value, config.sort as sort FROM dr_config AS config
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT config.id as id, config.name as name, config.type as type, config.title as title, config.group as group, config.extra as extra, config.remark as remark, config.create_time as createTime, config.update_time as updateTime, config.status as status, config.value as value, config.sort as sort FROM dr_config AS config  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_config 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="name != null">name,</if><if test="type != null">type,</if><if test="title != null">title,</if><if test="group != null">group,</if><if test="extra != null">extra,</if><if test="remark != null">remark,</if><if test="createTime != null">create_time,</if><if test="updateTime != null">update_time,</if><if test="status != null">status,</if><if test="value != null">value,</if><if test="sort != null">sort,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="name != null">#{name},</if><if test="type != null">#{type},</if><if test="title != null">#{title},</if><if test="group != null">#{group},</if><if test="extra != null">#{extra},</if><if test="remark != null">#{remark},</if><if test="createTime != null">#{createTime},</if><if test="updateTime != null">#{updateTime},</if><if test="status != null">#{status},</if><if test="value != null">#{value},</if><if test="sort != null">#{sort},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_config (id,name,type,title,group,extra,remark,create_time,update_time,status,value,sort)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.name},#{item.type},#{item.title},#{item.group},#{item.extra},#{item.remark},#{item.createTime},#{item.updateTime},#{item.status},#{item.value},#{item.sort})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_config
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="name != null" >  name = #{name}, </if><if test="type != null" >  type = #{type}, </if><if test="title != null" >  title = #{title}, </if><if test="group != null" >  group = #{group}, </if><if test="extra != null" >  extra = #{extra}, </if><if test="remark != null" >  remark = #{remark}, </if><if test="createTime != null" >  create_time = #{createTime}, </if><if test="updateTime != null" >  update_time = #{updateTime}, </if><if test="status != null" >  status = #{status}, </if><if test="value != null" >  value = #{value}, </if><if test="sort != null" >  sort = #{sort}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_config 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_config 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

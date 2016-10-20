@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="account">
+	<!-- 查询次近登录信息 -->
+	<select id="findbyid" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT * FROM 
+		(SELECT 
+			l.log_logintime AS logLogintime,
+			l.log_login_ip AS logLogin_ip,
+			l.log_login_device AS logLogin_device
+		FROM dr_user_login_log l WHERE l.user_id = #{userId} ORDER BY l.log_logintime DESC LIMIT 2) AS a 
+		ORDER BY a.logLogintime ASC LIMIT 1 
+	</select>
+
+	<!-- 统计用户资金记录条数 -->
+	<select id="countFinanceLog" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_finance_log AS user_finance_log
+		<include refid="UserFinanceLog_Where_Select" />
+	</select>
+
+	<!-- 查询用户资金记录 -->
+	<select id="findPageFinanceLog" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT user_finance_log.log_id as logId, user_finance_log.user_id as
+			userId, user_finance_log.log_operate as logOperate,
+			user_finance_log.log_operate_money as logOperate_money,
+			user_finance_log.log_operate_reason as logOperate_reason,
+			user_finance_log.log_operator as logOperator,
+			user_finance_log.log_user_wealth as logUser_wealth,
+			user_finance_log.log_user_balance as logUser_balance,
+			user_finance_log.log_user_frozen as logUser_frozen,
+			user_finance_log.log_user_asset as logUser_asset,
+			user_finance_log.log_user_yield as logUser_yield,
+			user_finance_log.log_user_float as logUser_float,
+			user_finance_log.log_target_id as logTarget_id,
+			user_finance_log.log_status as logStatus, 
+			user_finance_log.log_display	as logDisplay, 
+			user_finance_log.log_remark as logRemark,
+			user_finance_log.log_createtime as logCreatetime 
+		FROM
+			dr_user_finance_log AS user_finance_log
+		<include refid="UserFinanceLog_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+		LIMIT #{start},#{end}
+	</select>
+
+	<sql id="UserFinanceLog_Where_Select">
+		<where>
+			1=1
+			<if test="logId != null and '' != logId"> AND
+				user_finance_log.log_id = #{logId}</if>
+			<if test="userId != null and '' != userId"> AND
+				user_finance_log.user_id = #{userId}</if>
+			<if test="logOperate != null and '' != logOperate"> AND
+				user_finance_log.log_operate = #{logOperate}</if>
+			<if test="logOperate_money != null and '' != logOperate_money">
+				AND user_finance_log.log_operate_money = #{logOperate_money}</if>
+			<if test="logOperate_reason != null and '' != logOperate_reason">
+				AND user_finance_log.log_operate_reason = #{logOperate_reason}</if>
+			<if test="logOperator != null and '' != logOperator"> AND
+				user_finance_log.log_operator = #{logOperator}</if>
+			<if test="logUser_wealth != null and '' != logUser_wealth"> AND
+				user_finance_log.log_user_wealth = #{logUser_wealth}</if>
+			<if test="logUser_balance != null and '' != logUser_balance"> AND
+				user_finance_log.log_user_balance = #{logUser_balance}</if>
+			<if test="logUser_frozen != null and '' != logUser_frozen"> AND
+				user_finance_log.log_user_frozen = #{logUser_frozen}</if>
+			<if test="logUser_asset != null and '' != logUser_asset"> AND
+				user_finance_log.log_user_asset = #{logUser_asset}</if>
+			<if test="logUser_yield != null and '' != logUser_yield"> AND
+				user_finance_log.log_user_yield = #{logUser_yield}</if>
+			<if test="logUser_float != null and '' != logUser_float"> AND
+				user_finance_log.log_user_float = #{logUser_float}</if>
+			<if test="logTarget_id != null and '' != logTarget_id"> AND
+				user_finance_log.log_target_id = #{logTarget_id}</if>
+			<if test="logStatus != null and '' != logStatus"> AND
+				user_finance_log.log_status = #{logStatus}</if>
+			<if test="logDisplay != null and '' != logDisplay"> AND
+				user_finance_log.log_display = #{logDisplay}</if>
+			<if test="logRemark != null and '' != logRemark"> AND
+				user_finance_log.log_remark = #{logRemark}</if>
+			<if test="logCreatetime != null and '' != logCreatetime"> AND
+				user_finance_log.log_createtime = #{logCreatetime}</if>
+			<if test="startTime != null and '' != startTime"> AND
+			 	DATEDIFF(#{startTime},user_finance_log.log_createtime) <![CDATA[<=]]> 0</if>
+			<if test="endTime != null and '' != endTime"> AND
+				DATEDIFF(#{endTime},user_finance_log.log_createtime) <![CDATA[>=]]> 0</if>
+		</where>
+	</sql>
+	
+	<!-- 统计用户购买产品数量 -->
+	<select id="countOrder" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_order AS dr_order
+		<include refid="order_Where_Select" />
+	</select>
+	
+	<!-- 用户购买产品分页列表 -->
+	<select id="orderPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT 
+			dr_order.order_id as orderId, 
+			dr_order.order_no as orderNo,
+			dr_order.user_id as userId, 
+			dr_order.pdt_id as pdtId, 
+			dr_order.inst_id as instId, 
+			dr_order.order_inst_name as orderInst_name,
+			dr_order.order_product_name as orderProduct_name,
+			dr_order.order_product_price as orderProduct_price,
+			dr_order.order_buycount as orderBuycount, 
+			dr_order.order_amount as	orderAmount, 
+			dr_order.order_charge as orderCharge,
+			dr_order.order_actual_amount as orderActual_amount,
+			dr_order.order_bail_money as orderBail_money, 
+			dr_order.order_freeze_id as orderFreeze_id, 
+			dr_order.order_unfreeze_id as orderUnfreeze_id,
+			dr_order.order_confirmtime as orderConfirmtime, 
+			dr_order.order_paytime as orderPaytime, 
+			dr_order.order_collect_no as orderCollect_no,
+			dr_order.order_pay_no as orderPay_no, 
+			dr_order.order_expire_next_step as orderExpire_next_step, 
+			dr_order.order_remark as orderRemark,
+			dr_order.order_status as orderStatus, 
+			dr_order.order_createtime as orderCreatetime, 
+			dr_order.order_modifytime as orderModifytime 
+		FROM
+			dr_order AS dr_order  
+		<include refid="order_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<sql id="order_Where_Select" >
+		<where>
+			1=1
+			AND dr_order.order_status <![CDATA[>=]]> 0
+			<if test="orderId != null and '' != orderId"> AND dr_order.order_id
+				= #{orderId}</if>
+			<if test="orderNo != null and '' != orderNo"> AND dr_order.order_no
+				= #{orderNo}</if>
+			<if test="userId != null and '' != userId"> AND dr_order.user_id =
+				#{userId}</if>
+			<if test="pdtId != null and '' != pdtId"> AND dr_order.pdt_id =
+				#{pdtId}</if>
+			<if test="instId != null and '' != instId"> AND dr_order.inst_id =
+				#{instId}</if>
+			<if test="orderInst_name != null and '' != orderInst_name"> AND
+				dr_order.order_inst_name = #{orderInst_name}</if>
+			<if test="orderProduct_name != null and '' != orderProduct_name">
+				AND dr_order.order_product_name = #{orderProduct_name}</if>
+			<if test="orderProduct_price != null and '' != orderProduct_price">
+				AND dr_order.order_product_price = #{orderProduct_price}</if>
+			<if test="orderBuycount != null and '' != orderBuycount"> AND
+				dr_order.order_buycount = #{orderBuycount}</if>
+			<if test="orderAmount != null and '' != orderAmount"> AND
+				dr_order.order_amount = #{orderAmount}</if>
+			<if test="orderCharge != null and '' != orderCharge"> AND
+				dr_order.order_charge = #{orderCharge}</if>
+			<if test="orderActual_amount != null and '' != orderActual_amount">
+				AND dr_order.order_actual_amount = #{orderActual_amount}</if>
+			<if test="orderBail_money != null and '' != orderBail_money"> AND
+				dr_order.order_bail_money = #{orderBail_money}</if>
+			<if test="orderFreeze_id != null and '' != orderFreeze_id"> AND
+				dr_order.order_freeze_id = #{orderFreeze_id}</if>
+			<if test="orderUnfreeze_id != null and '' != orderUnfreeze_id"> AND
+				dr_order.order_unfreeze_id = #{orderUnfreeze_id}</if>
+			<if test="orderConfirmtime != null and '' != orderConfirmtime"> AND
+				dr_order.order_confirmtime = #{orderConfirmtime}</if>
+			<if test="orderPaytime != null and '' != orderPaytime"> AND
+				dr_order.order_paytime like CONCAT('%',#{orderPaytime},'%')</if>
+			<if test="orderCollect_no != null and '' != orderCollect_no"> AND
+				dr_order.order_collect_no = #{orderCollect_no}</if>
+			<if test="orderPay_no != null and '' != orderPay_no"> AND
+				dr_order.order_pay_no = #{orderPay_no}</if>
+			<if test="orderExpire_next_step != null and '' != orderExpire_next_step">
+				AND dr_order.order_expire_next_step = #{orderExpire_next_step}</if>
+			<if test="orderRemark != null and '' != orderRemark"> AND
+				dr_order.order_remark = #{orderRemark}</if>
+			<if test="orderStatus != null and '' != orderStatus"> AND
+				dr_order.order_status = #{orderStatus}</if>
+			<if test="orderCreatetime != null and '' != orderCreatetime"> AND
+				dr_order.order_createtime = #{orderCreatetime}</if>
+			<if test="orderModifytime != null and '' != orderModifytime"> AND
+				dr_order.order_modifytime = #{orderModifytime}</if>
+			<if test="days != null and '' != days"> AND
+				DATEDIFF(dr_order.order_modifytime,now()) <![CDATA[<=]]> #{days}</if>
+		</where>
+	</sql>
+	
+	<!-- 资产列表 -->
+	<select id="assetAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+			SELECT 
+				asset.asset_id as assetId, asset.asset_no as assetNo,
+				asset.user_id as userId, asset.pdt_id as pdtId, asset.inst_id as
+				instId, asset.order_id as orderId, asset.asset_contract_no as
+				assetContract_no, asset.asset_amount as assetAmount,
+				asset.asset_buymoney as assetBuymoney, asset.asset_yield as assetYield,
+				asset.asset_yesterday_yield as assetYesterday_yield,
+				asset.asset_yield_fee as assetYield_fee, asset.asset_charge as
+				assetCharge, asset.asset_buy_count as assetBuy_count, asset.asset_price
+				as assetPrice, asset.asset_yield_rate as assetYield_rate,
+				asset.asset_buytime as assetBuytime, asset.asset_confirmtime as
+				assetConfirmtime, asset.asset_start_yield_date as
+				assetStart_yield_date, asset.asset_start_allot_yield_date as
+				assetStart_allot_yield_date, 
+				asset.asset_expire_date as assetExpire_date, 
+				asset.asset_refund_date as assetRefund_date,
+				asset.asset_expire_next_step as assetExpire_next_step,
+				asset.asset_yield_updatetime as assetYield_updatetime,
+				asset.asset_repaytime as assetRepaytime, 
+				asset.asset_collect_no as assetCollect_no, 
+				asset.asset_pay_no as assetPay_no, 
+				CASE asset.asset_status
+				When 0 Then '待确认'
+				When 1 Then '确认'
+				When 2 Then '到期'
+				When 3 Then '已赎回'
+				When -1 Then '失败'
+				End 	as assetStatus, 
+				asset.asset_createtime as assetCreatetime,
+				asset.asset_modifytime as assetModifytime 
+			FROM dr_asset AS asset
+		 <include refid="asset_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<sql id="asset_Where_Select" >
+		<where>
+		1=1  <if test="assetId != null and '' != assetId" > AND asset.asset_id = #{assetId}</if> <if test="assetNo != null and '' != assetNo" > AND asset.asset_no = #{assetNo}</if> <if test="userId != null and '' != userId" > AND asset.user_id = #{userId}</if> <if test="pdtId != null and '' != pdtId" > AND asset.pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND asset.inst_id = #{instId}</if> <if test="orderId != null and '' != orderId" > AND asset.order_id = #{orderId}</if> <if test="assetContract_no != null and '' != assetContract_no" > AND asset.asset_contract_no = #{assetContract_no}</if> <if test="assetAmount != null and '' != assetAmount" > AND asset.asset_amount = #{assetAmount}</if> <if test="assetBuymoney != null and '' != assetBuymoney" > AND asset.asset_buymoney = #{assetBuymoney}</if> <if test="assetYield != null and '' != assetYield" > AND asset.asset_yield = #{assetYield}</if> <if test="assetYesterday_yield != null and '' != assetYesterday_yield" > AND asset.asset_yesterday_yield = #{assetYesterday_yield}</if> <if test="assetYield_fee != null and '' != assetYield_fee" > AND asset.asset_yield_fee = #{assetYield_fee}</if> <if test="assetCharge != null and '' != assetCharge" > AND asset.asset_charge = #{assetCharge}</if> <if test="assetBuy_count != null and '' != assetBuy_count" > AND asset.asset_buy_count = #{assetBuy_count}</if> <if test="assetPrice != null and '' != assetPrice" > AND asset.asset_price = #{assetPrice}</if> <if test="assetYield_rate != null and '' != assetYield_rate" > AND asset.asset_yield_rate = #{assetYield_rate}</if> <if test="assetBuytime != null and '' != assetBuytime" > AND asset.asset_buytime = #{assetBuytime}</if> <if test="assetConfirmtime != null and '' != assetConfirmtime" > AND asset.asset_confirmtime = #{assetConfirmtime}</if> <if test="assetStart_yield_date != null and '' != assetStart_yield_date" > AND asset.asset_start_yield_date = #{assetStart_yield_date}</if> <if test="assetStart_allot_yield_date != null and '' != assetStart_allot_yield_date" > AND asset.asset_start_allot_yield_date = #{assetStart_allot_yield_date}</if> <if test="assetExpire_date != null and '' != assetExpire_date" > AND asset.asset_expire_date = #{assetExpire_date}</if> <if test="assetRefund_date != null and '' != assetRefund_date" > AND asset.asset_refund_date = #{assetRefund_date}</if> <if test="assetExpire_next_step != null and '' != assetExpire_next_step" > AND asset.asset_expire_next_step = #{assetExpire_next_step}</if> <if test="assetYield_updatetime != null and '' != assetYield_updatetime" > AND asset.asset_yield_updatetime = #{assetYield_updatetime}</if> <if test="assetRepaytime != null and '' != assetRepaytime" > AND asset.asset_repaytime = #{assetRepaytime}</if> <if test="assetCollect_no != null and '' != assetCollect_no" > AND asset.asset_collect_no = #{assetCollect_no}</if> <if test="assetPay_no != null and '' != assetPay_no" > AND asset.asset_pay_no = #{assetPay_no}</if> <if test="assetStatus != null and '' != assetStatus" > AND asset.asset_status = #{assetStatus}</if> <if test="assetCreatetime != null and '' != assetCreatetime" > AND asset.asset_createtime = #{assetCreatetime}</if> <if test="assetModifytime != null and '' != assetModifytime" > AND asset.asset_modifytime = #{assetModifytime}</if>
+	     </where>
+	</sql>
+	
+	<!-- 福利明细列表查询 -->
+	<select id="tiyanAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+			SELECT 
+				tiyan_user_record.ur_id as urId, tiyan_user_record.ot_id as
+				otId, tiyan_user_record.user_id as userId,
+				tiyan_user_record.related_type as relatedType,
+				tiyan_user_record.related_id as relatedId, tiyan_user_record.rt_source
+				as rtSource, tiyan_user_record.order_id as orderId,
+				tiyan_user_record.ot_trigger_condition as otTrigger_condition,
+				tiyan_user_record.plan_id as planId, tiyan_user_record.ur_tiyan_amount
+				as urTiyan_amount, tiyan_user_record.ur_promise_rate as urPromise_rate,
+				tiyan_user_record.ur_state as urState, tiyan_user_record.ur_type as
+				urType, tiyan_user_record.ur_start_date as urStart_date,
+				tiyan_user_record.ur_end_date as urEnd_date,
+				tiyan_user_record.ur_day_profit as urDay_profit,
+				tiyan_user_record.ur_accu_profit as urAccu_profit,
+				tiyan_user_record.ur_create_time as urCreate_time,
+				tiyan_user_record.ur_modified_time as urModified_time,
+				tiyan_user_record.ur_transfer_time as urTransfer_time,
+				tiyan_user_record.ur_collect_request_id as urCollect_request_id,
+				tiyan_user_record.ur_pay_request_id as urPay_request_id 
+			FROM
+				dr_tiyan_user_record AS tiyan_user_record
+		 <include refid="tiyan_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<sql id="tiyan_Where_Select" >
+		<where>
+				1=1
+				<if test="urId != null and '' != urId"> AND tiyan_user_record.ur_id
+					= #{urId}</if>
+				<if test="otId != null and '' != otId"> AND tiyan_user_record.ot_id
+					= #{otId}</if>
+				<if test="userId != null and '' != userId"> AND
+					tiyan_user_record.user_id = #{userId}</if>
+				<if test="relatedType != null and '' != relatedType"> AND
+					tiyan_user_record.related_type = #{relatedType}</if>
+				<if test="relatedId != null and '' != relatedId"> AND
+					tiyan_user_record.related_id = #{relatedId}</if>
+				<if test="rtSource != null and '' != rtSource"> AND
+					tiyan_user_record.rt_source = #{rtSource}</if>
+				<if test="orderId != null and '' != orderId"> AND
+					tiyan_user_record.order_id = #{orderId}</if>
+				<if test="otTrigger_condition != null and '' != otTrigger_condition">
+					AND tiyan_user_record.ot_trigger_condition = #{otTrigger_condition}
+				</if>
+				<if test="planId != null and '' != planId"> AND
+					tiyan_user_record.plan_id = #{planId}</if>
+				<if test="urTiyan_amount != null and '' != urTiyan_amount"> AND
+					tiyan_user_record.ur_tiyan_amount = #{urTiyan_amount}</if>
+				<if test="urPromise_rate != null and '' != urPromise_rate"> AND
+					tiyan_user_record.ur_promise_rate = #{urPromise_rate}</if>
+				<if test="urState != null and '' != urState"> AND
+					tiyan_user_record.ur_state = #{urState}</if>
+				<if test="urType != null and '' != urType"> AND
+					tiyan_user_record.ur_type = #{urType}</if>
+				<if test="urStart_date != null and '' != urStart_date"> AND
+					tiyan_user_record.ur_start_date Like CONCAT('%',#{urStart_date},'%')</if>
+				<if test="urEnd_date != null and '' != urEnd_date"> AND
+					tiyan_user_record.ur_end_date = #{urEnd_date}</if>
+				<if test="urDay_profit != null and '' != urDay_profit"> AND
+					tiyan_user_record.ur_day_profit = #{urDay_profit}</if>
+				<if test="urAccu_profit != null and '' != urAccu_profit"> AND
+					tiyan_user_record.ur_accu_profit = #{urAccu_profit}</if>
+				<if test="urCreate_time != null and '' != urCreate_time"> AND
+					tiyan_user_record.ur_create_time = #{urCreate_time}</if>
+				<if test="urModified_time != null and '' != urModified_time"> AND
+					tiyan_user_record.ur_modified_time = #{urModified_time}</if>
+				<if test="urTransfer_time != null and '' != urTransfer_time"> AND
+					tiyan_user_record.ur_transfer_time = #{urTransfer_time}</if>
+				<if test="urCollect_request_id != null and '' != urCollect_request_id">
+					AND tiyan_user_record.ur_collect_request_id = #{urCollect_request_id}
+				</if>
+				<if test="urPay_request_id != null and '' != urPay_request_id"> AND
+					tiyan_user_record.ur_pay_request_id = #{urPay_request_id}</if>
+				<if test="inteval != null and '' != inteval"> AND
+				DATEDIFF(tiyan_user_record.ur_start_date,now()) <![CDATA[<=]]> #{inteval}</if>
+	     </where>
+	</sql>
+</mapper>

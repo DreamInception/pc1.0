@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_pay_user_bind_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND pay_user_bind_log.id = #{id}</if> <if test="userId != null and '' != userId" > AND pay_user_bind_log.user_id = #{userId}</if> <if test="channelId != null and '' != channelId" > AND pay_user_bind_log.channel_id = #{channelId}</if> <if test="idCard_type != null and '' != idCard_type" > AND pay_user_bind_log.id_card_type = #{idCard_type}</if> <if test="idCard != null and '' != idCard" > AND pay_user_bind_log.id_card = #{idCard}</if> <if test="accNo != null and '' != accNo" > AND pay_user_bind_log.acc_no = #{accNo}</if> <if test="idHolder != null and '' != idHolder" > AND pay_user_bind_log.id_holder = #{idHolder}</if> <if test="mobile != null and '' != mobile" > AND pay_user_bind_log.mobile = #{mobile}</if> <if test="bindId != null and '' != bindId" > AND pay_user_bind_log.bind_id = #{bindId}</if> <if test="bankId != null and '' != bankId" > AND pay_user_bind_log.bank_id = #{bankId}</if> <if test="bankPro_name != null and '' != bankPro_name" > AND pay_user_bind_log.bank_pro_name = #{bankPro_name}</if> <if test="bankCity_name != null and '' != bankCity_name" > AND pay_user_bind_log.bank_city_name = #{bankCity_name}</if> <if test="bankAcc_dept != null and '' != bankAcc_dept" > AND pay_user_bind_log.bank_acc_dept = #{bankAcc_dept}</if> <if test="state != null and '' != state" > AND pay_user_bind_log.state = #{state}</if> <if test="createDt != null and '' != createDt" > AND pay_user_bind_log.create_dt = #{createDt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="channelId != null and '' != channelId" > AND channel_id = #{channelId}</if> <if test="idCard_type != null and '' != idCard_type" > AND id_card_type = #{idCard_type}</if> <if test="idCard != null and '' != idCard" > AND id_card = #{idCard}</if> <if test="accNo != null and '' != accNo" > AND acc_no = #{accNo}</if> <if test="idHolder != null and '' != idHolder" > AND id_holder = #{idHolder}</if> <if test="mobile != null and '' != mobile" > AND mobile = #{mobile}</if> <if test="bindId != null and '' != bindId" > AND bind_id = #{bindId}</if> <if test="bankId != null and '' != bankId" > AND bank_id = #{bankId}</if> <if test="bankPro_name != null and '' != bankPro_name" > AND bank_pro_name = #{bankPro_name}</if> <if test="bankCity_name != null and '' != bankCity_name" > AND bank_city_name = #{bankCity_name}</if> <if test="bankAcc_dept != null and '' != bankAcc_dept" > AND bank_acc_dept = #{bankAcc_dept}</if> <if test="state != null and '' != state" > AND state = #{state}</if> <if test="createDt != null and '' != createDt" > AND create_dt = #{createDt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_pay_user_bind_log AS pay_user_bind_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT pay_user_bind_log.id as id, pay_user_bind_log.user_id as userId, pay_user_bind_log.channel_id as channelId, pay_user_bind_log.id_card_type as idCard_type, pay_user_bind_log.id_card as idCard, pay_user_bind_log.acc_no as accNo, pay_user_bind_log.id_holder as idHolder, pay_user_bind_log.mobile as mobile, pay_user_bind_log.bind_id as bindId, pay_user_bind_log.bank_id as bankId, pay_user_bind_log.bank_pro_name as bankPro_name, pay_user_bind_log.bank_city_name as bankCity_name, pay_user_bind_log.bank_acc_dept as bankAcc_dept, pay_user_bind_log.state as state, pay_user_bind_log.create_dt as createDt FROM dr_pay_user_bind_log AS pay_user_bind_log WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT pay_user_bind_log.id as id, pay_user_bind_log.user_id as userId, pay_user_bind_log.channel_id as channelId, pay_user_bind_log.id_card_type as idCard_type, pay_user_bind_log.id_card as idCard, pay_user_bind_log.acc_no as accNo, pay_user_bind_log.id_holder as idHolder, pay_user_bind_log.mobile as mobile, pay_user_bind_log.bind_id as bindId, pay_user_bind_log.bank_id as bankId, pay_user_bind_log.bank_pro_name as bankPro_name, pay_user_bind_log.bank_city_name as bankCity_name, pay_user_bind_log.bank_acc_dept as bankAcc_dept, pay_user_bind_log.state as state, pay_user_bind_log.create_dt as createDt FROM dr_pay_user_bind_log AS pay_user_bind_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT pay_user_bind_log.id as id, pay_user_bind_log.user_id as userId, pay_user_bind_log.channel_id as channelId, pay_user_bind_log.id_card_type as idCard_type, pay_user_bind_log.id_card as idCard, pay_user_bind_log.acc_no as accNo, pay_user_bind_log.id_holder as idHolder, pay_user_bind_log.mobile as mobile, pay_user_bind_log.bind_id as bindId, pay_user_bind_log.bank_id as bankId, pay_user_bind_log.bank_pro_name as bankPro_name, pay_user_bind_log.bank_city_name as bankCity_name, pay_user_bind_log.bank_acc_dept as bankAcc_dept, pay_user_bind_log.state as state, pay_user_bind_log.create_dt as createDt FROM dr_pay_user_bind_log AS pay_user_bind_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_pay_user_bind_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="userId != null">user_id,</if><if test="channelId != null">channel_id,</if><if test="idCard_type != null">id_card_type,</if><if test="idCard != null">id_card,</if><if test="accNo != null">acc_no,</if><if test="idHolder != null">id_holder,</if><if test="mobile != null">mobile,</if><if test="bindId != null">bind_id,</if><if test="bankId != null">bank_id,</if><if test="bankPro_name != null">bank_pro_name,</if><if test="bankCity_name != null">bank_city_name,</if><if test="bankAcc_dept != null">bank_acc_dept,</if><if test="state != null">state,</if><if test="createDt != null">create_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="userId != null">#{userId},</if><if test="channelId != null">#{channelId},</if><if test="idCard_type != null">#{idCard_type},</if><if test="idCard != null">#{idCard},</if><if test="accNo != null">#{accNo},</if><if test="idHolder != null">#{idHolder},</if><if test="mobile != null">#{mobile},</if><if test="bindId != null">#{bindId},</if><if test="bankId != null">#{bankId},</if><if test="bankPro_name != null">#{bankPro_name},</if><if test="bankCity_name != null">#{bankCity_name},</if><if test="bankAcc_dept != null">#{bankAcc_dept},</if><if test="state != null">#{state},</if><if test="createDt != null">#{createDt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_pay_user_bind_log (id,user_id,channel_id,id_card_type,id_card,acc_no,id_holder,mobile,bind_id,bank_id,bank_pro_name,bank_city_name,bank_acc_dept,state,create_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.userId},#{item.channelId},#{item.idCard_type},#{item.idCard},#{item.accNo},#{item.idHolder},#{item.mobile},#{item.bindId},#{item.bankId},#{item.bankPro_name},#{item.bankCity_name},#{item.bankAcc_dept},#{item.state},#{item.createDt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_pay_user_bind_log
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="channelId != null" >  channel_id = #{channelId}, </if><if test="idCard_type != null" >  id_card_type = #{idCard_type}, </if><if test="idCard != null" >  id_card = #{idCard}, </if><if test="accNo != null" >  acc_no = #{accNo}, </if><if test="idHolder != null" >  id_holder = #{idHolder}, </if><if test="mobile != null" >  mobile = #{mobile}, </if><if test="bindId != null" >  bind_id = #{bindId}, </if><if test="bankId != null" >  bank_id = #{bankId}, </if><if test="bankPro_name != null" >  bank_pro_name = #{bankPro_name}, </if><if test="bankCity_name != null" >  bank_city_name = #{bankCity_name}, </if><if test="bankAcc_dept != null" >  bank_acc_dept = #{bankAcc_dept}, </if><if test="state != null" >  state = #{state}, </if><if test="createDt != null" >  create_dt = #{createDt}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_pay_user_bind_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_pay_user_bind_log 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

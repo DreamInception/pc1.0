@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_product_statistic">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="pdtId != null and '' != pdtId" > AND product_statistic.pdt_id = #{pdtId}</if> <if test="pdtStock_count != null and '' != pdtStock_count" > AND product_statistic.pdt_stock_count = #{pdtStock_count}</if> <if test="pdtFrozen_count != null and '' != pdtFrozen_count" > AND product_statistic.pdt_frozen_count = #{pdtFrozen_count}</if> <if test="pdtAvailable_count != null and '' != pdtAvailable_count" > AND product_statistic.pdt_available_count = #{pdtAvailable_count}</if> <if test="pdtSale_count != null and '' != pdtSale_count" > AND product_statistic.pdt_sale_count = #{pdtSale_count}</if> <if test="pdtBuyer_count != null and '' != pdtBuyer_count" > AND product_statistic.pdt_buyer_count = #{pdtBuyer_count}</if> <if test="pdtOrder_count != null and '' != pdtOrder_count" > AND product_statistic.pdt_order_count = #{pdtOrder_count}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="pdtStock_count != null and '' != pdtStock_count" > AND pdt_stock_count = #{pdtStock_count}</if> <if test="pdtFrozen_count != null and '' != pdtFrozen_count" > AND pdt_frozen_count = #{pdtFrozen_count}</if> <if test="pdtAvailable_count != null and '' != pdtAvailable_count" > AND pdt_available_count = #{pdtAvailable_count}</if> <if test="pdtSale_count != null and '' != pdtSale_count" > AND pdt_sale_count = #{pdtSale_count}</if> <if test="pdtBuyer_count != null and '' != pdtBuyer_count" > AND pdt_buyer_count = #{pdtBuyer_count}</if> <if test="pdtOrder_count != null and '' != pdtOrder_count" > AND pdt_order_count = #{pdtOrder_count}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_product_statistic AS product_statistic
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT product_statistic.pdt_id as pdtId, product_statistic.pdt_stock_count as pdtStock_count, product_statistic.pdt_frozen_count as pdtFrozen_count, product_statistic.pdt_available_count as pdtAvailable_count, product_statistic.pdt_sale_count as pdtSale_count, product_statistic.pdt_buyer_count as pdtBuyer_count, product_statistic.pdt_order_count as pdtOrder_count FROM dr_product_statistic AS product_statistic WHERE pdt_id = #{pdtId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT product_statistic.pdt_id as pdtId, product_statistic.pdt_stock_count as pdtStock_count, product_statistic.pdt_frozen_count as pdtFrozen_count, product_statistic.pdt_available_count as pdtAvailable_count, product_statistic.pdt_sale_count as pdtSale_count, product_statistic.pdt_buyer_count as pdtBuyer_count, product_statistic.pdt_order_count as pdtOrder_count FROM dr_product_statistic AS product_statistic
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT product_statistic.pdt_id as pdtId, product_statistic.pdt_stock_count as pdtStock_count, product_statistic.pdt_frozen_count as pdtFrozen_count, product_statistic.pdt_available_count as pdtAvailable_count, product_statistic.pdt_sale_count as pdtSale_count, product_statistic.pdt_buyer_count as pdtBuyer_count, product_statistic.pdt_order_count as pdtOrder_count FROM dr_product_statistic AS product_statistic  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_product_statistic 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pdtId != null">pdt_id,</if><if test="pdtStock_count != null">pdt_stock_count,</if><if test="pdtFrozen_count != null">pdt_frozen_count,</if><if test="pdtAvailable_count != null">pdt_available_count,</if><if test="pdtSale_count != null">pdt_sale_count,</if><if test="pdtBuyer_count != null">pdt_buyer_count,</if><if test="pdtOrder_count != null">pdt_order_count,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="pdtId != null">#{pdtId},</if><if test="pdtStock_count != null">#{pdtStock_count},</if><if test="pdtFrozen_count != null">#{pdtFrozen_count},</if><if test="pdtAvailable_count != null">#{pdtAvailable_count},</if><if test="pdtSale_count != null">#{pdtSale_count},</if><if test="pdtBuyer_count != null">#{pdtBuyer_count},</if><if test="pdtOrder_count != null">#{pdtOrder_count},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_product_statistic (pdt_id,pdt_stock_count,pdt_frozen_count,pdt_available_count,pdt_sale_count,pdt_buyer_count,pdt_order_count)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.pdtId},#{item.pdtStock_count},#{item.pdtFrozen_count},#{item.pdtAvailable_count},#{item.pdtSale_count},#{item.pdtBuyer_count},#{item.pdtOrder_count})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_product_statistic
+    <set>
+     <if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="pdtStock_count != null" >  pdt_stock_count = #{pdtStock_count}, </if><if test="pdtFrozen_count != null" >  pdt_frozen_count = #{pdtFrozen_count}, </if><if test="pdtAvailable_count != null" >  pdt_available_count = #{pdtAvailable_count}, </if><if test="pdtSale_count != null" >  pdt_sale_count = #{pdtSale_count}, </if><if test="pdtBuyer_count != null" >  pdt_buyer_count = #{pdtBuyer_count}, </if><if test="pdtOrder_count != null" >  pdt_order_count = #{pdtOrder_count}, </if>
+      </set>
+	  WHERE pdt_id = #{pdtId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_product_statistic 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_product_statistic 
+		WHERE pdt_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

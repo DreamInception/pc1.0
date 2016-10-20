@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_institution_finance">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="instId != null and '' != instId" > AND institution_finance.inst_id = #{instId}</if> <if test="instWealth != null and '' != instWealth" > AND institution_finance.inst_wealth = #{instWealth}</if> <if test="instSale_account != null and '' != instSale_account" > AND institution_finance.inst_sale_account = #{instSale_account}</if> <if test="instPay_account != null and '' != instPay_account" > AND institution_finance.inst_pay_account = #{instPay_account}</if> <if test="instRecharge_money != null and '' != instRecharge_money" > AND institution_finance.inst_recharge_money = #{instRecharge_money}</if> <if test="instWithdraw_money != null and '' != instWithdraw_money" > AND institution_finance.inst_withdraw_money = #{instWithdraw_money}</if> <if test="instBuyer_count != null and '' != instBuyer_count" > AND institution_finance.inst_buyer_count = #{instBuyer_count}</if> <if test="instOrder_count != null and '' != instOrder_count" > AND institution_finance.inst_order_count = #{instOrder_count}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="instWealth != null and '' != instWealth" > AND inst_wealth = #{instWealth}</if> <if test="instSale_account != null and '' != instSale_account" > AND inst_sale_account = #{instSale_account}</if> <if test="instPay_account != null and '' != instPay_account" > AND inst_pay_account = #{instPay_account}</if> <if test="instRecharge_money != null and '' != instRecharge_money" > AND inst_recharge_money = #{instRecharge_money}</if> <if test="instWithdraw_money != null and '' != instWithdraw_money" > AND inst_withdraw_money = #{instWithdraw_money}</if> <if test="instBuyer_count != null and '' != instBuyer_count" > AND inst_buyer_count = #{instBuyer_count}</if> <if test="instOrder_count != null and '' != instOrder_count" > AND inst_order_count = #{instOrder_count}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_institution_finance AS institution_finance
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT institution_finance.inst_id as instId, institution_finance.inst_wealth as instWealth, institution_finance.inst_sale_account as instSale_account, institution_finance.inst_pay_account as instPay_account, institution_finance.inst_recharge_money as instRecharge_money, institution_finance.inst_withdraw_money as instWithdraw_money, institution_finance.inst_buyer_count as instBuyer_count, institution_finance.inst_order_count as instOrder_count FROM dr_institution_finance AS institution_finance WHERE inst_id = #{instId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT institution_finance.inst_id as instId, institution_finance.inst_wealth as instWealth, institution_finance.inst_sale_account as instSale_account, institution_finance.inst_pay_account as instPay_account, institution_finance.inst_recharge_money as instRecharge_money, institution_finance.inst_withdraw_money as instWithdraw_money, institution_finance.inst_buyer_count as instBuyer_count, institution_finance.inst_order_count as instOrder_count FROM dr_institution_finance AS institution_finance
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT institution_finance.inst_id as instId, institution_finance.inst_wealth as instWealth, institution_finance.inst_sale_account as instSale_account, institution_finance.inst_pay_account as instPay_account, institution_finance.inst_recharge_money as instRecharge_money, institution_finance.inst_withdraw_money as instWithdraw_money, institution_finance.inst_buyer_count as instBuyer_count, institution_finance.inst_order_count as instOrder_count FROM dr_institution_finance AS institution_finance  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_institution_finance 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="instId != null">inst_id,</if><if test="instWealth != null">inst_wealth,</if><if test="instSale_account != null">inst_sale_account,</if><if test="instPay_account != null">inst_pay_account,</if><if test="instRecharge_money != null">inst_recharge_money,</if><if test="instWithdraw_money != null">inst_withdraw_money,</if><if test="instBuyer_count != null">inst_buyer_count,</if><if test="instOrder_count != null">inst_order_count,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="instId != null">#{instId},</if><if test="instWealth != null">#{instWealth},</if><if test="instSale_account != null">#{instSale_account},</if><if test="instPay_account != null">#{instPay_account},</if><if test="instRecharge_money != null">#{instRecharge_money},</if><if test="instWithdraw_money != null">#{instWithdraw_money},</if><if test="instBuyer_count != null">#{instBuyer_count},</if><if test="instOrder_count != null">#{instOrder_count},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_institution_finance (inst_id,inst_wealth,inst_sale_account,inst_pay_account,inst_recharge_money,inst_withdraw_money,inst_buyer_count,inst_order_count)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.instId},#{item.instWealth},#{item.instSale_account},#{item.instPay_account},#{item.instRecharge_money},#{item.instWithdraw_money},#{item.instBuyer_count},#{item.instOrder_count})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_institution_finance
+    <set>
+     <if test="instId != null" >  inst_id = #{instId}, </if><if test="instWealth != null" >  inst_wealth = #{instWealth}, </if><if test="instSale_account != null" >  inst_sale_account = #{instSale_account}, </if><if test="instPay_account != null" >  inst_pay_account = #{instPay_account}, </if><if test="instRecharge_money != null" >  inst_recharge_money = #{instRecharge_money}, </if><if test="instWithdraw_money != null" >  inst_withdraw_money = #{instWithdraw_money}, </if><if test="instBuyer_count != null" >  inst_buyer_count = #{instBuyer_count}, </if><if test="instOrder_count != null" >  inst_order_count = #{instOrder_count}, </if>
+      </set>
+	  WHERE inst_id = #{instId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_institution_finance 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_institution_finance 
+		WHERE inst_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

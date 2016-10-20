@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_user_recommend">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="userId != null and '' != userId" > AND user_recommend.user_id = #{userId}</if> <if test="recommendId != null and '' != recommendId" > AND user_recommend.recommend_id = #{recommendId}</if> <if test="createdDt != null and '' != createdDt" > AND user_recommend.created_dt = #{createdDt}</if> <if test="isGive != null and '' != isGive" > AND user_recommend.is_give = #{isGive}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="recommendId != null and '' != recommendId" > AND recommend_id = #{recommendId}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="isGive != null and '' != isGive" > AND is_give = #{isGive}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_recommend AS user_recommend
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT user_recommend.user_id as userId, user_recommend.recommend_id as recommendId, user_recommend.created_dt as createdDt, user_recommend.is_give as isGive FROM dr_user_recommend AS user_recommend WHERE user_id = #{userId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT user_recommend.user_id as userId, user_recommend.recommend_id as recommendId, user_recommend.created_dt as createdDt, user_recommend.is_give as isGive FROM dr_user_recommend AS user_recommend
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT user_recommend.user_id as userId, user_recommend.recommend_id as recommendId, user_recommend.created_dt as createdDt, user_recommend.is_give as isGive FROM dr_user_recommend AS user_recommend  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_user_recommend 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">user_id,</if><if test="recommendId != null">recommend_id,</if><if test="createdDt != null">created_dt,</if><if test="isGive != null">is_give,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="userId != null">#{userId},</if><if test="recommendId != null">#{recommendId},</if><if test="createdDt != null">#{createdDt},</if><if test="isGive != null">#{isGive},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_user_recommend (user_id,recommend_id,created_dt,is_give)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.userId},#{item.recommendId},#{item.createdDt},#{item.isGive})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_user_recommend
+    <set>
+     <if test="userId != null" >  user_id = #{userId}, </if><if test="recommendId != null" >  recommend_id = #{recommendId}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="isGive != null" >  is_give = #{isGive}, </if>
+      </set>
+	  WHERE user_id = #{userId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_user_recommend 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_user_recommend 
+		WHERE user_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

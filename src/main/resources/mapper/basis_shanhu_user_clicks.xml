@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_shanhu_user_clicks">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND shanhu_user_clicks.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND shanhu_user_clicks.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND shanhu_user_clicks.last_modified_dt = #{lastModified_dt}</if> <if test="idfa != null and '' != idfa" > AND shanhu_user_clicks.idfa = #{idfa}</if> <if test="mac != null and '' != mac" > AND shanhu_user_clicks.mac = #{mac}</if> <if test="udid != null and '' != udid" > AND shanhu_user_clicks.udid = #{udid}</if> <if test="ip != null and '' != ip" > AND shanhu_user_clicks.ip = #{ip}</if> <if test="os != null and '' != os" > AND shanhu_user_clicks.os = #{os}</if> <if test="callback != null and '' != callback" > AND shanhu_user_clicks.callback = #{callback}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="idfa != null and '' != idfa" > AND idfa = #{idfa}</if> <if test="mac != null and '' != mac" > AND mac = #{mac}</if> <if test="udid != null and '' != udid" > AND udid = #{udid}</if> <if test="ip != null and '' != ip" > AND ip = #{ip}</if> <if test="os != null and '' != os" > AND os = #{os}</if> <if test="callback != null and '' != callback" > AND callback = #{callback}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_shanhu_user_clicks AS shanhu_user_clicks
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT shanhu_user_clicks.id as id, shanhu_user_clicks.created_dt as createdDt, shanhu_user_clicks.last_modified_dt as lastModified_dt, shanhu_user_clicks.idfa as idfa, shanhu_user_clicks.mac as mac, shanhu_user_clicks.udid as udid, shanhu_user_clicks.ip as ip, shanhu_user_clicks.os as os, shanhu_user_clicks.callback as callback FROM v2_shanhu_user_clicks AS shanhu_user_clicks WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT shanhu_user_clicks.id as id, shanhu_user_clicks.created_dt as createdDt, shanhu_user_clicks.last_modified_dt as lastModified_dt, shanhu_user_clicks.idfa as idfa, shanhu_user_clicks.mac as mac, shanhu_user_clicks.udid as udid, shanhu_user_clicks.ip as ip, shanhu_user_clicks.os as os, shanhu_user_clicks.callback as callback FROM v2_shanhu_user_clicks AS shanhu_user_clicks
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT shanhu_user_clicks.id as id, shanhu_user_clicks.created_dt as createdDt, shanhu_user_clicks.last_modified_dt as lastModified_dt, shanhu_user_clicks.idfa as idfa, shanhu_user_clicks.mac as mac, shanhu_user_clicks.udid as udid, shanhu_user_clicks.ip as ip, shanhu_user_clicks.os as os, shanhu_user_clicks.callback as callback FROM v2_shanhu_user_clicks AS shanhu_user_clicks  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_shanhu_user_clicks 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="idfa != null">idfa,</if><if test="mac != null">mac,</if><if test="udid != null">udid,</if><if test="ip != null">ip,</if><if test="os != null">os,</if><if test="callback != null">callback,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="idfa != null">#{idfa},</if><if test="mac != null">#{mac},</if><if test="udid != null">#{udid},</if><if test="ip != null">#{ip},</if><if test="os != null">#{os},</if><if test="callback != null">#{callback},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_shanhu_user_clicks (id,created_dt,last_modified_dt,idfa,mac,udid,ip,os,callback)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.idfa},#{item.mac},#{item.udid},#{item.ip},#{item.os},#{item.callback})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_shanhu_user_clicks
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="idfa != null" >  idfa = #{idfa}, </if><if test="mac != null" >  mac = #{mac}, </if><if test="udid != null" >  udid = #{udid}, </if><if test="ip != null" >  ip = #{ip}, </if><if test="os != null" >  os = #{os}, </if><if test="callback != null" >  callback = #{callback}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_shanhu_user_clicks 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_shanhu_user_clicks 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

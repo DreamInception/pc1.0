@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_user_finance_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND user_finance_log.log_id = #{logId}</if> <if test="userId != null and '' != userId" > AND user_finance_log.user_id = #{userId}</if> <if test="logOperate != null and '' != logOperate" > AND user_finance_log.log_operate = #{logOperate}</if> <if test="logOperate_money != null and '' != logOperate_money" > AND user_finance_log.log_operate_money = #{logOperate_money}</if> <if test="logOperate_reason != null and '' != logOperate_reason" > AND user_finance_log.log_operate_reason = #{logOperate_reason}</if> <if test="logOperator != null and '' != logOperator" > AND user_finance_log.log_operator = #{logOperator}</if> <if test="logUser_wealth != null and '' != logUser_wealth" > AND user_finance_log.log_user_wealth = #{logUser_wealth}</if> <if test="logUser_balance != null and '' != logUser_balance" > AND user_finance_log.log_user_balance = #{logUser_balance}</if> <if test="logUser_frozen != null and '' != logUser_frozen" > AND user_finance_log.log_user_frozen = #{logUser_frozen}</if> <if test="logUser_asset != null and '' != logUser_asset" > AND user_finance_log.log_user_asset = #{logUser_asset}</if> <if test="logUser_yield != null and '' != logUser_yield" > AND user_finance_log.log_user_yield = #{logUser_yield}</if> <if test="logUser_float != null and '' != logUser_float" > AND user_finance_log.log_user_float = #{logUser_float}</if> <if test="logTarget_id != null and '' != logTarget_id" > AND user_finance_log.log_target_id = #{logTarget_id}</if> <if test="logStatus != null and '' != logStatus" > AND user_finance_log.log_status = #{logStatus}</if> <if test="logDisplay != null and '' != logDisplay" > AND user_finance_log.log_display = #{logDisplay}</if> <if test="logRemark != null and '' != logRemark" > AND user_finance_log.log_remark = #{logRemark}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND user_finance_log.log_createtime = #{logCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND log_id = #{logId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="logOperate != null and '' != logOperate" > AND log_operate = #{logOperate}</if> <if test="logOperate_money != null and '' != logOperate_money" > AND log_operate_money = #{logOperate_money}</if> <if test="logOperate_reason != null and '' != logOperate_reason" > AND log_operate_reason = #{logOperate_reason}</if> <if test="logOperator != null and '' != logOperator" > AND log_operator = #{logOperator}</if> <if test="logUser_wealth != null and '' != logUser_wealth" > AND log_user_wealth = #{logUser_wealth}</if> <if test="logUser_balance != null and '' != logUser_balance" > AND log_user_balance = #{logUser_balance}</if> <if test="logUser_frozen != null and '' != logUser_frozen" > AND log_user_frozen = #{logUser_frozen}</if> <if test="logUser_asset != null and '' != logUser_asset" > AND log_user_asset = #{logUser_asset}</if> <if test="logUser_yield != null and '' != logUser_yield" > AND log_user_yield = #{logUser_yield}</if> <if test="logUser_float != null and '' != logUser_float" > AND log_user_float = #{logUser_float}</if> <if test="logTarget_id != null and '' != logTarget_id" > AND log_target_id = #{logTarget_id}</if> <if test="logStatus != null and '' != logStatus" > AND log_status = #{logStatus}</if> <if test="logDisplay != null and '' != logDisplay" > AND log_display = #{logDisplay}</if> <if test="logRemark != null and '' != logRemark" > AND log_remark = #{logRemark}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_finance_log AS user_finance_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT user_finance_log.log_id as logId, user_finance_log.user_id as userId, user_finance_log.log_operate as logOperate, user_finance_log.log_operate_money as logOperate_money, user_finance_log.log_operate_reason as logOperate_reason, user_finance_log.log_operator as logOperator, user_finance_log.log_user_wealth as logUser_wealth, user_finance_log.log_user_balance as logUser_balance, user_finance_log.log_user_frozen as logUser_frozen, user_finance_log.log_user_asset as logUser_asset, user_finance_log.log_user_yield as logUser_yield, user_finance_log.log_user_float as logUser_float, user_finance_log.log_target_id as logTarget_id, user_finance_log.log_status as logStatus, user_finance_log.log_display as logDisplay, user_finance_log.log_remark as logRemark, user_finance_log.log_createtime as logCreatetime FROM dr_user_finance_log AS user_finance_log WHERE log_id = #{logId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT user_finance_log.log_id as logId, user_finance_log.user_id as userId, user_finance_log.log_operate as logOperate, user_finance_log.log_operate_money as logOperate_money, user_finance_log.log_operate_reason as logOperate_reason, user_finance_log.log_operator as logOperator, user_finance_log.log_user_wealth as logUser_wealth, user_finance_log.log_user_balance as logUser_balance, user_finance_log.log_user_frozen as logUser_frozen, user_finance_log.log_user_asset as logUser_asset, user_finance_log.log_user_yield as logUser_yield, user_finance_log.log_user_float as logUser_float, user_finance_log.log_target_id as logTarget_id, user_finance_log.log_status as logStatus, user_finance_log.log_display as logDisplay, user_finance_log.log_remark as logRemark, user_finance_log.log_createtime as logCreatetime FROM dr_user_finance_log AS user_finance_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT user_finance_log.log_id as logId, user_finance_log.user_id as userId, user_finance_log.log_operate as logOperate, user_finance_log.log_operate_money as logOperate_money, user_finance_log.log_operate_reason as logOperate_reason, user_finance_log.log_operator as logOperator, user_finance_log.log_user_wealth as logUser_wealth, user_finance_log.log_user_balance as logUser_balance, user_finance_log.log_user_frozen as logUser_frozen, user_finance_log.log_user_asset as logUser_asset, user_finance_log.log_user_yield as logUser_yield, user_finance_log.log_user_float as logUser_float, user_finance_log.log_target_id as logTarget_id, user_finance_log.log_status as logStatus, user_finance_log.log_display as logDisplay, user_finance_log.log_remark as logRemark, user_finance_log.log_createtime as logCreatetime FROM dr_user_finance_log AS user_finance_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_user_finance_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">log_id,</if><if test="userId != null">user_id,</if><if test="logOperate != null">log_operate,</if><if test="logOperate_money != null">log_operate_money,</if><if test="logOperate_reason != null">log_operate_reason,</if><if test="logOperator != null">log_operator,</if><if test="logUser_wealth != null">log_user_wealth,</if><if test="logUser_balance != null">log_user_balance,</if><if test="logUser_frozen != null">log_user_frozen,</if><if test="logUser_asset != null">log_user_asset,</if><if test="logUser_yield != null">log_user_yield,</if><if test="logUser_float != null">log_user_float,</if><if test="logTarget_id != null">log_target_id,</if><if test="logStatus != null">log_status,</if><if test="logDisplay != null">log_display,</if><if test="logRemark != null">log_remark,</if><if test="logCreatetime != null">log_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logId != null">#{logId},</if><if test="userId != null">#{userId},</if><if test="logOperate != null">#{logOperate},</if><if test="logOperate_money != null">#{logOperate_money},</if><if test="logOperate_reason != null">#{logOperate_reason},</if><if test="logOperator != null">#{logOperator},</if><if test="logUser_wealth != null">#{logUser_wealth},</if><if test="logUser_balance != null">#{logUser_balance},</if><if test="logUser_frozen != null">#{logUser_frozen},</if><if test="logUser_asset != null">#{logUser_asset},</if><if test="logUser_yield != null">#{logUser_yield},</if><if test="logUser_float != null">#{logUser_float},</if><if test="logTarget_id != null">#{logTarget_id},</if><if test="logStatus != null">#{logStatus},</if><if test="logDisplay != null">#{logDisplay},</if><if test="logRemark != null">#{logRemark},</if><if test="logCreatetime != null">#{logCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_user_finance_log (log_id,user_id,log_operate,log_operate_money,log_operate_reason,log_operator,log_user_wealth,log_user_balance,log_user_frozen,log_user_asset,log_user_yield,log_user_float,log_target_id,log_status,log_display,log_remark,log_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logId},#{item.userId},#{item.logOperate},#{item.logOperate_money},#{item.logOperate_reason},#{item.logOperator},#{item.logUser_wealth},#{item.logUser_balance},#{item.logUser_frozen},#{item.logUser_asset},#{item.logUser_yield},#{item.logUser_float},#{item.logTarget_id},#{item.logStatus},#{item.logDisplay},#{item.logRemark},#{item.logCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_user_finance_log
+    <set>
+     <if test="logId != null" >  log_id = #{logId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="logOperate != null" >  log_operate = #{logOperate}, </if><if test="logOperate_money != null" >  log_operate_money = #{logOperate_money}, </if><if test="logOperate_reason != null" >  log_operate_reason = #{logOperate_reason}, </if><if test="logOperator != null" >  log_operator = #{logOperator}, </if><if test="logUser_wealth != null" >  log_user_wealth = #{logUser_wealth}, </if><if test="logUser_balance != null" >  log_user_balance = #{logUser_balance}, </if><if test="logUser_frozen != null" >  log_user_frozen = #{logUser_frozen}, </if><if test="logUser_asset != null" >  log_user_asset = #{logUser_asset}, </if><if test="logUser_yield != null" >  log_user_yield = #{logUser_yield}, </if><if test="logUser_float != null" >  log_user_float = #{logUser_float}, </if><if test="logTarget_id != null" >  log_target_id = #{logTarget_id}, </if><if test="logStatus != null" >  log_status = #{logStatus}, </if><if test="logDisplay != null" >  log_display = #{logDisplay}, </if><if test="logRemark != null" >  log_remark = #{logRemark}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if>
+      </set>
+	  WHERE log_id = #{logId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_user_finance_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_user_finance_log 
+		WHERE log_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

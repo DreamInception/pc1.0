@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product_detail">
+<!-- 新产品基本信息 -->
+	<select id="v3ProductDetail" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT
+	d.product_id pdt_id,
+	p.name pdt_name,
+	p.yield_rate pdt_expect_yield_rate,
+	p.min_order_amount pdt_min_order_count,
+	(p.duration DIV 1440) pdt_cycle,
+	(p.duration DIV 1440) pdt_cycle_in_days,
+	('T+1') pdt_start_yield_date,
+	'收益权转让' pdt_type,
+	p.total_amount pdt_stock_count,
+	'暂不支持' pdt_expire_date,
+	'自动赎回' pdt_expire_next_step,
+	p.project_intro pdt_instruction,
+	s.inst_summary
+FROM
+	v3_fixed_deposit_products p 
+join v3_projects r on r.id = p.project_id
+JOIN dr_institution s on s.inst_id = r.inst_id
+JOIN v3_sub_fixed_deposit_products d on d.product_id = p.id
+where p.id=${pdtId}
+	
+	</select>
+	<!-- 新产品投资列表 -->
+	<select id="v3investList" resultType="java.util.List" parameterType="java.util.Map">
+		SELECT u.user_telephone,v.order_amount asset_buymoney,v.ordered_dt asset_buytime from v3_fixed_deposit_assets v JOIN dr_user u on u.user_id = v.user_id WHERE v.product_id=#{pdtId} limit #{start},#{end}
+	</select>
+	
+	<select id="v3investListCount" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT count(0) from v3_fixed_deposit_assets v JOIN dr_user u on u.user_id = v.user_id WHERE v.product_id=#{pdtId}
+	</select>
+	<!-- 产品基本信息 -->
+	<select id="findProductDetail" parameterType="java.util.Map" resultType="java.util.Map">
+	
+	SELECT
+	p.pdt_id,
+	p.pdt_name,
+	p.pdt_expect_yield_rate,
+	p.pdt_min_order_count,
+	p.pdt_cycle_in_days,
+	p.pdt_start_yield_date,
+	CONVERT(p.pdt_type, SIGNED) as pdt_type,
+	p.pdt_stock_count,
+  	p.pdt_cycle,
+	p.pdt_expire_date,
+	p.pdt_expire_next_step,
+	d.pdt_risk_instruction,
+	d.pdt_instruction,
+	i.inst_summary
+FROM
+	dr_product p
+JOIN dr_institution i on i.inst_id = p.inst_id
+JOIN dr_product_detail d on d.pdt_id = p.pdt_id
+WHERE p.pdt_id=#{pdtId};
+	
+	</select>
+	<!-- 投资列表查询 -->
+	<select id="investList" resultType="java.util.List" parameterType="java.util.Map">
+		SELECT
+	u.user_telephone,
+	a.asset_buymoney,
+	a.asset_buytime
+FROM
+	dr_asset a
+JOIN dr_product p ON p.pdt_id = a.pdt_id
+JOIN dr_user u ON u.user_id = a.user_id where a.pdt_id=#{pdtId} limit #{start},#{end}
+	</select>
+	
+	<select id="investListCount" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+	count(0) count
+FROM
+	dr_asset a
+JOIN dr_product p ON p.pdt_id = a.pdt_id
+JOIN dr_user u ON u.user_id = a.user_id where a.pdt_id=#{pdtId}
+	</select>
+	
+	<!-- 购买成功后返回给用户的信息 -->
+	<select id="orderinfo" resultType="java.util.Map" parameterType="java.util.Map">
+		
+SELECT
+	o.order_createtime asset_buytime,
+	p.pdt_name pdt_name,
+	p.pdt_expect_yield_rate pdt_expect_yield_rate,
+	p.pdt_start_yield_date pdt_start_yield_date,
+	p.pdt_expire_date pdt_expire_date,
+	o.order_amount asset_amount
+FROM
+	dr_order o
+JOIN dr_product p ON p.pdt_id = o.pdt_id
+where o.order_id=#{orderId} and p.pdt_id=#{pdtId} 
+	</select>
+	
+	
+	<select id="v3orderinfo" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+		a.ordered_dt asset_buytime,
+		o.name pdt_name,
+		o.yield_rate pdt_expect_yield_rate,
+		a.order_amount asset_amount
+	FROM
+		v3_fixed_deposit_assets a
+	JOIN v3_projects p ON a.project_id = p.id
+	JOIN v3_sub_fixed_deposit_products s ON s.project_id = a.project_id
+	JOIN v3_fixed_deposit_products o on o.id = a.product_id  
+	WHERE
+		a.id = #{orderId}
+	AND s.id = #{pdtId} AND a.user_id=#{userId}
+
+	</select>
+	
+	
+	
+</mapper>

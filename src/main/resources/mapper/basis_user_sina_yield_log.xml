@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_user_sina_yield_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND user_sina_yield_log.log_id = #{logId}</if> <if test="userId != null and '' != userId" > AND user_sina_yield_log.user_id = #{userId}</if> <if test="logYield_date != null and '' != logYield_date" > AND user_sina_yield_log.log_yield_date = #{logYield_date}</if> <if test="logYield != null and '' != logYield" > AND user_sina_yield_log.log_yield = #{logYield}</if> <if test="logUser_balance != null and '' != logUser_balance" > AND user_sina_yield_log.log_user_balance = #{logUser_balance}</if> <if test="logUser_sina_yield != null and '' != logUser_sina_yield" > AND user_sina_yield_log.log_user_sina_yield = #{logUser_sina_yield}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND user_sina_yield_log.log_createtime = #{logCreatetime}</if> <if test="v2Mirror_sn != null and '' != v2Mirror_sn" > AND user_sina_yield_log.v2_mirror_sn = #{v2Mirror_sn}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND log_id = #{logId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="logYield_date != null and '' != logYield_date" > AND log_yield_date = #{logYield_date}</if> <if test="logYield != null and '' != logYield" > AND log_yield = #{logYield}</if> <if test="logUser_balance != null and '' != logUser_balance" > AND log_user_balance = #{logUser_balance}</if> <if test="logUser_sina_yield != null and '' != logUser_sina_yield" > AND log_user_sina_yield = #{logUser_sina_yield}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if> <if test="v2Mirror_sn != null and '' != v2Mirror_sn" > AND v2_mirror_sn = #{v2Mirror_sn}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_sina_yield_log AS user_sina_yield_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT user_sina_yield_log.log_id as logId, user_sina_yield_log.user_id as userId, user_sina_yield_log.log_yield_date as logYield_date, user_sina_yield_log.log_yield as logYield, user_sina_yield_log.log_user_balance as logUser_balance, user_sina_yield_log.log_user_sina_yield as logUser_sina_yield, user_sina_yield_log.log_createtime as logCreatetime, user_sina_yield_log.v2_mirror_sn as v2Mirror_sn FROM dr_user_sina_yield_log AS user_sina_yield_log WHERE log_id = #{logId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT user_sina_yield_log.log_id as logId, user_sina_yield_log.user_id as userId, user_sina_yield_log.log_yield_date as logYield_date, user_sina_yield_log.log_yield as logYield, user_sina_yield_log.log_user_balance as logUser_balance, user_sina_yield_log.log_user_sina_yield as logUser_sina_yield, user_sina_yield_log.log_createtime as logCreatetime, user_sina_yield_log.v2_mirror_sn as v2Mirror_sn FROM dr_user_sina_yield_log AS user_sina_yield_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT user_sina_yield_log.log_id as logId, user_sina_yield_log.user_id as userId, user_sina_yield_log.log_yield_date as logYield_date, user_sina_yield_log.log_yield as logYield, user_sina_yield_log.log_user_balance as logUser_balance, user_sina_yield_log.log_user_sina_yield as logUser_sina_yield, user_sina_yield_log.log_createtime as logCreatetime, user_sina_yield_log.v2_mirror_sn as v2Mirror_sn FROM dr_user_sina_yield_log AS user_sina_yield_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_user_sina_yield_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">log_id,</if><if test="userId != null">user_id,</if><if test="logYield_date != null">log_yield_date,</if><if test="logYield != null">log_yield,</if><if test="logUser_balance != null">log_user_balance,</if><if test="logUser_sina_yield != null">log_user_sina_yield,</if><if test="logCreatetime != null">log_createtime,</if><if test="v2Mirror_sn != null">v2_mirror_sn,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logId != null">#{logId},</if><if test="userId != null">#{userId},</if><if test="logYield_date != null">#{logYield_date},</if><if test="logYield != null">#{logYield},</if><if test="logUser_balance != null">#{logUser_balance},</if><if test="logUser_sina_yield != null">#{logUser_sina_yield},</if><if test="logCreatetime != null">#{logCreatetime},</if><if test="v2Mirror_sn != null">#{v2Mirror_sn},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_user_sina_yield_log (log_id,user_id,log_yield_date,log_yield,log_user_balance,log_user_sina_yield,log_createtime,v2_mirror_sn)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logId},#{item.userId},#{item.logYield_date},#{item.logYield},#{item.logUser_balance},#{item.logUser_sina_yield},#{item.logCreatetime},#{item.v2Mirror_sn})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_user_sina_yield_log
+    <set>
+     <if test="logId != null" >  log_id = #{logId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="logYield_date != null" >  log_yield_date = #{logYield_date}, </if><if test="logYield != null" >  log_yield = #{logYield}, </if><if test="logUser_balance != null" >  log_user_balance = #{logUser_balance}, </if><if test="logUser_sina_yield != null" >  log_user_sina_yield = #{logUser_sina_yield}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if><if test="v2Mirror_sn != null" >  v2_mirror_sn = #{v2Mirror_sn}, </if>
+      </set>
+	  WHERE log_id = #{logId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_user_sina_yield_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_user_sina_yield_log 
+		WHERE log_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_pay_user_finance_channel">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND pay_user_finance_channel.id = #{id}</if> <if test="userId != null and '' != userId" > AND pay_user_finance_channel.user_id = #{userId}</if> <if test="channelId != null and '' != channelId" > AND pay_user_finance_channel.channel_id = #{channelId}</if> <if test="balance != null and '' != balance" > AND pay_user_finance_channel.balance = #{balance}</if> <if test="frozen != null and '' != frozen" > AND pay_user_finance_channel.frozen = #{frozen}</if> <if test="income != null and '' != income" > AND pay_user_finance_channel.income = #{income}</if> <if test="expend != null and '' != expend" > AND pay_user_finance_channel.expend = #{expend}</if> <if test="state != null and '' != state" > AND pay_user_finance_channel.state = #{state}</if> <if test="createDt != null and '' != createDt" > AND pay_user_finance_channel.create_dt = #{createDt}</if> <if test="modifiedTs != null and '' != modifiedTs" > AND pay_user_finance_channel.modified_ts = #{modifiedTs}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="channelId != null and '' != channelId" > AND channel_id = #{channelId}</if> <if test="balance != null and '' != balance" > AND balance = #{balance}</if> <if test="frozen != null and '' != frozen" > AND frozen = #{frozen}</if> <if test="income != null and '' != income" > AND income = #{income}</if> <if test="expend != null and '' != expend" > AND expend = #{expend}</if> <if test="state != null and '' != state" > AND state = #{state}</if> <if test="createDt != null and '' != createDt" > AND create_dt = #{createDt}</if> <if test="modifiedTs != null and '' != modifiedTs" > AND modified_ts = #{modifiedTs}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_pay_user_finance_channel AS pay_user_finance_channel
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT pay_user_finance_channel.id as id, pay_user_finance_channel.user_id as userId, pay_user_finance_channel.channel_id as channelId, pay_user_finance_channel.balance as balance, pay_user_finance_channel.frozen as frozen, pay_user_finance_channel.income as income, pay_user_finance_channel.expend as expend, pay_user_finance_channel.state as state, pay_user_finance_channel.create_dt as createDt, pay_user_finance_channel.modified_ts as modifiedTs FROM dr_pay_user_finance_channel AS pay_user_finance_channel WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT pay_user_finance_channel.id as id, pay_user_finance_channel.user_id as userId, pay_user_finance_channel.channel_id as channelId, pay_user_finance_channel.balance as balance, pay_user_finance_channel.frozen as frozen, pay_user_finance_channel.income as income, pay_user_finance_channel.expend as expend, pay_user_finance_channel.state as state, pay_user_finance_channel.create_dt as createDt, pay_user_finance_channel.modified_ts as modifiedTs FROM dr_pay_user_finance_channel AS pay_user_finance_channel
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT pay_user_finance_channel.id as id, pay_user_finance_channel.user_id as userId, pay_user_finance_channel.channel_id as channelId, pay_user_finance_channel.balance as balance, pay_user_finance_channel.frozen as frozen, pay_user_finance_channel.income as income, pay_user_finance_channel.expend as expend, pay_user_finance_channel.state as state, pay_user_finance_channel.create_dt as createDt, pay_user_finance_channel.modified_ts as modifiedTs FROM dr_pay_user_finance_channel AS pay_user_finance_channel  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_pay_user_finance_channel 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="userId != null">user_id,</if><if test="channelId != null">channel_id,</if><if test="balance != null">balance,</if><if test="frozen != null">frozen,</if><if test="income != null">income,</if><if test="expend != null">expend,</if><if test="state != null">state,</if><if test="createDt != null">create_dt,</if><if test="modifiedTs != null">modified_ts,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="userId != null">#{userId},</if><if test="channelId != null">#{channelId},</if><if test="balance != null">#{balance},</if><if test="frozen != null">#{frozen},</if><if test="income != null">#{income},</if><if test="expend != null">#{expend},</if><if test="state != null">#{state},</if><if test="createDt != null">#{createDt},</if><if test="modifiedTs != null">#{modifiedTs},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_pay_user_finance_channel (id,user_id,channel_id,balance,frozen,income,expend,state,create_dt,modified_ts)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.userId},#{item.channelId},#{item.balance},#{item.frozen},#{item.income},#{item.expend},#{item.state},#{item.createDt},#{item.modifiedTs})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_pay_user_finance_channel
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="channelId != null" >  channel_id = #{channelId}, </if><if test="balance != null" >  balance = #{balance}, </if><if test="frozen != null" >  frozen = #{frozen}, </if><if test="income != null" >  income = #{income}, </if><if test="expend != null" >  expend = #{expend}, </if><if test="state != null" >  state = #{state}, </if><if test="createDt != null" >  create_dt = #{createDt}, </if><if test="modifiedTs != null" >  modified_ts = #{modifiedTs}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_pay_user_finance_channel 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_pay_user_finance_channel 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

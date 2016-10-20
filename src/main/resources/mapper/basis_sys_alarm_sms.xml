@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_sys_alarm_sms">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="asId != null and '' != asId" > AND sys_alarm_sms.as_id = #{asId}</if> <if test="asPhone != null and '' != asPhone" > AND sys_alarm_sms.as_phone = #{asPhone}</if> <if test="asTxt != null and '' != asTxt" > AND sys_alarm_sms.as_txt = #{asTxt}</if> <if test="asTime != null and '' != asTime" > AND sys_alarm_sms.as_time = #{asTime}</if> <if test="asCreate_dt != null and '' != asCreate_dt" > AND sys_alarm_sms.as_create_dt = #{asCreate_dt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="asId != null and '' != asId" > AND as_id = #{asId}</if> <if test="asPhone != null and '' != asPhone" > AND as_phone = #{asPhone}</if> <if test="asTxt != null and '' != asTxt" > AND as_txt = #{asTxt}</if> <if test="asTime != null and '' != asTime" > AND as_time = #{asTime}</if> <if test="asCreate_dt != null and '' != asCreate_dt" > AND as_create_dt = #{asCreate_dt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_sys_alarm_sms AS sys_alarm_sms
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT sys_alarm_sms.as_id as asId, sys_alarm_sms.as_phone as asPhone, sys_alarm_sms.as_txt as asTxt, sys_alarm_sms.as_time as asTime, sys_alarm_sms.as_create_dt as asCreate_dt FROM dr_sys_alarm_sms AS sys_alarm_sms WHERE as_id = #{asId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT sys_alarm_sms.as_id as asId, sys_alarm_sms.as_phone as asPhone, sys_alarm_sms.as_txt as asTxt, sys_alarm_sms.as_time as asTime, sys_alarm_sms.as_create_dt as asCreate_dt FROM dr_sys_alarm_sms AS sys_alarm_sms
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT sys_alarm_sms.as_id as asId, sys_alarm_sms.as_phone as asPhone, sys_alarm_sms.as_txt as asTxt, sys_alarm_sms.as_time as asTime, sys_alarm_sms.as_create_dt as asCreate_dt FROM dr_sys_alarm_sms AS sys_alarm_sms  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_sys_alarm_sms 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="asId != null">as_id,</if><if test="asPhone != null">as_phone,</if><if test="asTxt != null">as_txt,</if><if test="asTime != null">as_time,</if><if test="asCreate_dt != null">as_create_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="asId != null">#{asId},</if><if test="asPhone != null">#{asPhone},</if><if test="asTxt != null">#{asTxt},</if><if test="asTime != null">#{asTime},</if><if test="asCreate_dt != null">#{asCreate_dt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_sys_alarm_sms (as_id,as_phone,as_txt,as_time,as_create_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.asId},#{item.asPhone},#{item.asTxt},#{item.asTime},#{item.asCreate_dt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_sys_alarm_sms
+    <set>
+     <if test="asId != null" >  as_id = #{asId}, </if><if test="asPhone != null" >  as_phone = #{asPhone}, </if><if test="asTxt != null" >  as_txt = #{asTxt}, </if><if test="asTime != null" >  as_time = #{asTime}, </if><if test="asCreate_dt != null" >  as_create_dt = #{asCreate_dt}, </if>
+      </set>
+	  WHERE as_id = #{asId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_sys_alarm_sms 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_sys_alarm_sms 
+		WHERE as_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

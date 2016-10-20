@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_plant_activity">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="userId != null and '' != userId" > AND plant_activity.user_id = #{userId}</if> <if test="plantTiyan_amount != null and '' != plantTiyan_amount" > AND plant_activity.plant_tiyan_amount = #{plantTiyan_amount}</if> <if test="plantReward_amount != null and '' != plantReward_amount" > AND plant_activity.plant_reward_amount = #{plantReward_amount}</if> <if test="plantSharetime != null and '' != plantSharetime" > AND plant_activity.plant_sharetime = #{plantSharetime}</if> <if test="plantPlanttime != null and '' != plantPlanttime" > AND plant_activity.plant_planttime = #{plantPlanttime}</if> <if test="plantHarvesttime != null and '' != plantHarvesttime" > AND plant_activity.plant_harvesttime = #{plantHarvesttime}</if> <if test="plantHarvest_operate_time != null and '' != plantHarvest_operate_time" > AND plant_activity.plant_harvest_operate_time = #{plantHarvest_operate_time}</if> <if test="plantCreattime != null and '' != plantCreattime" > AND plant_activity.plant_creattime = #{plantCreattime}</if> <if test="plantModifytime != null and '' != plantModifytime" > AND plant_activity.plant_modifytime = #{plantModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="plantTiyan_amount != null and '' != plantTiyan_amount" > AND plant_tiyan_amount = #{plantTiyan_amount}</if> <if test="plantReward_amount != null and '' != plantReward_amount" > AND plant_reward_amount = #{plantReward_amount}</if> <if test="plantSharetime != null and '' != plantSharetime" > AND plant_sharetime = #{plantSharetime}</if> <if test="plantPlanttime != null and '' != plantPlanttime" > AND plant_planttime = #{plantPlanttime}</if> <if test="plantHarvesttime != null and '' != plantHarvesttime" > AND plant_harvesttime = #{plantHarvesttime}</if> <if test="plantHarvest_operate_time != null and '' != plantHarvest_operate_time" > AND plant_harvest_operate_time = #{plantHarvest_operate_time}</if> <if test="plantCreattime != null and '' != plantCreattime" > AND plant_creattime = #{plantCreattime}</if> <if test="plantModifytime != null and '' != plantModifytime" > AND plant_modifytime = #{plantModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_plant_activity AS plant_activity
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT plant_activity.user_id as userId, plant_activity.plant_tiyan_amount as plantTiyan_amount, plant_activity.plant_reward_amount as plantReward_amount, plant_activity.plant_sharetime as plantSharetime, plant_activity.plant_planttime as plantPlanttime, plant_activity.plant_harvesttime as plantHarvesttime, plant_activity.plant_harvest_operate_time as plantHarvest_operate_time, plant_activity.plant_creattime as plantCreattime, plant_activity.plant_modifytime as plantModifytime FROM dr_plant_activity AS plant_activity WHERE user_id = #{userId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT plant_activity.user_id as userId, plant_activity.plant_tiyan_amount as plantTiyan_amount, plant_activity.plant_reward_amount as plantReward_amount, plant_activity.plant_sharetime as plantSharetime, plant_activity.plant_planttime as plantPlanttime, plant_activity.plant_harvesttime as plantHarvesttime, plant_activity.plant_harvest_operate_time as plantHarvest_operate_time, plant_activity.plant_creattime as plantCreattime, plant_activity.plant_modifytime as plantModifytime FROM dr_plant_activity AS plant_activity
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT plant_activity.user_id as userId, plant_activity.plant_tiyan_amount as plantTiyan_amount, plant_activity.plant_reward_amount as plantReward_amount, plant_activity.plant_sharetime as plantSharetime, plant_activity.plant_planttime as plantPlanttime, plant_activity.plant_harvesttime as plantHarvesttime, plant_activity.plant_harvest_operate_time as plantHarvest_operate_time, plant_activity.plant_creattime as plantCreattime, plant_activity.plant_modifytime as plantModifytime FROM dr_plant_activity AS plant_activity  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_plant_activity 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">user_id,</if><if test="plantTiyan_amount != null">plant_tiyan_amount,</if><if test="plantReward_amount != null">plant_reward_amount,</if><if test="plantSharetime != null">plant_sharetime,</if><if test="plantPlanttime != null">plant_planttime,</if><if test="plantHarvesttime != null">plant_harvesttime,</if><if test="plantHarvest_operate_time != null">plant_harvest_operate_time,</if><if test="plantCreattime != null">plant_creattime,</if><if test="plantModifytime != null">plant_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="userId != null">#{userId},</if><if test="plantTiyan_amount != null">#{plantTiyan_amount},</if><if test="plantReward_amount != null">#{plantReward_amount},</if><if test="plantSharetime != null">#{plantSharetime},</if><if test="plantPlanttime != null">#{plantPlanttime},</if><if test="plantHarvesttime != null">#{plantHarvesttime},</if><if test="plantHarvest_operate_time != null">#{plantHarvest_operate_time},</if><if test="plantCreattime != null">#{plantCreattime},</if><if test="plantModifytime != null">#{plantModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_plant_activity (user_id,plant_tiyan_amount,plant_reward_amount,plant_sharetime,plant_planttime,plant_harvesttime,plant_harvest_operate_time,plant_creattime,plant_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.userId},#{item.plantTiyan_amount},#{item.plantReward_amount},#{item.plantSharetime},#{item.plantPlanttime},#{item.plantHarvesttime},#{item.plantHarvest_operate_time},#{item.plantCreattime},#{item.plantModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_plant_activity
+    <set>
+     <if test="userId != null" >  user_id = #{userId}, </if><if test="plantTiyan_amount != null" >  plant_tiyan_amount = #{plantTiyan_amount}, </if><if test="plantReward_amount != null" >  plant_reward_amount = #{plantReward_amount}, </if><if test="plantSharetime != null" >  plant_sharetime = #{plantSharetime}, </if><if test="plantPlanttime != null" >  plant_planttime = #{plantPlanttime}, </if><if test="plantHarvesttime != null" >  plant_harvesttime = #{plantHarvesttime}, </if><if test="plantHarvest_operate_time != null" >  plant_harvest_operate_time = #{plantHarvest_operate_time}, </if><if test="plantCreattime != null" >  plant_creattime = #{plantCreattime}, </if><if test="plantModifytime != null" >  plant_modifytime = #{plantModifytime}, </if>
+      </set>
+	  WHERE user_id = #{userId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_plant_activity 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_plant_activity 
+		WHERE user_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

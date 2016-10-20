@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_pending_product_yield_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND pending_product_yield_log.log_id = #{logId}</if> <if test="pdtId != null and '' != pdtId" > AND pending_product_yield_log.pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND pending_product_yield_log.inst_id = #{instId}</if> <if test="logYield_date != null and '' != logYield_date" > AND pending_product_yield_log.log_yield_date = #{logYield_date}</if> <if test="logYield_rate != null and '' != logYield_rate" > AND pending_product_yield_log.log_yield_rate = #{logYield_rate}</if> <if test="logAllocate_num != null and '' != logAllocate_num" > AND pending_product_yield_log.log_allocate_num = #{logAllocate_num}</if> <if test="logStatus != null and '' != logStatus" > AND pending_product_yield_log.log_status = #{logStatus}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND pending_product_yield_log.log_createtime = #{logCreatetime}</if> <if test="logModifytime != null and '' != logModifytime" > AND pending_product_yield_log.log_modifytime = #{logModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND log_id = #{logId}</if> <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="logYield_date != null and '' != logYield_date" > AND log_yield_date = #{logYield_date}</if> <if test="logYield_rate != null and '' != logYield_rate" > AND log_yield_rate = #{logYield_rate}</if> <if test="logAllocate_num != null and '' != logAllocate_num" > AND log_allocate_num = #{logAllocate_num}</if> <if test="logStatus != null and '' != logStatus" > AND log_status = #{logStatus}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if> <if test="logModifytime != null and '' != logModifytime" > AND log_modifytime = #{logModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_pending_product_yield_log AS pending_product_yield_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT pending_product_yield_log.log_id as logId, pending_product_yield_log.pdt_id as pdtId, pending_product_yield_log.inst_id as instId, pending_product_yield_log.log_yield_date as logYield_date, pending_product_yield_log.log_yield_rate as logYield_rate, pending_product_yield_log.log_allocate_num as logAllocate_num, pending_product_yield_log.log_status as logStatus, pending_product_yield_log.log_createtime as logCreatetime, pending_product_yield_log.log_modifytime as logModifytime FROM dr_pending_product_yield_log AS pending_product_yield_log WHERE log_id = #{logId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT pending_product_yield_log.log_id as logId, pending_product_yield_log.pdt_id as pdtId, pending_product_yield_log.inst_id as instId, pending_product_yield_log.log_yield_date as logYield_date, pending_product_yield_log.log_yield_rate as logYield_rate, pending_product_yield_log.log_allocate_num as logAllocate_num, pending_product_yield_log.log_status as logStatus, pending_product_yield_log.log_createtime as logCreatetime, pending_product_yield_log.log_modifytime as logModifytime FROM dr_pending_product_yield_log AS pending_product_yield_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT pending_product_yield_log.log_id as logId, pending_product_yield_log.pdt_id as pdtId, pending_product_yield_log.inst_id as instId, pending_product_yield_log.log_yield_date as logYield_date, pending_product_yield_log.log_yield_rate as logYield_rate, pending_product_yield_log.log_allocate_num as logAllocate_num, pending_product_yield_log.log_status as logStatus, pending_product_yield_log.log_createtime as logCreatetime, pending_product_yield_log.log_modifytime as logModifytime FROM dr_pending_product_yield_log AS pending_product_yield_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_pending_product_yield_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">log_id,</if><if test="pdtId != null">pdt_id,</if><if test="instId != null">inst_id,</if><if test="logYield_date != null">log_yield_date,</if><if test="logYield_rate != null">log_yield_rate,</if><if test="logAllocate_num != null">log_allocate_num,</if><if test="logStatus != null">log_status,</if><if test="logCreatetime != null">log_createtime,</if><if test="logModifytime != null">log_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logId != null">#{logId},</if><if test="pdtId != null">#{pdtId},</if><if test="instId != null">#{instId},</if><if test="logYield_date != null">#{logYield_date},</if><if test="logYield_rate != null">#{logYield_rate},</if><if test="logAllocate_num != null">#{logAllocate_num},</if><if test="logStatus != null">#{logStatus},</if><if test="logCreatetime != null">#{logCreatetime},</if><if test="logModifytime != null">#{logModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_pending_product_yield_log (log_id,pdt_id,inst_id,log_yield_date,log_yield_rate,log_allocate_num,log_status,log_createtime,log_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logId},#{item.pdtId},#{item.instId},#{item.logYield_date},#{item.logYield_rate},#{item.logAllocate_num},#{item.logStatus},#{item.logCreatetime},#{item.logModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_pending_product_yield_log
+    <set>
+     <if test="logId != null" >  log_id = #{logId}, </if><if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="logYield_date != null" >  log_yield_date = #{logYield_date}, </if><if test="logYield_rate != null" >  log_yield_rate = #{logYield_rate}, </if><if test="logAllocate_num != null" >  log_allocate_num = #{logAllocate_num}, </if><if test="logStatus != null" >  log_status = #{logStatus}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if><if test="logModifytime != null" >  log_modifytime = #{logModifytime}, </if>
+      </set>
+	  WHERE log_id = #{logId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_pending_product_yield_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_pending_product_yield_log 
+		WHERE log_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

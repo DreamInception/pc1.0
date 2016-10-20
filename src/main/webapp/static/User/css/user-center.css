@@ -1,0 +1,859 @@
+/**----------------------------- User/access.html ------------------------------------**/
+.user-access-container{
+    position: relative;
+    width: 100%;
+    height: 566px;
+    background: #eeeeee;!important;
+}
+.user-access-title{
+    font-size: 18px;
+    padding-top: 42px;
+    padding-left: 83px;
+    color: #595757;
+    z-index: 20;
+}
+.ua-flash-area{
+    width: 532px;
+    height: 380px;
+    position: relative;
+}
+.ua-feature-img{
+    width: 479px;
+    padding-left: 60px;
+    display: inline-block;
+    z-index: 10;
+}
+.uaer-access-window{
+    position: relative;
+    width: 338px;
+   // height: 338px;
+    margin-top: 30px;
+    margin-left: 27px;
+    box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -moz-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -webkit-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+}
+
+.uaw-tabs{
+    width: 100%;
+}
+.uaw-login-tab,.uaw-reg-tab{
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #d9d9d9;
+}
+.uaw-contentArea{
+    background: #fff;
+}
+.uaw-log-container{
+    width: 100%;
+    height: 367px;
+    padding: 33px 25px 0 25px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+
+}
+.log-phoneNum{
+    display: block;
+    width: 287px;
+    height: 40px;
+ //   line-height: 40px;
+    text-indent: 20px;
+    /*padding-top: 53px;*/
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+
+.log-loginPsw{
+    display: block;
+    width: 287px;
+    height: 40px;
+//    line-height: 40px;
+    text-indent: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+.loginBtn{
+    width: 291px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 23px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    background: #e74d46;
+    
+}
+.log-hint{
+    width: 289px;
+    color: #9fa0a0;
+    font-size: 12px;
+    margin-top: 7px;
+    line-height: 12px;
+}
+.log-free-reg{
+    margin-top: 8px;
+    color: #a78e54;
+    font-size: 12px;
+}
+.log-find-psw{
+    margin-top: 8px;
+    color: #a78e54;
+    font-size: 12px;
+}
+.uaw-reg-container{
+    width: 100%;
+    height: 450px;
+    padding: 23px 25px 0 25px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+
+}
+.reg-phoneNum{
+    display: block;
+    width: 287px;
+    height: 34px;
+  //  line-height: 40px;
+    text-indent: 20px;
+    /*margin-top: 33px;*/
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+.reg-loginPsw{
+    display: block;
+    width: 287px;
+    height: 34px;
+ //   line-height: 40px;
+    text-indent: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+.reg-verifyCode{
+    width: 55%;
+    height: 36px;
+    line-height: 36px;
+    text-indent: 20px;
+    border: solid 1px #A8A8A8;
+    font-size: 14px;
+}
+.log-verifyCode{
+    width: 55%;
+    height: 36px;
+	line-height: 36px;
+    text-indent: 20px;
+    border: solid 1px #A8A8A8;
+    font-size: 14px;
+}
+.reg-msgCode{
+    width: 55%;
+    height: 36px;
+    line-height: 36px;
+    text-indent: 20px;
+    border: solid 1px #A8A8A8;
+    font-size: 14px;
+}
+.reg-gainCode{
+    width: 40%;
+    height: 38px;
+	line-height: 38px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background: #e74d46;
+    color: #fff;
+    cursor: pointer;
+}
+.log-gainCode{
+    width: 40%;
+    height: 38px;
+	line-height: 38px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background: #e74d46;
+    color: #fff;
+    cursor: pointer;
+}
+
+.codeStyle{
+    width: 40%;
+    height: 38px;
+    /*margin-top: 10px;*/
+    font-size: 5px;
+    font-style: italic;
+    font-weight: bolder;
+    /*color: #e74d46;*/
+    text-align: center;
+    background: #fff;
+    border: solid 1px #A8A8A8;
+    /*padding: 2px 3px;*/
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+
+}
+.log-codeStyle{
+    width: 40%;
+    height: 38px;
+    /*margin-top: 10px;*/
+    font-size: 5px;
+    font-style: italic;
+    font-weight: bolder;
+    /*color: #e74d46;*/
+    text-align: center;
+    background: #ffffff;
+    border: solid 1px #A8A8A8;
+    /*padding: 2px 3px;*/
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+
+}
+.agreeDiv{
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 12px;
+}
+.reg-radio{
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
+    margin-top: 20px;
+    display: none;
+}
+.agreementSpan{
+    /*margin-left: 10px;*/
+    color: #727171;
+}
+.agreement{
+    color: #ac9354;
+}
+.registerBtn{
+    width: 291px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    margin-top: 10px;
+    background:  #e74d46;
+    color: #fff;
+}
+.reg-hint{
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #ac9354;
+}
+.reg-errorMsg{
+    color: #af5c46;
+    height: 12px;
+    line-height: 12px;
+    padding-top: 3.5px;
+    padding-bottom: 3.5px;
+    font-size: 12px;
+    visibility: hidden;
+}
+.reg-to-login{
+    color: #ac9354;
+}
+.access-activeTab{
+    background: #e74d46;
+}
+.ua-copyright{
+    width: 100%;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    color: #b5b5b6;
+    position: absolute;
+    bottom: 20px;
+}
+/**----------------------------- User/resetPsw.html --- ---------------------------------**/
+.user-reset-window{
+    display: block;
+    width: 336px;
+    height: 450px;
+ //   margin-top: 26px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    outline: none;
+    border: 0px;
+    background-color: white;
+    background-size: 100%;
+    box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -moz-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -webkit-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+}
+.resetPsw{
+    width: 100%;
+    height: 40px;
+    color: #000;
+    text-align: center;
+    line-height: 40px;
+    background: grey;
+}
+.urw-phoneNum{
+    display: block;
+    margin-top: 32px;
+    text-indent: 20px;
+    width: 281px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #A8A8A8;
+}
+.urw-password,.urw-confirmPsw{
+    display: block;
+ //   margin-top: 15px;
+    text-indent: 20px;
+    width: 281px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px #A8A8A8;
+}
+.urw-msgCode{
+    display: block;
+    margin-top: 15px;
+    text-indent: 20px;
+    width: 60%;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 7.5%;
+    border: solid 1px #A8A8A8;
+}
+.urw-gainPsw{
+    display: block;
+    margin-top: 20px;
+    width: 25%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: red;
+}
+.input-msgCode-error{
+    display: block;
+    margin-top: 5px;
+    line-height: 20px;
+    margin-left: 7%;
+    color: #e64d46;
+    font-size: 12px;
+    visibility: hidden;
+}
+.urw-submit{
+    display: block;
+  //  margin-top: 30px;
+    width: 86%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 7%;
+    margin-right: 6%;
+    text-align: center;
+    background: #e64d46;
+    color: white;
+}
+.rp-picDiv{
+	width: 85%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.rp-verifyCode{
+    width: 55%;
+    height: 36px;
+    line-height: 36px;
+    text-indent: 20px;
+    border: solid 1px #A8A8A8;
+}
+.rp-codeStyle{
+    width: 40%;
+    height: 38px;
+    /*margin-top: 10px;*/
+    font-size: 5px;
+    font-style: italic;
+    font-weight: bolder;
+    /*color: #e74d46;*/
+    text-align: center;
+    background: #fff;
+    border: solid 1px #A8A8A8;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+/**----------------------------- User/identification.html --- ---------------------------------**/
+.identify-errorMsg{
+    width: 85%;
+    margin: 0 auto;
+    color: #af5c46;
+    height: 12px;
+    line-height: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 12px;
+    visibility: hidden;
+}
+.identification-Container{
+    background-color: #efefef;
+}
+.identificationDiv{
+    background: url("../../Public/images/idbackimage.png") no-repeat;
+    /*-webkit-background-size: 1500px;*/
+    height: 940px;
+    width: 1000px;
+    margin: 0 auto;
+    background-size: 100%;
+    padding-top: 200px;
+    padding-bottom: 0px;
+    background-color: #efefef;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+.user-identity-window{
+    display: block;
+    width: 336px;
+    height: 337px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    outline: none;
+    border: 0px;
+    background-color: white;
+    background-size: 100%;
+    box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -moz-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -webkit-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+}
+.user-idTitle{
+    display: block;
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+    background: #c5c6c6;
+    font-size: 15px;
+}
+.uit-name{
+    display: block;
+    margin-top: 33px;
+    text-indent: 20px;
+    width: 85%;
+    height: 40px;
+    line-height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+.uit-number{
+    display: block;
+    margin-top: 15px;
+    text-indent: 20px;
+    width: 85%;
+    height: 40px;
+    line-height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+.uit-number-error{
+    display: block;
+    margin-top: 10px;
+    line-height: 30px;
+    margin-left: 10px;
+    color: #af5c46;
+    visibility: hidden;
+}
+.uit-checkbox{
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
+    margin-top: 20px;
+    display: none;
+}
+.uit-agreeDiv{
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+}
+.uit-agreement {
+    /*margin-left: 10px;*/
+    color: #727171;
+    font-size: 12px;
+}
+.uit-radio{
+    margin-right: -5px;
+    margin-bottom: 0px;
+    width: 12px;
+    height: 12px;
+    border:#969696;
+}
+
+.uit-confirm{
+    margin-top: 5px;
+    width: 85%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background: #e64d46;
+    color: #ffffff;
+    display: block;
+    font-size: 14px;
+}
+/**----------------------------- User/setBusinessPsw.html --- ---------------------------------**/
+.setBusinessPswDiv{
+    background: url("../../Public/images/setpasword-backimg.png") no-repeat;
+    height: 940px;
+    width: 1000px;
+    margin: 0 auto;
+    background-size: 100%;
+    padding-top: 200px;
+    padding-bottom: 0px;
+    background-color: #efefef;
+     box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+
+.user-bpsw-window{
+    box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -moz-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -webkit-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    display: block;
+    width: 336px;
+    height: 337px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    outline: none;
+    border: 0px;
+    background-color: white;
+  
+}
+.user-bpsw-Title{
+    width: 100%;
+    height: 40px;
+    color: #000;
+    text-align: center;
+    line-height: 40px;
+    background: grey;
+}
+.user-first-password{
+    display: block;
+    margin-top: 30px;
+    text-indent: 20px;
+    width: 85%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+.user-second-password{
+    display: block;
+    margin-top: 10px;
+    text-indent: 20px;
+    width: 85%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    border: solid 1px #A8A8A8;
+}
+/**----------------------------- User/bindCard.html --- ---------------------------------**/
+.setbindCardDiv{
+    background: url("../../Public/images/bindCard-backimage.png") no-repeat;
+    height: 940px;
+    width: 1000px;
+    margin: 0 auto;
+    background-size: 100%;
+    padding-top: 200px;
+    padding-bottom: 0px;
+    background-color: #efefef;
+     box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+.user-bindCard-window{
+    display: block;
+    width: 336px;
+    height: 590px;
+    border: solid 0px grey;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    background-color: white;
+    box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -moz-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -webkit-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+}
+.user-bindCard-Title{
+    width: 100%;
+    height: 40px;
+    color: #000;
+    text-align: center;
+    line-height: 40px;
+    background: grey;
+}
+.user-bindCard-name{
+    display: block;
+    margin-top: 30px;
+    text-indent: 20px;
+    width: 85%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    color: #595757;
+    border: solid 1px #A8A8A8;
+}
+.eb-card-area{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.eb-province{
+    width: 49%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+    display: inline-block;
+}
+.eb-city{
+    width: 49%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+    /*margin-left: 5%;*/
+    display: inline-block;
+}
+.eb-bankname{
+    display: block;
+    margin-top: 15px;
+    width: 85%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right:  auto;
+}
+.eb-sel-bname{
+    width: 100%;
+    text-indent: 20px;
+    font-size: 14px;
+    color: #727171;
+
+}
+.user-bindCard-bankCard,.user-bindCard-phoneNum{
+    display: block;
+    margin-top: 15px;
+    text-indent: 20px;
+    width: 85%;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    color: #595757;
+    border: solid 1px #A8A8A8;
+}
+.ubc-gainCode{
+    width: 40%;
+    height: 42px;
+    line-height: 42px;
+ //   margin-top: 15px;
+    font-size: 12px;
+    text-align: center;
+    border: none;
+    background: #e64d46;
+    color: white;
+    cursor: pointer;
+}
+.ubc-msgCode{
+    width: 55%;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 20px;
+    font-size: 14px;
+    color: #9fa0a0;
+     border: solid 1px #A8A8A8;
+}
+.ubw-hint{
+    font-size: 10px;
+    margin-top: 10px;
+}
+.uya{
+    width: 85%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ubc-remind{
+    text-align: center;
+  //  margin-top: 30px;
+    font-size: 12px;
+    color: #727171;
+
+}
+.ubc-msgCode-error{
+    font-size: 12px;
+    color: #af5c46;
+    margin-left: 15px;
+}
+.bindcard-verifyCode{
+    width: 55%;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 20px;
+    border: solid 1px #A8A8A8;
+    font-size: 14px;
+}
+.bindcard-codeStyle{
+    width: 40%;
+    height: 42px;
+    /*margin-top: 10px;*/
+    font-size: 5px;
+    font-style: italic;
+    font-weight: bolder;
+    /*color: #e74d46;*/
+    text-align: center;
+    background: #fff;
+    border: solid 1px #A8A8A8;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+/**----------------------------- User/bindCard-Success.html --- ---------------------------------**/
+/**----------------------------- User/register-Success.html --- ---------------------------------**/
+.user-bdc-title{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 100;
+    padding-top: 165px;
+    color: #727171;
+}
+.bindcard-SuccessDiv{
+    background: url("../../Public/images/setPswBackImage.png") no-repeat;
+    /*-webkit-background-size: 1500px;*/
+    height: 488px;
+    width: 1000px;
+    margin: 0 auto;
+    background-size: 1000px;
+    padding-top: 150px;
+    padding-bottom: 0px;
+    background-color: #efefef;
+}
+.userSuccess{
+    width: 340px;
+    height: 350px;
+    background: url("../../Public/images/setPswSectionBack.png") no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+}
+.user-bdc-return{
+    margin-top: 40px;
+    text-align: center;
+}
+.user-bdc-link{
+    color: #898989;
+    margin-left: 5px;
+    font-size: 14px;
+}
+.user-bdc-return{
+    color: #898989;
+    font-size: 14px;
+}
+/**----------------------------- User/resetPsw-Success.html --- ---------------------------------**/
+.resetPswDiv{
+    background: url("../../Public/images/findPswBackimage.png") no-repeat;
+    /*-webkit-background-size: 1500px;*/
+    height: 488px;
+    width: 1000px;
+    margin: 0 auto;
+    background-size: 1000px;
+    padding-top: 130px;
+    padding-bottom: 0px;
+    background-color: #efefef;
+}
+.user-rps-title{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 100;
+    padding-top: 165px;
+    color: #727171;
+}
+.user-rps-title p{
+    display: inline-block;
+}
+.user-rps-link{
+    display: block;
+    margin-top: 60px;
+    width:  290px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    background: #e64d46;
+}

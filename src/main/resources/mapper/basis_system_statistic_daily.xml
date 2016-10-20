@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_system_statistic_daily">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="dailyId != null and '' != dailyId" > AND system_statistic_daily.daily_id = #{dailyId}</if> <if test="dailyDate != null and '' != dailyDate" > AND system_statistic_daily.daily_date = #{dailyDate}</if> <if test="dailyNew_user_count != null and '' != dailyNew_user_count" > AND system_statistic_daily.daily_new_user_count = #{dailyNew_user_count}</if> <if test="dailyNew_inst_count != null and '' != dailyNew_inst_count" > AND system_statistic_daily.daily_new_inst_count = #{dailyNew_inst_count}</if> <if test="dailyNew_sale_money != null and '' != dailyNew_sale_money" > AND system_statistic_daily.daily_new_sale_money = #{dailyNew_sale_money}</if> <if test="dailyNew_recharge_money != null and '' != dailyNew_recharge_money" > AND system_statistic_daily.daily_new_recharge_money = #{dailyNew_recharge_money}</if> <if test="dailyNew_withdraw_money != null and '' != dailyNew_withdraw_money" > AND system_statistic_daily.daily_new_withdraw_money = #{dailyNew_withdraw_money}</if> <if test="dailyNew_sale_charge != null and '' != dailyNew_sale_charge" > AND system_statistic_daily.daily_new_sale_charge = #{dailyNew_sale_charge}</if> <if test="dailyNew_recharge_charge != null and '' != dailyNew_recharge_charge" > AND system_statistic_daily.daily_new_recharge_charge = #{dailyNew_recharge_charge}</if> <if test="dailyCreatetime != null and '' != dailyCreatetime" > AND system_statistic_daily.daily_createtime = #{dailyCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="dailyId != null and '' != dailyId" > AND daily_id = #{dailyId}</if> <if test="dailyDate != null and '' != dailyDate" > AND daily_date = #{dailyDate}</if> <if test="dailyNew_user_count != null and '' != dailyNew_user_count" > AND daily_new_user_count = #{dailyNew_user_count}</if> <if test="dailyNew_inst_count != null and '' != dailyNew_inst_count" > AND daily_new_inst_count = #{dailyNew_inst_count}</if> <if test="dailyNew_sale_money != null and '' != dailyNew_sale_money" > AND daily_new_sale_money = #{dailyNew_sale_money}</if> <if test="dailyNew_recharge_money != null and '' != dailyNew_recharge_money" > AND daily_new_recharge_money = #{dailyNew_recharge_money}</if> <if test="dailyNew_withdraw_money != null and '' != dailyNew_withdraw_money" > AND daily_new_withdraw_money = #{dailyNew_withdraw_money}</if> <if test="dailyNew_sale_charge != null and '' != dailyNew_sale_charge" > AND daily_new_sale_charge = #{dailyNew_sale_charge}</if> <if test="dailyNew_recharge_charge != null and '' != dailyNew_recharge_charge" > AND daily_new_recharge_charge = #{dailyNew_recharge_charge}</if> <if test="dailyCreatetime != null and '' != dailyCreatetime" > AND daily_createtime = #{dailyCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_system_statistic_daily AS system_statistic_daily
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT system_statistic_daily.daily_id as dailyId, system_statistic_daily.daily_date as dailyDate, system_statistic_daily.daily_new_user_count as dailyNew_user_count, system_statistic_daily.daily_new_inst_count as dailyNew_inst_count, system_statistic_daily.daily_new_sale_money as dailyNew_sale_money, system_statistic_daily.daily_new_recharge_money as dailyNew_recharge_money, system_statistic_daily.daily_new_withdraw_money as dailyNew_withdraw_money, system_statistic_daily.daily_new_sale_charge as dailyNew_sale_charge, system_statistic_daily.daily_new_recharge_charge as dailyNew_recharge_charge, system_statistic_daily.daily_createtime as dailyCreatetime FROM dr_system_statistic_daily AS system_statistic_daily WHERE daily_id = #{dailyId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT system_statistic_daily.daily_id as dailyId, system_statistic_daily.daily_date as dailyDate, system_statistic_daily.daily_new_user_count as dailyNew_user_count, system_statistic_daily.daily_new_inst_count as dailyNew_inst_count, system_statistic_daily.daily_new_sale_money as dailyNew_sale_money, system_statistic_daily.daily_new_recharge_money as dailyNew_recharge_money, system_statistic_daily.daily_new_withdraw_money as dailyNew_withdraw_money, system_statistic_daily.daily_new_sale_charge as dailyNew_sale_charge, system_statistic_daily.daily_new_recharge_charge as dailyNew_recharge_charge, system_statistic_daily.daily_createtime as dailyCreatetime FROM dr_system_statistic_daily AS system_statistic_daily
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT system_statistic_daily.daily_id as dailyId, system_statistic_daily.daily_date as dailyDate, system_statistic_daily.daily_new_user_count as dailyNew_user_count, system_statistic_daily.daily_new_inst_count as dailyNew_inst_count, system_statistic_daily.daily_new_sale_money as dailyNew_sale_money, system_statistic_daily.daily_new_recharge_money as dailyNew_recharge_money, system_statistic_daily.daily_new_withdraw_money as dailyNew_withdraw_money, system_statistic_daily.daily_new_sale_charge as dailyNew_sale_charge, system_statistic_daily.daily_new_recharge_charge as dailyNew_recharge_charge, system_statistic_daily.daily_createtime as dailyCreatetime FROM dr_system_statistic_daily AS system_statistic_daily  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_system_statistic_daily 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dailyId != null">daily_id,</if><if test="dailyDate != null">daily_date,</if><if test="dailyNew_user_count != null">daily_new_user_count,</if><if test="dailyNew_inst_count != null">daily_new_inst_count,</if><if test="dailyNew_sale_money != null">daily_new_sale_money,</if><if test="dailyNew_recharge_money != null">daily_new_recharge_money,</if><if test="dailyNew_withdraw_money != null">daily_new_withdraw_money,</if><if test="dailyNew_sale_charge != null">daily_new_sale_charge,</if><if test="dailyNew_recharge_charge != null">daily_new_recharge_charge,</if><if test="dailyCreatetime != null">daily_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="dailyId != null">#{dailyId},</if><if test="dailyDate != null">#{dailyDate},</if><if test="dailyNew_user_count != null">#{dailyNew_user_count},</if><if test="dailyNew_inst_count != null">#{dailyNew_inst_count},</if><if test="dailyNew_sale_money != null">#{dailyNew_sale_money},</if><if test="dailyNew_recharge_money != null">#{dailyNew_recharge_money},</if><if test="dailyNew_withdraw_money != null">#{dailyNew_withdraw_money},</if><if test="dailyNew_sale_charge != null">#{dailyNew_sale_charge},</if><if test="dailyNew_recharge_charge != null">#{dailyNew_recharge_charge},</if><if test="dailyCreatetime != null">#{dailyCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_system_statistic_daily (daily_id,daily_date,daily_new_user_count,daily_new_inst_count,daily_new_sale_money,daily_new_recharge_money,daily_new_withdraw_money,daily_new_sale_charge,daily_new_recharge_charge,daily_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.dailyId},#{item.dailyDate},#{item.dailyNew_user_count},#{item.dailyNew_inst_count},#{item.dailyNew_sale_money},#{item.dailyNew_recharge_money},#{item.dailyNew_withdraw_money},#{item.dailyNew_sale_charge},#{item.dailyNew_recharge_charge},#{item.dailyCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_system_statistic_daily
+    <set>
+     <if test="dailyId != null" >  daily_id = #{dailyId}, </if><if test="dailyDate != null" >  daily_date = #{dailyDate}, </if><if test="dailyNew_user_count != null" >  daily_new_user_count = #{dailyNew_user_count}, </if><if test="dailyNew_inst_count != null" >  daily_new_inst_count = #{dailyNew_inst_count}, </if><if test="dailyNew_sale_money != null" >  daily_new_sale_money = #{dailyNew_sale_money}, </if><if test="dailyNew_recharge_money != null" >  daily_new_recharge_money = #{dailyNew_recharge_money}, </if><if test="dailyNew_withdraw_money != null" >  daily_new_withdraw_money = #{dailyNew_withdraw_money}, </if><if test="dailyNew_sale_charge != null" >  daily_new_sale_charge = #{dailyNew_sale_charge}, </if><if test="dailyNew_recharge_charge != null" >  daily_new_recharge_charge = #{dailyNew_recharge_charge}, </if><if test="dailyCreatetime != null" >  daily_createtime = #{dailyCreatetime}, </if>
+      </set>
+	  WHERE daily_id = #{dailyId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_system_statistic_daily 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_system_statistic_daily 
+		WHERE daily_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

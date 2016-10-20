@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_fixed_deposit_assets">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND fixed_deposit_assets.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND fixed_deposit_assets.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND fixed_deposit_assets.last_modified_dt = #{lastModified_dt}</if> <if test="projectId != null and '' != projectId" > AND fixed_deposit_assets.project_id = #{projectId}</if> <if test="productId != null and '' != productId" > AND fixed_deposit_assets.product_id = #{productId}</if> <if test="subProduct_id != null and '' != subProduct_id" > AND fixed_deposit_assets.sub_product_id = #{subProduct_id}</if> <if test="userId != null and '' != userId" > AND fixed_deposit_assets.user_id = #{userId}</if> <if test="sn != null and '' != sn" > AND fixed_deposit_assets.sn = #{sn}</if> <if test="contractSn != null and '' != contractSn" > AND fixed_deposit_assets.contract_sn = #{contractSn}</if> <if test="freezeSn != null and '' != freezeSn" > AND fixed_deposit_assets.freeze_sn = #{freezeSn}</if> <if test="unfreezeSn != null and '' != unfreezeSn" > AND fixed_deposit_assets.unfreeze_sn = #{unfreezeSn}</if> <if test="confirmStep1_sn != null and '' != confirmStep1_sn" > AND fixed_deposit_assets.confirm_step1_sn = #{confirmStep1_sn}</if> <if test="confirmStep2_sn != null and '' != confirmStep2_sn" > AND fixed_deposit_assets.confirm_step2_sn = #{confirmStep2_sn}</if> <if test="repayStep1_sn != null and '' != repayStep1_sn" > AND fixed_deposit_assets.repay_step1_sn = #{repayStep1_sn}</if> <if test="repayStep2_sn != null and '' != repayStep2_sn" > AND fixed_deposit_assets.repay_step2_sn = #{repayStep2_sn}</if> <if test="orderAmount != null and '' != orderAmount" > AND fixed_deposit_assets.order_amount = #{orderAmount}</if> <if test="repaidAmount != null and '' != repaidAmount" > AND fixed_deposit_assets.repaid_amount = #{repaidAmount}</if> <if test="orderedDt != null and '' != orderedDt" > AND fixed_deposit_assets.ordered_dt = #{orderedDt}</if> <if test="confirmedDt != null and '' != confirmedDt" > AND fixed_deposit_assets.confirmed_dt = #{confirmedDt}</if> <if test="accrueStarted_dt != null and '' != accrueStarted_dt" > AND fixed_deposit_assets.accrue_started_dt = #{accrueStarted_dt}</if> <if test="accrueStopped_dt != null and '' != accrueStopped_dt" > AND fixed_deposit_assets.accrue_stopped_dt = #{accrueStopped_dt}</if> <if test="repaidDt != null and '' != repaidDt" > AND fixed_deposit_assets.repaid_dt = #{repaidDt}</if> <if test="status != null and '' != status" > AND fixed_deposit_assets.status = #{status}</if> <if test="failedType != null and '' != failedType" > AND fixed_deposit_assets.failed_type = #{failedType}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="projectId != null and '' != projectId" > AND project_id = #{projectId}</if> <if test="productId != null and '' != productId" > AND product_id = #{productId}</if> <if test="subProduct_id != null and '' != subProduct_id" > AND sub_product_id = #{subProduct_id}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="sn != null and '' != sn" > AND sn = #{sn}</if> <if test="contractSn != null and '' != contractSn" > AND contract_sn = #{contractSn}</if> <if test="freezeSn != null and '' != freezeSn" > AND freeze_sn = #{freezeSn}</if> <if test="unfreezeSn != null and '' != unfreezeSn" > AND unfreeze_sn = #{unfreezeSn}</if> <if test="confirmStep1_sn != null and '' != confirmStep1_sn" > AND confirm_step1_sn = #{confirmStep1_sn}</if> <if test="confirmStep2_sn != null and '' != confirmStep2_sn" > AND confirm_step2_sn = #{confirmStep2_sn}</if> <if test="repayStep1_sn != null and '' != repayStep1_sn" > AND repay_step1_sn = #{repayStep1_sn}</if> <if test="repayStep2_sn != null and '' != repayStep2_sn" > AND repay_step2_sn = #{repayStep2_sn}</if> <if test="orderAmount != null and '' != orderAmount" > AND order_amount = #{orderAmount}</if> <if test="repaidAmount != null and '' != repaidAmount" > AND repaid_amount = #{repaidAmount}</if> <if test="orderedDt != null and '' != orderedDt" > AND ordered_dt = #{orderedDt}</if> <if test="confirmedDt != null and '' != confirmedDt" > AND confirmed_dt = #{confirmedDt}</if> <if test="accrueStarted_dt != null and '' != accrueStarted_dt" > AND accrue_started_dt = #{accrueStarted_dt}</if> <if test="accrueStopped_dt != null and '' != accrueStopped_dt" > AND accrue_stopped_dt = #{accrueStopped_dt}</if> <if test="repaidDt != null and '' != repaidDt" > AND repaid_dt = #{repaidDt}</if> <if test="status != null and '' != status" > AND status = #{status}</if> <if test="failedType != null and '' != failedType" > AND failed_type = #{failedType}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v3_fixed_deposit_assets AS fixed_deposit_assets
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT fixed_deposit_assets.id as id, fixed_deposit_assets.created_dt as createdDt, fixed_deposit_assets.last_modified_dt as lastModified_dt, fixed_deposit_assets.project_id as projectId, fixed_deposit_assets.product_id as productId, fixed_deposit_assets.sub_product_id as subProduct_id, fixed_deposit_assets.user_id as userId, fixed_deposit_assets.sn as sn, fixed_deposit_assets.contract_sn as contractSn, fixed_deposit_assets.freeze_sn as freezeSn, fixed_deposit_assets.unfreeze_sn as unfreezeSn, fixed_deposit_assets.confirm_step1_sn as confirmStep1_sn, fixed_deposit_assets.confirm_step2_sn as confirmStep2_sn, fixed_deposit_assets.repay_step1_sn as repayStep1_sn, fixed_deposit_assets.repay_step2_sn as repayStep2_sn, fixed_deposit_assets.order_amount as orderAmount, fixed_deposit_assets.repaid_amount as repaidAmount, fixed_deposit_assets.ordered_dt as orderedDt, fixed_deposit_assets.confirmed_dt as confirmedDt, fixed_deposit_assets.accrue_started_dt as accrueStarted_dt, fixed_deposit_assets.accrue_stopped_dt as accrueStopped_dt, fixed_deposit_assets.repaid_dt as repaidDt, fixed_deposit_assets.status as status, fixed_deposit_assets.failed_type as failedType FROM v3_fixed_deposit_assets AS fixed_deposit_assets WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT fixed_deposit_assets.id as id, fixed_deposit_assets.created_dt as createdDt, fixed_deposit_assets.last_modified_dt as lastModified_dt, fixed_deposit_assets.project_id as projectId, fixed_deposit_assets.product_id as productId, fixed_deposit_assets.sub_product_id as subProduct_id, fixed_deposit_assets.user_id as userId, fixed_deposit_assets.sn as sn, fixed_deposit_assets.contract_sn as contractSn, fixed_deposit_assets.freeze_sn as freezeSn, fixed_deposit_assets.unfreeze_sn as unfreezeSn, fixed_deposit_assets.confirm_step1_sn as confirmStep1_sn, fixed_deposit_assets.confirm_step2_sn as confirmStep2_sn, fixed_deposit_assets.repay_step1_sn as repayStep1_sn, fixed_deposit_assets.repay_step2_sn as repayStep2_sn, fixed_deposit_assets.order_amount as orderAmount, fixed_deposit_assets.repaid_amount as repaidAmount, fixed_deposit_assets.ordered_dt as orderedDt, fixed_deposit_assets.confirmed_dt as confirmedDt, fixed_deposit_assets.accrue_started_dt as accrueStarted_dt, fixed_deposit_assets.accrue_stopped_dt as accrueStopped_dt, fixed_deposit_assets.repaid_dt as repaidDt, fixed_deposit_assets.status as status, fixed_deposit_assets.failed_type as failedType FROM v3_fixed_deposit_assets AS fixed_deposit_assets
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT fixed_deposit_assets.id as id, fixed_deposit_assets.created_dt as createdDt, fixed_deposit_assets.last_modified_dt as lastModified_dt, fixed_deposit_assets.project_id as projectId, fixed_deposit_assets.product_id as productId, fixed_deposit_assets.sub_product_id as subProduct_id, fixed_deposit_assets.user_id as userId, fixed_deposit_assets.sn as sn, fixed_deposit_assets.contract_sn as contractSn, fixed_deposit_assets.freeze_sn as freezeSn, fixed_deposit_assets.unfreeze_sn as unfreezeSn, fixed_deposit_assets.confirm_step1_sn as confirmStep1_sn, fixed_deposit_assets.confirm_step2_sn as confirmStep2_sn, fixed_deposit_assets.repay_step1_sn as repayStep1_sn, fixed_deposit_assets.repay_step2_sn as repayStep2_sn, fixed_deposit_assets.order_amount as orderAmount, fixed_deposit_assets.repaid_amount as repaidAmount, fixed_deposit_assets.ordered_dt as orderedDt, fixed_deposit_assets.confirmed_dt as confirmedDt, fixed_deposit_assets.accrue_started_dt as accrueStarted_dt, fixed_deposit_assets.accrue_stopped_dt as accrueStopped_dt, fixed_deposit_assets.repaid_dt as repaidDt, fixed_deposit_assets.status as status, fixed_deposit_assets.failed_type as failedType FROM v3_fixed_deposit_assets AS fixed_deposit_assets  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v3_fixed_deposit_assets 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="projectId != null">project_id,</if><if test="productId != null">product_id,</if><if test="subProduct_id != null">sub_product_id,</if><if test="userId != null">user_id,</if><if test="sn != null">sn,</if><if test="contractSn != null">contract_sn,</if><if test="freezeSn != null">freeze_sn,</if><if test="unfreezeSn != null">unfreeze_sn,</if><if test="confirmStep1_sn != null">confirm_step1_sn,</if><if test="confirmStep2_sn != null">confirm_step2_sn,</if><if test="repayStep1_sn != null">repay_step1_sn,</if><if test="repayStep2_sn != null">repay_step2_sn,</if><if test="orderAmount != null">order_amount,</if><if test="repaidAmount != null">repaid_amount,</if><if test="orderedDt != null">ordered_dt,</if><if test="confirmedDt != null">confirmed_dt,</if><if test="accrueStarted_dt != null">accrue_started_dt,</if><if test="accrueStopped_dt != null">accrue_stopped_dt,</if><if test="repaidDt != null">repaid_dt,</if><if test="status != null">status,</if><if test="failedType != null">failed_type,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="projectId != null">#{projectId},</if><if test="productId != null">#{productId},</if><if test="subProduct_id != null">#{subProduct_id},</if><if test="userId != null">#{userId},</if><if test="sn != null">#{sn},</if><if test="contractSn != null">#{contractSn},</if><if test="freezeSn != null">#{freezeSn},</if><if test="unfreezeSn != null">#{unfreezeSn},</if><if test="confirmStep1_sn != null">#{confirmStep1_sn},</if><if test="confirmStep2_sn != null">#{confirmStep2_sn},</if><if test="repayStep1_sn != null">#{repayStep1_sn},</if><if test="repayStep2_sn != null">#{repayStep2_sn},</if><if test="orderAmount != null">#{orderAmount},</if><if test="repaidAmount != null">#{repaidAmount},</if><if test="orderedDt != null">#{orderedDt},</if><if test="confirmedDt != null">#{confirmedDt},</if><if test="accrueStarted_dt != null">#{accrueStarted_dt},</if><if test="accrueStopped_dt != null">#{accrueStopped_dt},</if><if test="repaidDt != null">#{repaidDt},</if><if test="status != null">#{status},</if><if test="failedType != null">#{failedType},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v3_fixed_deposit_assets (id,created_dt,last_modified_dt,project_id,product_id,sub_product_id,user_id,sn,contract_sn,freeze_sn,unfreeze_sn,confirm_step1_sn,confirm_step2_sn,repay_step1_sn,repay_step2_sn,order_amount,repaid_amount,ordered_dt,confirmed_dt,accrue_started_dt,accrue_stopped_dt,repaid_dt,status,failed_type)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.projectId},#{item.productId},#{item.subProduct_id},#{item.userId},#{item.sn},#{item.contractSn},#{item.freezeSn},#{item.unfreezeSn},#{item.confirmStep1_sn},#{item.confirmStep2_sn},#{item.repayStep1_sn},#{item.repayStep2_sn},#{item.orderAmount},#{item.repaidAmount},#{item.orderedDt},#{item.confirmedDt},#{item.accrueStarted_dt},#{item.accrueStopped_dt},#{item.repaidDt},#{item.status},#{item.failedType})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v3_fixed_deposit_assets
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="projectId != null" >  project_id = #{projectId}, </if><if test="productId != null" >  product_id = #{productId}, </if><if test="subProduct_id != null" >  sub_product_id = #{subProduct_id}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="sn != null" >  sn = #{sn}, </if><if test="contractSn != null" >  contract_sn = #{contractSn}, </if><if test="freezeSn != null" >  freeze_sn = #{freezeSn}, </if><if test="unfreezeSn != null" >  unfreeze_sn = #{unfreezeSn}, </if><if test="confirmStep1_sn != null" >  confirm_step1_sn = #{confirmStep1_sn}, </if><if test="confirmStep2_sn != null" >  confirm_step2_sn = #{confirmStep2_sn}, </if><if test="repayStep1_sn != null" >  repay_step1_sn = #{repayStep1_sn}, </if><if test="repayStep2_sn != null" >  repay_step2_sn = #{repayStep2_sn}, </if><if test="orderAmount != null" >  order_amount = #{orderAmount}, </if><if test="repaidAmount != null" >  repaid_amount = #{repaidAmount}, </if><if test="orderedDt != null" >  ordered_dt = #{orderedDt}, </if><if test="confirmedDt != null" >  confirmed_dt = #{confirmedDt}, </if><if test="accrueStarted_dt != null" >  accrue_started_dt = #{accrueStarted_dt}, </if><if test="accrueStopped_dt != null" >  accrue_stopped_dt = #{accrueStopped_dt}, </if><if test="repaidDt != null" >  repaid_dt = #{repaidDt}, </if><if test="status != null" >  status = #{status}, </if><if test="failedType != null" >  failed_type = #{failedType}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v3_fixed_deposit_assets 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v3_fixed_deposit_assets 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

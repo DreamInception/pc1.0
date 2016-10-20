@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_pending_product_refund">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="refundId != null and '' != refundId" > AND pending_product_refund.refund_id = #{refundId}</if> <if test="pdtId != null and '' != pdtId" > AND pending_product_refund.pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND pending_product_refund.inst_id = #{instId}</if> <if test="assetBuycount != null and '' != assetBuycount" > AND pending_product_refund.asset_buycount = #{assetBuycount}</if> <if test="assetBuymoney != null and '' != assetBuymoney" > AND pending_product_refund.asset_buymoney = #{assetBuymoney}</if> <if test="refundCount != null and '' != refundCount" > AND pending_product_refund.refund_count = #{refundCount}</if> <if test="refundYield != null and '' != refundYield" > AND pending_product_refund.refund_yield = #{refundYield}</if> <if test="refundFee != null and '' != refundFee" > AND pending_product_refund.refund_fee = #{refundFee}</if> <if test="refundAmount != null and '' != refundAmount" > AND pending_product_refund.refund_amount = #{refundAmount}</if> <if test="refundType != null and '' != refundType" > AND pending_product_refund.refund_type = #{refundType}</if> <if test="refundYield_rate != null and '' != refundYield_rate" > AND pending_product_refund.refund_yield_rate = #{refundYield_rate}</if> <if test="refundAllocate_num != null and '' != refundAllocate_num" > AND pending_product_refund.refund_allocate_num = #{refundAllocate_num}</if> <if test="refundDate != null and '' != refundDate" > AND pending_product_refund.refund_date = #{refundDate}</if> <if test="refundStatus != null and '' != refundStatus" > AND pending_product_refund.refund_status = #{refundStatus}</if> <if test="refundCreatetime != null and '' != refundCreatetime" > AND pending_product_refund.refund_createtime = #{refundCreatetime}</if> <if test="refundModifytime != null and '' != refundModifytime" > AND pending_product_refund.refund_modifytime = #{refundModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="refundId != null and '' != refundId" > AND refund_id = #{refundId}</if> <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="assetBuycount != null and '' != assetBuycount" > AND asset_buycount = #{assetBuycount}</if> <if test="assetBuymoney != null and '' != assetBuymoney" > AND asset_buymoney = #{assetBuymoney}</if> <if test="refundCount != null and '' != refundCount" > AND refund_count = #{refundCount}</if> <if test="refundYield != null and '' != refundYield" > AND refund_yield = #{refundYield}</if> <if test="refundFee != null and '' != refundFee" > AND refund_fee = #{refundFee}</if> <if test="refundAmount != null and '' != refundAmount" > AND refund_amount = #{refundAmount}</if> <if test="refundType != null and '' != refundType" > AND refund_type = #{refundType}</if> <if test="refundYield_rate != null and '' != refundYield_rate" > AND refund_yield_rate = #{refundYield_rate}</if> <if test="refundAllocate_num != null and '' != refundAllocate_num" > AND refund_allocate_num = #{refundAllocate_num}</if> <if test="refundDate != null and '' != refundDate" > AND refund_date = #{refundDate}</if> <if test="refundStatus != null and '' != refundStatus" > AND refund_status = #{refundStatus}</if> <if test="refundCreatetime != null and '' != refundCreatetime" > AND refund_createtime = #{refundCreatetime}</if> <if test="refundModifytime != null and '' != refundModifytime" > AND refund_modifytime = #{refundModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_pending_product_refund AS pending_product_refund
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT pending_product_refund.refund_id as refundId, pending_product_refund.pdt_id as pdtId, pending_product_refund.inst_id as instId, pending_product_refund.asset_buycount as assetBuycount, pending_product_refund.asset_buymoney as assetBuymoney, pending_product_refund.refund_count as refundCount, pending_product_refund.refund_yield as refundYield, pending_product_refund.refund_fee as refundFee, pending_product_refund.refund_amount as refundAmount, pending_product_refund.refund_type as refundType, pending_product_refund.refund_yield_rate as refundYield_rate, pending_product_refund.refund_allocate_num as refundAllocate_num, pending_product_refund.refund_date as refundDate, pending_product_refund.refund_status as refundStatus, pending_product_refund.refund_createtime as refundCreatetime, pending_product_refund.refund_modifytime as refundModifytime FROM dr_pending_product_refund AS pending_product_refund WHERE refund_id = #{refundId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT pending_product_refund.refund_id as refundId, pending_product_refund.pdt_id as pdtId, pending_product_refund.inst_id as instId, pending_product_refund.asset_buycount as assetBuycount, pending_product_refund.asset_buymoney as assetBuymoney, pending_product_refund.refund_count as refundCount, pending_product_refund.refund_yield as refundYield, pending_product_refund.refund_fee as refundFee, pending_product_refund.refund_amount as refundAmount, pending_product_refund.refund_type as refundType, pending_product_refund.refund_yield_rate as refundYield_rate, pending_product_refund.refund_allocate_num as refundAllocate_num, pending_product_refund.refund_date as refundDate, pending_product_refund.refund_status as refundStatus, pending_product_refund.refund_createtime as refundCreatetime, pending_product_refund.refund_modifytime as refundModifytime FROM dr_pending_product_refund AS pending_product_refund
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT pending_product_refund.refund_id as refundId, pending_product_refund.pdt_id as pdtId, pending_product_refund.inst_id as instId, pending_product_refund.asset_buycount as assetBuycount, pending_product_refund.asset_buymoney as assetBuymoney, pending_product_refund.refund_count as refundCount, pending_product_refund.refund_yield as refundYield, pending_product_refund.refund_fee as refundFee, pending_product_refund.refund_amount as refundAmount, pending_product_refund.refund_type as refundType, pending_product_refund.refund_yield_rate as refundYield_rate, pending_product_refund.refund_allocate_num as refundAllocate_num, pending_product_refund.refund_date as refundDate, pending_product_refund.refund_status as refundStatus, pending_product_refund.refund_createtime as refundCreatetime, pending_product_refund.refund_modifytime as refundModifytime FROM dr_pending_product_refund AS pending_product_refund  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_pending_product_refund 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="refundId != null">refund_id,</if><if test="pdtId != null">pdt_id,</if><if test="instId != null">inst_id,</if><if test="assetBuycount != null">asset_buycount,</if><if test="assetBuymoney != null">asset_buymoney,</if><if test="refundCount != null">refund_count,</if><if test="refundYield != null">refund_yield,</if><if test="refundFee != null">refund_fee,</if><if test="refundAmount != null">refund_amount,</if><if test="refundType != null">refund_type,</if><if test="refundYield_rate != null">refund_yield_rate,</if><if test="refundAllocate_num != null">refund_allocate_num,</if><if test="refundDate != null">refund_date,</if><if test="refundStatus != null">refund_status,</if><if test="refundCreatetime != null">refund_createtime,</if><if test="refundModifytime != null">refund_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="refundId != null">#{refundId},</if><if test="pdtId != null">#{pdtId},</if><if test="instId != null">#{instId},</if><if test="assetBuycount != null">#{assetBuycount},</if><if test="assetBuymoney != null">#{assetBuymoney},</if><if test="refundCount != null">#{refundCount},</if><if test="refundYield != null">#{refundYield},</if><if test="refundFee != null">#{refundFee},</if><if test="refundAmount != null">#{refundAmount},</if><if test="refundType != null">#{refundType},</if><if test="refundYield_rate != null">#{refundYield_rate},</if><if test="refundAllocate_num != null">#{refundAllocate_num},</if><if test="refundDate != null">#{refundDate},</if><if test="refundStatus != null">#{refundStatus},</if><if test="refundCreatetime != null">#{refundCreatetime},</if><if test="refundModifytime != null">#{refundModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_pending_product_refund (refund_id,pdt_id,inst_id,asset_buycount,asset_buymoney,refund_count,refund_yield,refund_fee,refund_amount,refund_type,refund_yield_rate,refund_allocate_num,refund_date,refund_status,refund_createtime,refund_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.refundId},#{item.pdtId},#{item.instId},#{item.assetBuycount},#{item.assetBuymoney},#{item.refundCount},#{item.refundYield},#{item.refundFee},#{item.refundAmount},#{item.refundType},#{item.refundYield_rate},#{item.refundAllocate_num},#{item.refundDate},#{item.refundStatus},#{item.refundCreatetime},#{item.refundModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_pending_product_refund
+    <set>
+     <if test="refundId != null" >  refund_id = #{refundId}, </if><if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="assetBuycount != null" >  asset_buycount = #{assetBuycount}, </if><if test="assetBuymoney != null" >  asset_buymoney = #{assetBuymoney}, </if><if test="refundCount != null" >  refund_count = #{refundCount}, </if><if test="refundYield != null" >  refund_yield = #{refundYield}, </if><if test="refundFee != null" >  refund_fee = #{refundFee}, </if><if test="refundAmount != null" >  refund_amount = #{refundAmount}, </if><if test="refundType != null" >  refund_type = #{refundType}, </if><if test="refundYield_rate != null" >  refund_yield_rate = #{refundYield_rate}, </if><if test="refundAllocate_num != null" >  refund_allocate_num = #{refundAllocate_num}, </if><if test="refundDate != null" >  refund_date = #{refundDate}, </if><if test="refundStatus != null" >  refund_status = #{refundStatus}, </if><if test="refundCreatetime != null" >  refund_createtime = #{refundCreatetime}, </if><if test="refundModifytime != null" >  refund_modifytime = #{refundModifytime}, </if>
+      </set>
+	  WHERE refund_id = #{refundId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_pending_product_refund 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_pending_product_refund 
+		WHERE refund_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

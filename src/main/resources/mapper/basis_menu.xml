@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_menu">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND menu.id = #{id}</if> <if test="title != null and '' != title" > AND menu.title = #{title}</if> <if test="pid != null and '' != pid" > AND menu.pid = #{pid}</if> <if test="sort != null and '' != sort" > AND menu.sort = #{sort}</if> <if test="url != null and '' != url" > AND menu.url = #{url}</if> <if test="hide != null and '' != hide" > AND menu.hide = #{hide}</if> <if test="tip != null and '' != tip" > AND menu.tip = #{tip}</if> <if test="group != null and '' != group" > AND menu.group = #{group}</if> <if test="isDev != null and '' != isDev" > AND menu.is_dev = #{isDev}</if> <if test="status != null and '' != status" > AND menu.status = #{status}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="title != null and '' != title" > AND title = #{title}</if> <if test="pid != null and '' != pid" > AND pid = #{pid}</if> <if test="sort != null and '' != sort" > AND sort = #{sort}</if> <if test="url != null and '' != url" > AND url = #{url}</if> <if test="hide != null and '' != hide" > AND hide = #{hide}</if> <if test="tip != null and '' != tip" > AND tip = #{tip}</if> <if test="group != null and '' != group" > AND group = #{group}</if> <if test="isDev != null and '' != isDev" > AND is_dev = #{isDev}</if> <if test="status != null and '' != status" > AND status = #{status}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_menu AS menu
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT menu.id as id, menu.title as title, menu.pid as pid, menu.sort as sort, menu.url as url, menu.hide as hide, menu.tip as tip, menu.group as group, menu.is_dev as isDev, menu.status as status FROM dr_menu AS menu WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT menu.id as id, menu.title as title, menu.pid as pid, menu.sort as sort, menu.url as url, menu.hide as hide, menu.tip as tip, menu.group as group, menu.is_dev as isDev, menu.status as status FROM dr_menu AS menu
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT menu.id as id, menu.title as title, menu.pid as pid, menu.sort as sort, menu.url as url, menu.hide as hide, menu.tip as tip, menu.group as group, menu.is_dev as isDev, menu.status as status FROM dr_menu AS menu  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_menu 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="title != null">title,</if><if test="pid != null">pid,</if><if test="sort != null">sort,</if><if test="url != null">url,</if><if test="hide != null">hide,</if><if test="tip != null">tip,</if><if test="group != null">group,</if><if test="isDev != null">is_dev,</if><if test="status != null">status,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="title != null">#{title},</if><if test="pid != null">#{pid},</if><if test="sort != null">#{sort},</if><if test="url != null">#{url},</if><if test="hide != null">#{hide},</if><if test="tip != null">#{tip},</if><if test="group != null">#{group},</if><if test="isDev != null">#{isDev},</if><if test="status != null">#{status},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_menu (id,title,pid,sort,url,hide,tip,group,is_dev,status)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.title},#{item.pid},#{item.sort},#{item.url},#{item.hide},#{item.tip},#{item.group},#{item.isDev},#{item.status})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_menu
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="title != null" >  title = #{title}, </if><if test="pid != null" >  pid = #{pid}, </if><if test="sort != null" >  sort = #{sort}, </if><if test="url != null" >  url = #{url}, </if><if test="hide != null" >  hide = #{hide}, </if><if test="tip != null" >  tip = #{tip}, </if><if test="group != null" >  group = #{group}, </if><if test="isDev != null" >  is_dev = #{isDev}, </if><if test="status != null" >  status = #{status}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_menu 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_menu 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

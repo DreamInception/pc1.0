@@ -1,0 +1,29 @@
+/** ---------------------------------------------   platform_Agreement.html --------------------------------------------------------- **/
+.contractContainer{
+	position: relative;
+	width: 100%;
+	overflow: auto;
+	background: #f6f7f7;
+	padding: 0 72px 33px 72px;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: #727171;
+}
+.contract-title{
+	font-size: 18px;
+	text-align: center;
+	padding: 28px 0 40px 0;
+	line-height: 18px;
+}
+.pa-paragraph{
+	font-size: 14px;
+	line-height: 26px;
+	margin-top: 24px;
+	text-align: left;
+}
+.platform-intro{
+	font-size: 14px;
+	line-height: 26px;
+}

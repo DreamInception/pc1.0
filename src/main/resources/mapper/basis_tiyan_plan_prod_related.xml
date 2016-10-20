@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_plan_prod_related">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="pprId != null and '' != pprId" > AND tiyan_plan_prod_related.ppr_id = #{pprId}</if> <if test="planId != null and '' != planId" > AND tiyan_plan_prod_related.plan_id = #{planId}</if> <if test="pdtId != null and '' != pdtId" > AND tiyan_plan_prod_related.pdt_id = #{pdtId}</if> <if test="rtSource != null and '' != rtSource" > AND tiyan_plan_prod_related.rt_source = #{rtSource}</if> <if test="pprState != null and '' != pprState" > AND tiyan_plan_prod_related.ppr_state = #{pprState}</if> <if test="pprExtra != null and '' != pprExtra" > AND tiyan_plan_prod_related.ppr_extra = #{pprExtra}</if> <if test="pprCreate_dt != null and '' != pprCreate_dt" > AND tiyan_plan_prod_related.ppr_create_dt = #{pprCreate_dt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="pprId != null and '' != pprId" > AND ppr_id = #{pprId}</if> <if test="planId != null and '' != planId" > AND plan_id = #{planId}</if> <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="rtSource != null and '' != rtSource" > AND rt_source = #{rtSource}</if> <if test="pprState != null and '' != pprState" > AND ppr_state = #{pprState}</if> <if test="pprExtra != null and '' != pprExtra" > AND ppr_extra = #{pprExtra}</if> <if test="pprCreate_dt != null and '' != pprCreate_dt" > AND ppr_create_dt = #{pprCreate_dt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_plan_prod_related AS tiyan_plan_prod_related
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_plan_prod_related.ppr_id as pprId, tiyan_plan_prod_related.plan_id as planId, tiyan_plan_prod_related.pdt_id as pdtId, tiyan_plan_prod_related.rt_source as rtSource, tiyan_plan_prod_related.ppr_state as pprState, tiyan_plan_prod_related.ppr_extra as pprExtra, tiyan_plan_prod_related.ppr_create_dt as pprCreate_dt FROM dr_tiyan_plan_prod_related AS tiyan_plan_prod_related WHERE ppr_id = #{pprId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_plan_prod_related.ppr_id as pprId, tiyan_plan_prod_related.plan_id as planId, tiyan_plan_prod_related.pdt_id as pdtId,  tiyan_plan_prod_related.ppr_state as pprState, tiyan_plan_prod_related.ppr_extra as pprExtra, tiyan_plan_prod_related.ppr_create_dt as pprCreate_dt FROM dr_tiyan_plan_prod_related AS tiyan_plan_prod_related
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_plan_prod_related.ppr_id as pprId, tiyan_plan_prod_related.plan_id as planId, tiyan_plan_prod_related.pdt_id as pdtId, tiyan_plan_prod_related.rt_source as rtSource, tiyan_plan_prod_related.ppr_state as pprState, tiyan_plan_prod_related.ppr_extra as pprExtra, tiyan_plan_prod_related.ppr_create_dt as pprCreate_dt FROM dr_tiyan_plan_prod_related AS tiyan_plan_prod_related  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_plan_prod_related 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pprId != null">ppr_id,</if><if test="planId != null">plan_id,</if><if test="pdtId != null">pdt_id,</if><if test="rtSource != null">rt_source,</if><if test="pprState != null">ppr_state,</if><if test="pprExtra != null">ppr_extra,</if><if test="pprCreate_dt != null">ppr_create_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="pprId != null">#{pprId},</if><if test="planId != null">#{planId},</if><if test="pdtId != null">#{pdtId},</if><if test="rtSource != null">#{rtSource},</if><if test="pprState != null">#{pprState},</if><if test="pprExtra != null">#{pprExtra},</if><if test="pprCreate_dt != null">#{pprCreate_dt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_plan_prod_related (ppr_id,plan_id,pdt_id,rt_source,ppr_state,ppr_extra,ppr_create_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.pprId},#{item.planId},#{item.pdtId},#{item.rtSource},#{item.pprState},#{item.pprExtra},#{item.pprCreate_dt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_plan_prod_related
+    <set>
+     <if test="pprId != null" >  ppr_id = #{pprId}, </if><if test="planId != null" >  plan_id = #{planId}, </if><if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="rtSource != null" >  rt_source = #{rtSource}, </if><if test="pprState != null" >  ppr_state = #{pprState}, </if><if test="pprExtra != null" >  ppr_extra = #{pprExtra}, </if><if test="pprCreate_dt != null" >  ppr_create_dt = #{pprCreate_dt}, </if>
+      </set>
+	  WHERE ppr_id = #{pprId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_plan_prod_related 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_plan_prod_related 
+		WHERE ppr_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

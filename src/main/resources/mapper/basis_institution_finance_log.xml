@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_institution_finance_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND institution_finance_log.log_id = #{logId}</if> <if test="instId != null and '' != instId" > AND institution_finance_log.inst_id = #{instId}</if> <if test="logOperate != null and '' != logOperate" > AND institution_finance_log.log_operate = #{logOperate}</if> <if test="logOperate_name != null and '' != logOperate_name" > AND institution_finance_log.log_operate_name = #{logOperate_name}</if> <if test="logOperator != null and '' != logOperator" > AND institution_finance_log.log_operator = #{logOperator}</if> <if test="logInst_wealth != null and '' != logInst_wealth" > AND institution_finance_log.log_inst_wealth = #{logInst_wealth}</if> <if test="logInst_sale_account != null and '' != logInst_sale_account" > AND institution_finance_log.log_inst_sale_account = #{logInst_sale_account}</if> <if test="logInst_pay_account != null and '' != logInst_pay_account" > AND institution_finance_log.log_inst_pay_account = #{logInst_pay_account}</if> <if test="logInst_recharge_money != null and '' != logInst_recharge_money" > AND institution_finance_log.log_inst_recharge_money = #{logInst_recharge_money}</if> <if test="logInst_withdraw_money != null and '' != logInst_withdraw_money" > AND institution_finance_log.log_inst_withdraw_money = #{logInst_withdraw_money}</if> <if test="logTarget_id != null and '' != logTarget_id" > AND institution_finance_log.log_target_id = #{logTarget_id}</if> <if test="logRemark != null and '' != logRemark" > AND institution_finance_log.log_remark = #{logRemark}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND institution_finance_log.log_createtime = #{logCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND log_id = #{logId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="logOperate != null and '' != logOperate" > AND log_operate = #{logOperate}</if> <if test="logOperate_name != null and '' != logOperate_name" > AND log_operate_name = #{logOperate_name}</if> <if test="logOperator != null and '' != logOperator" > AND log_operator = #{logOperator}</if> <if test="logInst_wealth != null and '' != logInst_wealth" > AND log_inst_wealth = #{logInst_wealth}</if> <if test="logInst_sale_account != null and '' != logInst_sale_account" > AND log_inst_sale_account = #{logInst_sale_account}</if> <if test="logInst_pay_account != null and '' != logInst_pay_account" > AND log_inst_pay_account = #{logInst_pay_account}</if> <if test="logInst_recharge_money != null and '' != logInst_recharge_money" > AND log_inst_recharge_money = #{logInst_recharge_money}</if> <if test="logInst_withdraw_money != null and '' != logInst_withdraw_money" > AND log_inst_withdraw_money = #{logInst_withdraw_money}</if> <if test="logTarget_id != null and '' != logTarget_id" > AND log_target_id = #{logTarget_id}</if> <if test="logRemark != null and '' != logRemark" > AND log_remark = #{logRemark}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_institution_finance_log AS institution_finance_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT institution_finance_log.log_id as logId, institution_finance_log.inst_id as instId, institution_finance_log.log_operate as logOperate, institution_finance_log.log_operate_name as logOperate_name, institution_finance_log.log_operator as logOperator, institution_finance_log.log_inst_wealth as logInst_wealth, institution_finance_log.log_inst_sale_account as logInst_sale_account, institution_finance_log.log_inst_pay_account as logInst_pay_account, institution_finance_log.log_inst_recharge_money as logInst_recharge_money, institution_finance_log.log_inst_withdraw_money as logInst_withdraw_money, institution_finance_log.log_target_id as logTarget_id, institution_finance_log.log_remark as logRemark, institution_finance_log.log_createtime as logCreatetime FROM dr_institution_finance_log AS institution_finance_log WHERE log_id = #{logId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT institution_finance_log.log_id as logId, institution_finance_log.inst_id as instId, institution_finance_log.log_operate as logOperate, institution_finance_log.log_operate_name as logOperate_name, institution_finance_log.log_operator as logOperator, institution_finance_log.log_inst_wealth as logInst_wealth, institution_finance_log.log_inst_sale_account as logInst_sale_account, institution_finance_log.log_inst_pay_account as logInst_pay_account, institution_finance_log.log_inst_recharge_money as logInst_recharge_money, institution_finance_log.log_inst_withdraw_money as logInst_withdraw_money, institution_finance_log.log_target_id as logTarget_id, institution_finance_log.log_remark as logRemark, institution_finance_log.log_createtime as logCreatetime FROM dr_institution_finance_log AS institution_finance_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT institution_finance_log.log_id as logId, institution_finance_log.inst_id as instId, institution_finance_log.log_operate as logOperate, institution_finance_log.log_operate_name as logOperate_name, institution_finance_log.log_operator as logOperator, institution_finance_log.log_inst_wealth as logInst_wealth, institution_finance_log.log_inst_sale_account as logInst_sale_account, institution_finance_log.log_inst_pay_account as logInst_pay_account, institution_finance_log.log_inst_recharge_money as logInst_recharge_money, institution_finance_log.log_inst_withdraw_money as logInst_withdraw_money, institution_finance_log.log_target_id as logTarget_id, institution_finance_log.log_remark as logRemark, institution_finance_log.log_createtime as logCreatetime FROM dr_institution_finance_log AS institution_finance_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_institution_finance_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">log_id,</if><if test="instId != null">inst_id,</if><if test="logOperate != null">log_operate,</if><if test="logOperate_name != null">log_operate_name,</if><if test="logOperator != null">log_operator,</if><if test="logInst_wealth != null">log_inst_wealth,</if><if test="logInst_sale_account != null">log_inst_sale_account,</if><if test="logInst_pay_account != null">log_inst_pay_account,</if><if test="logInst_recharge_money != null">log_inst_recharge_money,</if><if test="logInst_withdraw_money != null">log_inst_withdraw_money,</if><if test="logTarget_id != null">log_target_id,</if><if test="logRemark != null">log_remark,</if><if test="logCreatetime != null">log_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logId != null">#{logId},</if><if test="instId != null">#{instId},</if><if test="logOperate != null">#{logOperate},</if><if test="logOperate_name != null">#{logOperate_name},</if><if test="logOperator != null">#{logOperator},</if><if test="logInst_wealth != null">#{logInst_wealth},</if><if test="logInst_sale_account != null">#{logInst_sale_account},</if><if test="logInst_pay_account != null">#{logInst_pay_account},</if><if test="logInst_recharge_money != null">#{logInst_recharge_money},</if><if test="logInst_withdraw_money != null">#{logInst_withdraw_money},</if><if test="logTarget_id != null">#{logTarget_id},</if><if test="logRemark != null">#{logRemark},</if><if test="logCreatetime != null">#{logCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_institution_finance_log (log_id,inst_id,log_operate,log_operate_name,log_operator,log_inst_wealth,log_inst_sale_account,log_inst_pay_account,log_inst_recharge_money,log_inst_withdraw_money,log_target_id,log_remark,log_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logId},#{item.instId},#{item.logOperate},#{item.logOperate_name},#{item.logOperator},#{item.logInst_wealth},#{item.logInst_sale_account},#{item.logInst_pay_account},#{item.logInst_recharge_money},#{item.logInst_withdraw_money},#{item.logTarget_id},#{item.logRemark},#{item.logCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_institution_finance_log
+    <set>
+     <if test="logId != null" >  log_id = #{logId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="logOperate != null" >  log_operate = #{logOperate}, </if><if test="logOperate_name != null" >  log_operate_name = #{logOperate_name}, </if><if test="logOperator != null" >  log_operator = #{logOperator}, </if><if test="logInst_wealth != null" >  log_inst_wealth = #{logInst_wealth}, </if><if test="logInst_sale_account != null" >  log_inst_sale_account = #{logInst_sale_account}, </if><if test="logInst_pay_account != null" >  log_inst_pay_account = #{logInst_pay_account}, </if><if test="logInst_recharge_money != null" >  log_inst_recharge_money = #{logInst_recharge_money}, </if><if test="logInst_withdraw_money != null" >  log_inst_withdraw_money = #{logInst_withdraw_money}, </if><if test="logTarget_id != null" >  log_target_id = #{logTarget_id}, </if><if test="logRemark != null" >  log_remark = #{logRemark}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if>
+      </set>
+	  WHERE log_id = #{logId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_institution_finance_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_institution_finance_log 
+		WHERE log_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_db_changes">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND db_changes.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND db_changes.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND db_changes.last_modified_dt = #{lastModified_dt}</if> <if test="entity != null and '' != entity" > AND db_changes.entity = #{entity}</if> <if test="op != null and '' != op" > AND db_changes.op = #{op}</if> <if test="pk != null and '' != pk" > AND db_changes.pk = #{pk}</if> <if test="beforeFields != null and '' != beforeFields" > AND db_changes.before_fields = #{beforeFields}</if> <if test="afterFields != null and '' != afterFields" > AND db_changes.after_fields = #{afterFields}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="entity != null and '' != entity" > AND entity = #{entity}</if> <if test="op != null and '' != op" > AND op = #{op}</if> <if test="pk != null and '' != pk" > AND pk = #{pk}</if> <if test="beforeFields != null and '' != beforeFields" > AND before_fields = #{beforeFields}</if> <if test="afterFields != null and '' != afterFields" > AND after_fields = #{afterFields}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_db_changes AS db_changes
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT db_changes.id as id, db_changes.created_dt as createdDt, db_changes.last_modified_dt as lastModified_dt, db_changes.entity as entity, db_changes.op as op, db_changes.pk as pk, db_changes.before_fields as beforeFields, db_changes.after_fields as afterFields FROM v2_db_changes AS db_changes WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT db_changes.id as id, db_changes.created_dt as createdDt, db_changes.last_modified_dt as lastModified_dt, db_changes.entity as entity, db_changes.op as op, db_changes.pk as pk, db_changes.before_fields as beforeFields, db_changes.after_fields as afterFields FROM v2_db_changes AS db_changes
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT db_changes.id as id, db_changes.created_dt as createdDt, db_changes.last_modified_dt as lastModified_dt, db_changes.entity as entity, db_changes.op as op, db_changes.pk as pk, db_changes.before_fields as beforeFields, db_changes.after_fields as afterFields FROM v2_db_changes AS db_changes  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_db_changes 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="entity != null">entity,</if><if test="op != null">op,</if><if test="pk != null">pk,</if><if test="beforeFields != null">before_fields,</if><if test="afterFields != null">after_fields,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="entity != null">#{entity},</if><if test="op != null">#{op},</if><if test="pk != null">#{pk},</if><if test="beforeFields != null">#{beforeFields},</if><if test="afterFields != null">#{afterFields},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_db_changes (id,created_dt,last_modified_dt,entity,op,pk,before_fields,after_fields)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.entity},#{item.op},#{item.pk},#{item.beforeFields},#{item.afterFields})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_db_changes
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="entity != null" >  entity = #{entity}, </if><if test="op != null" >  op = #{op}, </if><if test="pk != null" >  pk = #{pk}, </if><if test="beforeFields != null" >  before_fields = #{beforeFields}, </if><if test="afterFields != null" >  after_fields = #{afterFields}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_db_changes 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_db_changes 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

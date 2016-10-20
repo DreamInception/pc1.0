@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_action">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND action.id = #{id}</if> <if test="name != null and '' != name" > AND action.name = #{name}</if> <if test="title != null and '' != title" > AND action.title = #{title}</if> <if test="remark != null and '' != remark" > AND action.remark = #{remark}</if> <if test="rule != null and '' != rule" > AND action.rule = #{rule}</if> <if test="log != null and '' != log" > AND action.log = #{log}</if> <if test="type != null and '' != type" > AND action.type = #{type}</if> <if test="status != null and '' != status" > AND action.status = #{status}</if> <if test="updateTime != null and '' != updateTime" > AND action.update_time = #{updateTime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="name != null and '' != name" > AND name = #{name}</if> <if test="title != null and '' != title" > AND title = #{title}</if> <if test="remark != null and '' != remark" > AND remark = #{remark}</if> <if test="rule != null and '' != rule" > AND rule = #{rule}</if> <if test="log != null and '' != log" > AND log = #{log}</if> <if test="type != null and '' != type" > AND type = #{type}</if> <if test="status != null and '' != status" > AND status = #{status}</if> <if test="updateTime != null and '' != updateTime" > AND update_time = #{updateTime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_action AS action
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT action.id as id, action.name as name, action.title as title, action.remark as remark, action.rule as rule, action.log as log, action.type as type, action.status as status, action.update_time as updateTime FROM dr_action AS action WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT action.id as id, action.name as name, action.title as title, action.remark as remark, action.rule as rule, action.log as log, action.type as type, action.status as status, action.update_time as updateTime FROM dr_action AS action
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT action.id as id, action.name as name, action.title as title, action.remark as remark, action.rule as rule, action.log as log, action.type as type, action.status as status, action.update_time as updateTime FROM dr_action AS action  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_action 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="name != null">name,</if><if test="title != null">title,</if><if test="remark != null">remark,</if><if test="rule != null">rule,</if><if test="log != null">log,</if><if test="type != null">type,</if><if test="status != null">status,</if><if test="updateTime != null">update_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="name != null">#{name},</if><if test="title != null">#{title},</if><if test="remark != null">#{remark},</if><if test="rule != null">#{rule},</if><if test="log != null">#{log},</if><if test="type != null">#{type},</if><if test="status != null">#{status},</if><if test="updateTime != null">#{updateTime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_action (id,name,title,remark,rule,log,type,status,update_time)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.name},#{item.title},#{item.remark},#{item.rule},#{item.log},#{item.type},#{item.status},#{item.updateTime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_action
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="name != null" >  name = #{name}, </if><if test="title != null" >  title = #{title}, </if><if test="remark != null" >  remark = #{remark}, </if><if test="rule != null" >  rule = #{rule}, </if><if test="log != null" >  log = #{log}, </if><if test="type != null" >  type = #{type}, </if><if test="status != null" >  status = #{status}, </if><if test="updateTime != null" >  update_time = #{updateTime}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_action 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_action 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

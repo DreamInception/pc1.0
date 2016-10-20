@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_cookies_archived">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND cookies_archived.id = #{id}</if> <if test="udid != null and '' != udid" > AND cookies_archived.udid = #{udid}</if> <if test="idfa != null and '' != idfa" > AND cookies_archived.idfa = #{idfa}</if> <if test="mac != null and '' != mac" > AND cookies_archived.mac = #{mac}</if> <if test="os != null and '' != os" > AND cookies_archived.os = #{os}</if> <if test="extra != null and '' != extra" > AND cookies_archived.extra = #{extra}</if> <if test="createdDt != null and '' != createdDt" > AND cookies_archived.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND cookies_archived.last_modified_dt = #{lastModified_dt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="udid != null and '' != udid" > AND udid = #{udid}</if> <if test="idfa != null and '' != idfa" > AND idfa = #{idfa}</if> <if test="mac != null and '' != mac" > AND mac = #{mac}</if> <if test="os != null and '' != os" > AND os = #{os}</if> <if test="extra != null and '' != extra" > AND extra = #{extra}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_cookies_archived AS cookies_archived
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT cookies_archived.id as id, cookies_archived.udid as udid, cookies_archived.idfa as idfa, cookies_archived.mac as mac, cookies_archived.os as os, cookies_archived.extra as extra, cookies_archived.created_dt as createdDt, cookies_archived.last_modified_dt as lastModified_dt FROM v2_cookies_archived AS cookies_archived WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT cookies_archived.id as id, cookies_archived.udid as udid, cookies_archived.idfa as idfa, cookies_archived.mac as mac, cookies_archived.os as os, cookies_archived.extra as extra, cookies_archived.created_dt as createdDt, cookies_archived.last_modified_dt as lastModified_dt FROM v2_cookies_archived AS cookies_archived
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT cookies_archived.id as id, cookies_archived.udid as udid, cookies_archived.idfa as idfa, cookies_archived.mac as mac, cookies_archived.os as os, cookies_archived.extra as extra, cookies_archived.created_dt as createdDt, cookies_archived.last_modified_dt as lastModified_dt FROM v2_cookies_archived AS cookies_archived  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_cookies_archived 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="udid != null">udid,</if><if test="idfa != null">idfa,</if><if test="mac != null">mac,</if><if test="os != null">os,</if><if test="extra != null">extra,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="udid != null">#{udid},</if><if test="idfa != null">#{idfa},</if><if test="mac != null">#{mac},</if><if test="os != null">#{os},</if><if test="extra != null">#{extra},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_cookies_archived (id,udid,idfa,mac,os,extra,created_dt,last_modified_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.udid},#{item.idfa},#{item.mac},#{item.os},#{item.extra},#{item.createdDt},#{item.lastModified_dt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_cookies_archived
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="udid != null" >  udid = #{udid}, </if><if test="idfa != null" >  idfa = #{idfa}, </if><if test="mac != null" >  mac = #{mac}, </if><if test="os != null" >  os = #{os}, </if><if test="extra != null" >  extra = #{extra}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_cookies_archived 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_cookies_archived 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

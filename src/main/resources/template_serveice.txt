@@ -1,0 +1,15 @@
+package {service_package};
+
+import dr.web.common.base.InterfaceService;
+
+/**
+ * 
+ * @包名 :{service_package}
+ * @文件名 :{文件名称}
+ * @系统名称 : {系统名称}
+ * @Author: {Author}
+ * @Date: 2016-3-16下午5:00:00
+ * @版本号 :{版本号}
+ */
+public interface Basis{简化大写首字母表名}Service extends InterfaceService {
+}

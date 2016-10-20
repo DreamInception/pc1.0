@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_user_stat">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="usId != null and '' != usId" > AND tiyan_user_stat.us_id = #{usId}</if> <if test="userId != null and '' != userId" > AND tiyan_user_stat.user_id = #{userId}</if> <if test="usTotal_amount != null and '' != usTotal_amount" > AND tiyan_user_stat.us_total_amount = #{usTotal_amount}</if> <if test="usDay_profit != null and '' != usDay_profit" > AND tiyan_user_stat.us_day_profit = #{usDay_profit}</if> <if test="usAccu_profit != null and '' != usAccu_profit" > AND tiyan_user_stat.us_accu_profit = #{usAccu_profit}</if> <if test="usCreate_time != null and '' != usCreate_time" > AND tiyan_user_stat.us_create_time = #{usCreate_time}</if> <if test="usModified_time != null and '' != usModified_time" > AND tiyan_user_stat.us_modified_time = #{usModified_time}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="usId != null and '' != usId" > AND us_id = #{usId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="usTotal_amount != null and '' != usTotal_amount" > AND us_total_amount = #{usTotal_amount}</if> <if test="usDay_profit != null and '' != usDay_profit" > AND us_day_profit = #{usDay_profit}</if> <if test="usAccu_profit != null and '' != usAccu_profit" > AND us_accu_profit = #{usAccu_profit}</if> <if test="usCreate_time != null and '' != usCreate_time" > AND us_create_time = #{usCreate_time}</if> <if test="usModified_time != null and '' != usModified_time" > AND us_modified_time = #{usModified_time}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_user_stat AS tiyan_user_stat
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_user_stat.us_id as usId, tiyan_user_stat.user_id as userId, tiyan_user_stat.us_total_amount as usTotal_amount, tiyan_user_stat.us_day_profit as usDay_profit, tiyan_user_stat.us_accu_profit as usAccu_profit, tiyan_user_stat.us_create_time as usCreate_time, tiyan_user_stat.us_modified_time as usModified_time FROM dr_tiyan_user_stat AS tiyan_user_stat WHERE us_id = #{usId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_user_stat.us_id as usId, tiyan_user_stat.user_id as userId, tiyan_user_stat.us_total_amount as usTotal_amount, tiyan_user_stat.us_day_profit as usDay_profit, tiyan_user_stat.us_accu_profit as usAccu_profit, tiyan_user_stat.us_create_time as usCreate_time, tiyan_user_stat.us_modified_time as usModified_time FROM dr_tiyan_user_stat AS tiyan_user_stat
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_user_stat.us_id as usId, tiyan_user_stat.user_id as userId, tiyan_user_stat.us_total_amount as usTotal_amount, tiyan_user_stat.us_day_profit as usDay_profit, tiyan_user_stat.us_accu_profit as usAccu_profit, tiyan_user_stat.us_create_time as usCreate_time, tiyan_user_stat.us_modified_time as usModified_time FROM dr_tiyan_user_stat AS tiyan_user_stat  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_user_stat 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usId != null">us_id,</if><if test="userId != null">user_id,</if><if test="usTotal_amount != null">us_total_amount,</if><if test="usDay_profit != null">us_day_profit,</if><if test="usAccu_profit != null">us_accu_profit,</if><if test="usCreate_time != null">us_create_time,</if><if test="usModified_time != null">us_modified_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="usId != null">#{usId},</if><if test="userId != null">#{userId},</if><if test="usTotal_amount != null">#{usTotal_amount},</if><if test="usDay_profit != null">#{usDay_profit},</if><if test="usAccu_profit != null">#{usAccu_profit},</if><if test="usCreate_time != null">#{usCreate_time},</if><if test="usModified_time != null">#{usModified_time},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_user_stat (us_id,user_id,us_total_amount,us_day_profit,us_accu_profit,us_create_time,us_modified_time)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.usId},#{item.userId},#{item.usTotal_amount},#{item.usDay_profit},#{item.usAccu_profit},#{item.usCreate_time},#{item.usModified_time})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_user_stat
+    <set>
+     <if test="usId != null" >  us_id = #{usId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="usTotal_amount != null" >  us_total_amount = #{usTotal_amount}, </if><if test="usDay_profit != null" >  us_day_profit = #{usDay_profit}, </if><if test="usAccu_profit != null" >  us_accu_profit = #{usAccu_profit}, </if><if test="usCreate_time != null" >  us_create_time = #{usCreate_time}, </if><if test="usModified_time != null" >  us_modified_time = #{usModified_time}, </if>
+      </set>
+	  WHERE us_id = #{usId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_user_stat 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_user_stat 
+		WHERE us_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

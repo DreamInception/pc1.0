@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_plan">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="planId != null and '' != planId" > AND tiyan_plan.plan_id = #{planId}</if> <if test="planName != null and '' != planName" > AND tiyan_plan.plan_name = #{planName}</if> <if test="planPeriod != null and '' != planPeriod" > AND tiyan_plan.plan_period = #{planPeriod}</if> <if test="planPosition_type != null and '' != planPosition_type" > AND tiyan_plan.plan_position_type = #{planPosition_type}</if> <if test="planPosition != null and '' != planPosition" > AND tiyan_plan.plan_position = #{planPosition}</if> <if test="planPosition_section != null and '' != planPosition_section" > AND tiyan_plan.plan_position_section = #{planPosition_section}</if> <if test="planRate_type != null and '' != planRate_type" > AND tiyan_plan.plan_rate_type = #{planRate_type}</if> <if test="planRate != null and '' != planRate" > AND tiyan_plan.plan_rate = #{planRate}</if> <if test="planIcon != null and '' != planIcon" > AND tiyan_plan.plan_icon = #{planIcon}</if> <if test="planValid_period != null and '' != planValid_period" > AND tiyan_plan.plan_valid_period = #{planValid_period}</if> <if test="planCount_person != null and '' != planCount_person" > AND tiyan_plan.plan_count_person = #{planCount_person}</if> <if test="planCount_limit != null and '' != planCount_limit" > AND tiyan_plan.plan_count_limit = #{planCount_limit}</if> <if test="planCount_used != null and '' != planCount_used" > AND tiyan_plan.plan_count_used = #{planCount_used}</if> <if test="planOrder_flag != null and '' != planOrder_flag" > AND tiyan_plan.plan_order_flag = #{planOrder_flag}</if> <if test="planPdt_rt_type != null and '' != planPdt_rt_type" > AND tiyan_plan.plan_pdt_rt_type = #{planPdt_rt_type}</if> <if test="planState != null and '' != planState" > AND tiyan_plan.plan_state = #{planState}</if> <if test="planDescs != null and '' != planDescs" > AND tiyan_plan.plan_descs = #{planDescs}</if> <if test="planExpire_date != null and '' != planExpire_date" > AND tiyan_plan.plan_expire_date = #{planExpire_date}</if> <if test="planCreate_time != null and '' != planCreate_time" > AND tiyan_plan.plan_create_time = #{planCreate_time}</if> <if test="planModified_time != null and '' != planModified_time" > AND tiyan_plan.plan_modified_time = #{planModified_time}</if> <if test="planExtra != null and '' != planExtra" > AND tiyan_plan.plan_extra = #{planExtra}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="planId != null and '' != planId" > AND plan_id = #{planId}</if> <if test="planName != null and '' != planName" > AND plan_name = #{planName}</if> <if test="planPeriod != null and '' != planPeriod" > AND plan_period = #{planPeriod}</if> <if test="planPosition_type != null and '' != planPosition_type" > AND plan_position_type = #{planPosition_type}</if> <if test="planPosition != null and '' != planPosition" > AND plan_position = #{planPosition}</if> <if test="planPosition_section != null and '' != planPosition_section" > AND plan_position_section = #{planPosition_section}</if> <if test="planRate_type != null and '' != planRate_type" > AND plan_rate_type = #{planRate_type}</if> <if test="planRate != null and '' != planRate" > AND plan_rate = #{planRate}</if> <if test="planIcon != null and '' != planIcon" > AND plan_icon = #{planIcon}</if> <if test="planValid_period != null and '' != planValid_period" > AND plan_valid_period = #{planValid_period}</if> <if test="planCount_person != null and '' != planCount_person" > AND plan_count_person = #{planCount_person}</if> <if test="planCount_limit != null and '' != planCount_limit" > AND plan_count_limit = #{planCount_limit}</if> <if test="planCount_used != null and '' != planCount_used" > AND plan_count_used = #{planCount_used}</if> <if test="planOrder_flag != null and '' != planOrder_flag" > AND plan_order_flag = #{planOrder_flag}</if> <if test="planPdt_rt_type != null and '' != planPdt_rt_type" > AND plan_pdt_rt_type = #{planPdt_rt_type}</if> <if test="planState != null and '' != planState" > AND plan_state = #{planState}</if> <if test="planDescs != null and '' != planDescs" > AND plan_descs = #{planDescs}</if> <if test="planExpire_date != null and '' != planExpire_date" > AND plan_expire_date = #{planExpire_date}</if> <if test="planCreate_time != null and '' != planCreate_time" > AND plan_create_time = #{planCreate_time}</if> <if test="planModified_time != null and '' != planModified_time" > AND plan_modified_time = #{planModified_time}</if> <if test="planExtra != null and '' != planExtra" > AND plan_extra = #{planExtra}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_plan AS tiyan_plan
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_plan.plan_id as planId, tiyan_plan.plan_name as planName, tiyan_plan.plan_period as planPeriod, tiyan_plan.plan_position_type as planPosition_type, tiyan_plan.plan_position as planPosition, tiyan_plan.plan_position_section as planPosition_section, tiyan_plan.plan_rate_type as planRate_type, tiyan_plan.plan_rate as planRate, tiyan_plan.plan_icon as planIcon, tiyan_plan.plan_valid_period as planValid_period, tiyan_plan.plan_count_person as planCount_person, tiyan_plan.plan_count_limit as planCount_limit, tiyan_plan.plan_count_used as planCount_used, tiyan_plan.plan_order_flag as planOrder_flag, tiyan_plan.plan_pdt_rt_type as planPdt_rt_type, tiyan_plan.plan_state as planState, tiyan_plan.plan_descs as planDescs, tiyan_plan.plan_expire_date as planExpire_date, tiyan_plan.plan_create_time as planCreate_time, tiyan_plan.plan_modified_time as planModified_time, tiyan_plan.plan_extra as planExtra FROM dr_tiyan_plan AS tiyan_plan WHERE plan_id = #{planId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_plan.plan_id as planId, tiyan_plan.plan_name as planName, tiyan_plan.plan_period as planPeriod, tiyan_plan.plan_position_type as planPosition_type, tiyan_plan.plan_position as planPosition, tiyan_plan.plan_position_section as planPosition_section, tiyan_plan.plan_rate_type as planRate_type, tiyan_plan.plan_rate as planRate, tiyan_plan.plan_icon as planIcon, tiyan_plan.plan_valid_period as planValid_period, tiyan_plan.plan_count_person as planCount_person, tiyan_plan.plan_count_limit as planCount_limit, tiyan_plan.plan_count_used as planCount_used, tiyan_plan.plan_order_flag as planOrder_flag, tiyan_plan.plan_pdt_rt_type as planPdt_rt_type, tiyan_plan.plan_state as planState, tiyan_plan.plan_descs as planDescs, tiyan_plan.plan_expire_date as planExpire_date, tiyan_plan.plan_create_time as planCreate_time, tiyan_plan.plan_modified_time as planModified_time, tiyan_plan.plan_extra as planExtra FROM dr_tiyan_plan AS tiyan_plan
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_plan.plan_id as planId, tiyan_plan.plan_name as planName, tiyan_plan.plan_period as planPeriod, tiyan_plan.plan_position_type as planPosition_type, tiyan_plan.plan_position as planPosition, tiyan_plan.plan_position_section as planPosition_section, tiyan_plan.plan_rate_type as planRate_type, tiyan_plan.plan_rate as planRate, tiyan_plan.plan_icon as planIcon, tiyan_plan.plan_valid_period as planValid_period, tiyan_plan.plan_count_person as planCount_person, tiyan_plan.plan_count_limit as planCount_limit, tiyan_plan.plan_count_used as planCount_used, tiyan_plan.plan_order_flag as planOrder_flag, tiyan_plan.plan_pdt_rt_type as planPdt_rt_type, tiyan_plan.plan_state as planState, tiyan_plan.plan_descs as planDescs, tiyan_plan.plan_expire_date as planExpire_date, tiyan_plan.plan_create_time as planCreate_time, tiyan_plan.plan_modified_time as planModified_time, tiyan_plan.plan_extra as planExtra FROM dr_tiyan_plan AS tiyan_plan  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_plan 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="planId != null">plan_id,</if><if test="planName != null">plan_name,</if><if test="planPeriod != null">plan_period,</if><if test="planPosition_type != null">plan_position_type,</if><if test="planPosition != null">plan_position,</if><if test="planPosition_section != null">plan_position_section,</if><if test="planRate_type != null">plan_rate_type,</if><if test="planRate != null">plan_rate,</if><if test="planIcon != null">plan_icon,</if><if test="planValid_period != null">plan_valid_period,</if><if test="planCount_person != null">plan_count_person,</if><if test="planCount_limit != null">plan_count_limit,</if><if test="planCount_used != null">plan_count_used,</if><if test="planOrder_flag != null">plan_order_flag,</if><if test="planPdt_rt_type != null">plan_pdt_rt_type,</if><if test="planState != null">plan_state,</if><if test="planDescs != null">plan_descs,</if><if test="planExpire_date != null">plan_expire_date,</if><if test="planCreate_time != null">plan_create_time,</if><if test="planModified_time != null">plan_modified_time,</if><if test="planExtra != null">plan_extra,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="planId != null">#{planId},</if><if test="planName != null">#{planName},</if><if test="planPeriod != null">#{planPeriod},</if><if test="planPosition_type != null">#{planPosition_type},</if><if test="planPosition != null">#{planPosition},</if><if test="planPosition_section != null">#{planPosition_section},</if><if test="planRate_type != null">#{planRate_type},</if><if test="planRate != null">#{planRate},</if><if test="planIcon != null">#{planIcon},</if><if test="planValid_period != null">#{planValid_period},</if><if test="planCount_person != null">#{planCount_person},</if><if test="planCount_limit != null">#{planCount_limit},</if><if test="planCount_used != null">#{planCount_used},</if><if test="planOrder_flag != null">#{planOrder_flag},</if><if test="planPdt_rt_type != null">#{planPdt_rt_type},</if><if test="planState != null">#{planState},</if><if test="planDescs != null">#{planDescs},</if><if test="planExpire_date != null">#{planExpire_date},</if><if test="planCreate_time != null">#{planCreate_time},</if><if test="planModified_time != null">#{planModified_time},</if><if test="planExtra != null">#{planExtra},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_plan (plan_id,plan_name,plan_period,plan_position_type,plan_position,plan_position_section,plan_rate_type,plan_rate,plan_icon,plan_valid_period,plan_count_person,plan_count_limit,plan_count_used,plan_order_flag,plan_pdt_rt_type,plan_state,plan_descs,plan_expire_date,plan_create_time,plan_modified_time,plan_extra)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.planId},#{item.planName},#{item.planPeriod},#{item.planPosition_type},#{item.planPosition},#{item.planPosition_section},#{item.planRate_type},#{item.planRate},#{item.planIcon},#{item.planValid_period},#{item.planCount_person},#{item.planCount_limit},#{item.planCount_used},#{item.planOrder_flag},#{item.planPdt_rt_type},#{item.planState},#{item.planDescs},#{item.planExpire_date},#{item.planCreate_time},#{item.planModified_time},#{item.planExtra})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_plan
+    <set>
+     <if test="planId != null" >  plan_id = #{planId}, </if><if test="planName != null" >  plan_name = #{planName}, </if><if test="planPeriod != null" >  plan_period = #{planPeriod}, </if><if test="planPosition_type != null" >  plan_position_type = #{planPosition_type}, </if><if test="planPosition != null" >  plan_position = #{planPosition}, </if><if test="planPosition_section != null" >  plan_position_section = #{planPosition_section}, </if><if test="planRate_type != null" >  plan_rate_type = #{planRate_type}, </if><if test="planRate != null" >  plan_rate = #{planRate}, </if><if test="planIcon != null" >  plan_icon = #{planIcon}, </if><if test="planValid_period != null" >  plan_valid_period = #{planValid_period}, </if><if test="planCount_person != null" >  plan_count_person = #{planCount_person}, </if><if test="planCount_limit != null" >  plan_count_limit = #{planCount_limit}, </if><if test="planCount_used != null" >  plan_count_used = #{planCount_used}, </if><if test="planOrder_flag != null" >  plan_order_flag = #{planOrder_flag}, </if><if test="planPdt_rt_type != null" >  plan_pdt_rt_type = #{planPdt_rt_type}, </if><if test="planState != null" >  plan_state = #{planState}, </if><if test="planDescs != null" >  plan_descs = #{planDescs}, </if><if test="planExpire_date != null" >  plan_expire_date = #{planExpire_date}, </if><if test="planCreate_time != null" >  plan_create_time = #{planCreate_time}, </if><if test="planModified_time != null" >  plan_modified_time = #{planModified_time}, </if><if test="planExtra != null" >  plan_extra = #{planExtra}, </if>
+      </set>
+	  WHERE plan_id = #{planId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_plan 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_plan 
+		WHERE plan_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

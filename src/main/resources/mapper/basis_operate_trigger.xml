@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_operate_trigger">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="otId != null and '' != otId" > AND operate_trigger.ot_id = #{otId}</if> <if test="userId != null and '' != userId" > AND operate_trigger.user_id = #{userId}</if> <if test="relatedType != null and '' != relatedType" > AND operate_trigger.related_type = #{relatedType}</if> <if test="relatedId != null and '' != relatedId" > AND operate_trigger.related_id = #{relatedId}</if> <if test="orderId != null and '' != orderId" > AND operate_trigger.order_id = #{orderId}</if> <if test="otTrigger_condition != null and '' != otTrigger_condition" > AND operate_trigger.ot_trigger_condition = #{otTrigger_condition}</if> <if test="otTrigger_time != null and '' != otTrigger_time" > AND operate_trigger.ot_trigger_time = #{otTrigger_time}</if> <if test="otIp != null and '' != otIp" > AND operate_trigger.ot_ip = #{otIp}</if> <if test="otEnd != null and '' != otEnd" > AND operate_trigger.ot_end = #{otEnd}</if> <if test="otDefault1 != null and '' != otDefault1" > AND operate_trigger.ot_default1 = #{otDefault1}</if> <if test="dataExtra != null and '' != dataExtra" > AND operate_trigger.data_extra = #{dataExtra}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="otId != null and '' != otId" > AND ot_id = #{otId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="relatedType != null and '' != relatedType" > AND related_type = #{relatedType}</if> <if test="relatedId != null and '' != relatedId" > AND related_id = #{relatedId}</if> <if test="orderId != null and '' != orderId" > AND order_id = #{orderId}</if> <if test="otTrigger_condition != null and '' != otTrigger_condition" > AND ot_trigger_condition = #{otTrigger_condition}</if> <if test="otTrigger_time != null and '' != otTrigger_time" > AND ot_trigger_time = #{otTrigger_time}</if> <if test="otIp != null and '' != otIp" > AND ot_ip = #{otIp}</if> <if test="otEnd != null and '' != otEnd" > AND ot_end = #{otEnd}</if> <if test="otDefault1 != null and '' != otDefault1" > AND ot_default1 = #{otDefault1}</if> <if test="dataExtra != null and '' != dataExtra" > AND data_extra = #{dataExtra}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_operate_trigger AS operate_trigger
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT operate_trigger.ot_id as otId, operate_trigger.user_id as userId, operate_trigger.related_type as relatedType, operate_trigger.related_id as relatedId, operate_trigger.order_id as orderId, operate_trigger.ot_trigger_condition as otTrigger_condition, operate_trigger.ot_trigger_time as otTrigger_time, operate_trigger.ot_ip as otIp, operate_trigger.ot_end as otEnd, operate_trigger.ot_default1 as otDefault1, operate_trigger.data_extra as dataExtra FROM dr_operate_trigger AS operate_trigger WHERE ot_id = #{otId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT operate_trigger.ot_id as otId, operate_trigger.user_id as userId, operate_trigger.related_type as relatedType, operate_trigger.related_id as relatedId, operate_trigger.order_id as orderId, operate_trigger.ot_trigger_condition as otTrigger_condition, operate_trigger.ot_trigger_time as otTrigger_time, operate_trigger.ot_ip as otIp, operate_trigger.ot_end as otEnd, operate_trigger.ot_default1 as otDefault1, operate_trigger.data_extra as dataExtra FROM dr_operate_trigger AS operate_trigger
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT operate_trigger.ot_id as otId, operate_trigger.user_id as userId, operate_trigger.related_type as relatedType, operate_trigger.related_id as relatedId, operate_trigger.order_id as orderId, operate_trigger.ot_trigger_condition as otTrigger_condition, operate_trigger.ot_trigger_time as otTrigger_time, operate_trigger.ot_ip as otIp, operate_trigger.ot_end as otEnd, operate_trigger.ot_default1 as otDefault1, operate_trigger.data_extra as dataExtra FROM dr_operate_trigger AS operate_trigger  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_operate_trigger 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="otId != null">ot_id,</if><if test="userId != null">user_id,</if><if test="relatedType != null">related_type,</if><if test="relatedId != null">related_id,</if><if test="orderId != null">order_id,</if><if test="otTrigger_condition != null">ot_trigger_condition,</if><if test="otTrigger_time != null">ot_trigger_time,</if><if test="otIp != null">ot_ip,</if><if test="otEnd != null">ot_end,</if><if test="otDefault1 != null">ot_default1,</if><if test="dataExtra != null">data_extra,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="otId != null">#{otId},</if><if test="userId != null">#{userId},</if><if test="relatedType != null">#{relatedType},</if><if test="relatedId != null">#{relatedId},</if><if test="orderId != null">#{orderId},</if><if test="otTrigger_condition != null">#{otTrigger_condition},</if><if test="otTrigger_time != null">#{otTrigger_time},</if><if test="otIp != null">#{otIp},</if><if test="otEnd != null">#{otEnd},</if><if test="otDefault1 != null">#{otDefault1},</if><if test="dataExtra != null">#{dataExtra},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_operate_trigger (ot_id,user_id,related_type,related_id,order_id,ot_trigger_condition,ot_trigger_time,ot_ip,ot_end,ot_default1,data_extra)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.otId},#{item.userId},#{item.relatedType},#{item.relatedId},#{item.orderId},#{item.otTrigger_condition},#{item.otTrigger_time},#{item.otIp},#{item.otEnd},#{item.otDefault1},#{item.dataExtra})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_operate_trigger
+    <set>
+     <if test="otId != null" >  ot_id = #{otId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="relatedType != null" >  related_type = #{relatedType}, </if><if test="relatedId != null" >  related_id = #{relatedId}, </if><if test="orderId != null" >  order_id = #{orderId}, </if><if test="otTrigger_condition != null" >  ot_trigger_condition = #{otTrigger_condition}, </if><if test="otTrigger_time != null" >  ot_trigger_time = #{otTrigger_time}, </if><if test="otIp != null" >  ot_ip = #{otIp}, </if><if test="otEnd != null" >  ot_end = #{otEnd}, </if><if test="otDefault1 != null" >  ot_default1 = #{otDefault1}, </if><if test="dataExtra != null" >  data_extra = #{dataExtra}, </if>
+      </set>
+	  WHERE ot_id = #{otId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_operate_trigger 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_operate_trigger 
+		WHERE ot_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

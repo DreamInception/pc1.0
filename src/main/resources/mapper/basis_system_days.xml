@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_system_days">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="dt != null and '' != dt" > AND system_days.dt = #{dt}</if> <if test="createdDt != null and '' != createdDt" > AND system_days.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND system_days.last_modified_dt = #{lastModified_dt}</if> <if test="workDay != null and '' != workDay" > AND system_days.work_day = #{workDay}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="dt != null and '' != dt" > AND dt = #{dt}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="workDay != null and '' != workDay" > AND work_day = #{workDay}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_system_days AS system_days
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT system_days.dt as dt, system_days.created_dt as createdDt, system_days.last_modified_dt as lastModified_dt, system_days.work_day as workDay FROM v2_system_days AS system_days WHERE dt = #{dt}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT system_days.dt as dt, system_days.created_dt as createdDt, system_days.last_modified_dt as lastModified_dt, system_days.work_day as workDay FROM v2_system_days AS system_days
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT system_days.dt as dt, system_days.created_dt as createdDt, system_days.last_modified_dt as lastModified_dt, system_days.work_day as workDay FROM v2_system_days AS system_days  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_system_days 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dt != null">dt,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="workDay != null">work_day,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="dt != null">#{dt},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="workDay != null">#{workDay},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_system_days (dt,created_dt,last_modified_dt,work_day)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.dt},#{item.createdDt},#{item.lastModified_dt},#{item.workDay})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_system_days
+    <set>
+     <if test="dt != null" >  dt = #{dt}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="workDay != null" >  work_day = #{workDay}, </if>
+      </set>
+	  WHERE dt = #{dt}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_system_days 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_system_days 
+		WHERE dt IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

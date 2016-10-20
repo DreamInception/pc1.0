@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_sinapay_request">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="sprId != null and '' != sprId" > AND sinapay_request.spr_id = #{sprId}</if> <if test="userId != null and '' != userId" > AND sinapay_request.user_id = #{userId}</if> <if test="sprType != null and '' != sprType" > AND sinapay_request.spr_type = #{sprType}</if> <if test="sprUrl != null and '' != sprUrl" > AND sinapay_request.spr_url = #{sprUrl}</if> <if test="sprParam != null and '' != sprParam" > AND sinapay_request.spr_param = #{sprParam}</if> <if test="sprStatus != null and '' != sprStatus" > AND sinapay_request.spr_status = #{sprStatus}</if> <if test="sprCreatetime != null and '' != sprCreatetime" > AND sinapay_request.spr_createtime = #{sprCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="sprId != null and '' != sprId" > AND spr_id = #{sprId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="sprType != null and '' != sprType" > AND spr_type = #{sprType}</if> <if test="sprUrl != null and '' != sprUrl" > AND spr_url = #{sprUrl}</if> <if test="sprParam != null and '' != sprParam" > AND spr_param = #{sprParam}</if> <if test="sprStatus != null and '' != sprStatus" > AND spr_status = #{sprStatus}</if> <if test="sprCreatetime != null and '' != sprCreatetime" > AND spr_createtime = #{sprCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_sinapay_request AS sinapay_request
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT sinapay_request.spr_id as sprId, sinapay_request.user_id as userId, sinapay_request.spr_type as sprType, sinapay_request.spr_url as sprUrl, sinapay_request.spr_param as sprParam, sinapay_request.spr_status as sprStatus, sinapay_request.spr_createtime as sprCreatetime FROM dr_sinapay_request AS sinapay_request WHERE spr_id = #{sprId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT sinapay_request.spr_id as sprId, sinapay_request.user_id as userId, sinapay_request.spr_type as sprType, sinapay_request.spr_url as sprUrl, sinapay_request.spr_param as sprParam, sinapay_request.spr_status as sprStatus, sinapay_request.spr_createtime as sprCreatetime FROM dr_sinapay_request AS sinapay_request
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT sinapay_request.spr_id as sprId, sinapay_request.user_id as userId, sinapay_request.spr_type as sprType, sinapay_request.spr_url as sprUrl, sinapay_request.spr_param as sprParam, sinapay_request.spr_status as sprStatus, sinapay_request.spr_createtime as sprCreatetime FROM dr_sinapay_request AS sinapay_request  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_sinapay_request 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sprId != null">spr_id,</if><if test="userId != null">user_id,</if><if test="sprType != null">spr_type,</if><if test="sprUrl != null">spr_url,</if><if test="sprParam != null">spr_param,</if><if test="sprStatus != null">spr_status,</if><if test="sprCreatetime != null">spr_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="sprId != null">#{sprId},</if><if test="userId != null">#{userId},</if><if test="sprType != null">#{sprType},</if><if test="sprUrl != null">#{sprUrl},</if><if test="sprParam != null">#{sprParam},</if><if test="sprStatus != null">#{sprStatus},</if><if test="sprCreatetime != null">#{sprCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_sinapay_request (spr_id,user_id,spr_type,spr_url,spr_param,spr_status,spr_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.sprId},#{item.userId},#{item.sprType},#{item.sprUrl},#{item.sprParam},#{item.sprStatus},#{item.sprCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_sinapay_request
+    <set>
+     <if test="sprId != null" >  spr_id = #{sprId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="sprType != null" >  spr_type = #{sprType}, </if><if test="sprUrl != null" >  spr_url = #{sprUrl}, </if><if test="sprParam != null" >  spr_param = #{sprParam}, </if><if test="sprStatus != null" >  spr_status = #{sprStatus}, </if><if test="sprCreatetime != null" >  spr_createtime = #{sprCreatetime}, </if>
+      </set>
+	  WHERE spr_id = #{sprId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_sinapay_request 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_sinapay_request 
+		WHERE spr_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,23 @@
+/**
+ *	包名:	{controller_package}
+ *	文件名:	Bean.java
+ *	描述:	登录相关操作
+ *	创建人:	陈吉秋特
+ *	创建时间:	2016-3-16下午5:00:00
+ *	版权:	2016 景源金服版权所有
+ */
+package {bean_package};
+import dr.web.common.bean.BaseBean;
+/**
+ * 
+ * @包名 :{controller_package}
+ * @文件名 :{文件名称}
+ * @系统名称 : {系统名称}
+ * @Author: {Author}
+ * @Date: 2014-6-4 上午9:56:20
+ * @版本号 :{版本号}
+ */
+public class {简化大写首字母表名}Bean  extends BaseBean {
+
+	{enum_code}
+}

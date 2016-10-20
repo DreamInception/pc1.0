@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_api_cookie_caches">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="createdDt != null and '' != createdDt" > AND api_cookie_caches.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND api_cookie_caches.last_modified_dt = #{lastModified_dt}</if> <if test="appCookie != null and '' != appCookie" > AND api_cookie_caches.app_cookie = #{appCookie}</if> <if test="data != null and '' != data" > AND api_cookie_caches.data = #{data}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="appCookie != null and '' != appCookie" > AND app_cookie = #{appCookie}</if> <if test="data != null and '' != data" > AND data = #{data}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_api_cookie_caches AS api_cookie_caches
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT api_cookie_caches.created_dt as createdDt, api_cookie_caches.last_modified_dt as lastModified_dt, api_cookie_caches.app_cookie as appCookie, api_cookie_caches.data as data FROM v2_api_cookie_caches AS api_cookie_caches WHERE created_dt = #{createdDt}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT api_cookie_caches.created_dt as createdDt, api_cookie_caches.last_modified_dt as lastModified_dt, api_cookie_caches.app_cookie as appCookie, api_cookie_caches.data as data FROM v2_api_cookie_caches AS api_cookie_caches
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT api_cookie_caches.created_dt as createdDt, api_cookie_caches.last_modified_dt as lastModified_dt, api_cookie_caches.app_cookie as appCookie, api_cookie_caches.data as data FROM v2_api_cookie_caches AS api_cookie_caches  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_api_cookie_caches 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="appCookie != null">app_cookie,</if><if test="data != null">data,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="appCookie != null">#{appCookie},</if><if test="data != null">#{data},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_api_cookie_caches (created_dt,last_modified_dt,app_cookie,data)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.createdDt},#{item.lastModified_dt},#{item.appCookie},#{item.data})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_api_cookie_caches
+    <set>
+     <if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="appCookie != null" >  app_cookie = #{appCookie}, </if><if test="data != null" >  data = #{data}, </if>
+      </set>
+	  WHERE created_dt = #{createdDt}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_api_cookie_caches 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_api_cookie_caches 
+		WHERE created_dt IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

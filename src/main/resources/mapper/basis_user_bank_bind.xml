@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_user_bank_bind">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="bindId != null and '' != bindId" > AND user_bank_bind.bind_id = #{bindId}</if> <if test="userId != null and '' != userId" > AND user_bank_bind.user_id = #{userId}</if> <if test="bindOperate != null and '' != bindOperate" > AND user_bank_bind.bind_operate = #{bindOperate}</if> <if test="bindBank_code != null and '' != bindBank_code" > AND user_bank_bind.bind_bank_code = #{bindBank_code}</if> <if test="bindBank_account != null and '' != bindBank_account" > AND user_bank_bind.bind_bank_account = #{bindBank_account}</if> <if test="bindBank_account_owner_name != null and '' != bindBank_account_owner_name" > AND user_bank_bind.bind_bank_account_owner_name = #{bindBank_account_owner_name}</if> <if test="bindCard_type != null and '' != bindCard_type" > AND user_bank_bind.bind_card_type = #{bindCard_type}</if> <if test="bindCard_attribute != null and '' != bindCard_attribute" > AND user_bank_bind.bind_card_attribute = #{bindCard_attribute}</if> <if test="bindBank_province != null and '' != bindBank_province" > AND user_bank_bind.bind_bank_province = #{bindBank_province}</if> <if test="bindBank_city != null and '' != bindBank_city" > AND user_bank_bind.bind_bank_city = #{bindBank_city}</if> <if test="bindBank_branch != null and '' != bindBank_branch" > AND user_bank_bind.bind_bank_branch = #{bindBank_branch}</if> <if test="bindSina_card_id != null and '' != bindSina_card_id" > AND user_bank_bind.bind_sina_card_id = #{bindSina_card_id}</if> <if test="bindSina_ticket != null and '' != bindSina_ticket" > AND user_bank_bind.bind_sina_ticket = #{bindSina_ticket}</if> <if test="bindApplytime != null and '' != bindApplytime" > AND user_bank_bind.bind_applytime = #{bindApplytime}</if> <if test="bindFinishtime != null and '' != bindFinishtime" > AND user_bank_bind.bind_finishtime = #{bindFinishtime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="bindId != null and '' != bindId" > AND bind_id = #{bindId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="bindOperate != null and '' != bindOperate" > AND bind_operate = #{bindOperate}</if> <if test="bindBank_code != null and '' != bindBank_code" > AND bind_bank_code = #{bindBank_code}</if> <if test="bindBank_account != null and '' != bindBank_account" > AND bind_bank_account = #{bindBank_account}</if> <if test="bindBank_account_owner_name != null and '' != bindBank_account_owner_name" > AND bind_bank_account_owner_name = #{bindBank_account_owner_name}</if> <if test="bindCard_type != null and '' != bindCard_type" > AND bind_card_type = #{bindCard_type}</if> <if test="bindCard_attribute != null and '' != bindCard_attribute" > AND bind_card_attribute = #{bindCard_attribute}</if> <if test="bindBank_province != null and '' != bindBank_province" > AND bind_bank_province = #{bindBank_province}</if> <if test="bindBank_city != null and '' != bindBank_city" > AND bind_bank_city = #{bindBank_city}</if> <if test="bindBank_branch != null and '' != bindBank_branch" > AND bind_bank_branch = #{bindBank_branch}</if> <if test="bindSina_card_id != null and '' != bindSina_card_id" > AND bind_sina_card_id = #{bindSina_card_id}</if> <if test="bindSina_ticket != null and '' != bindSina_ticket" > AND bind_sina_ticket = #{bindSina_ticket}</if> <if test="bindApplytime != null and '' != bindApplytime" > AND bind_applytime = #{bindApplytime}</if> <if test="bindFinishtime != null and '' != bindFinishtime" > AND bind_finishtime = #{bindFinishtime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_bank_bind AS user_bank_bind
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT user_bank_bind.bind_id as bindId, user_bank_bind.user_id as userId, user_bank_bind.bind_operate as bindOperate, user_bank_bind.bind_bank_code as bindBank_code, user_bank_bind.bind_bank_account as bindBank_account, user_bank_bind.bind_bank_account_owner_name as bindBank_account_owner_name, user_bank_bind.bind_card_type as bindCard_type, user_bank_bind.bind_card_attribute as bindCard_attribute, user_bank_bind.bind_bank_province as bindBank_province, user_bank_bind.bind_bank_city as bindBank_city, user_bank_bind.bind_bank_branch as bindBank_branch, user_bank_bind.bind_sina_card_id as bindSina_card_id, user_bank_bind.bind_sina_ticket as bindSina_ticket, user_bank_bind.bind_applytime as bindApplytime, user_bank_bind.bind_finishtime as bindFinishtime FROM dr_user_bank_bind AS user_bank_bind WHERE bind_id = #{bindId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT user_bank_bind.bind_id as bindId, user_bank_bind.user_id as userId, user_bank_bind.bind_operate as bindOperate, user_bank_bind.bind_bank_code as bindBank_code, user_bank_bind.bind_bank_account as bindBank_account, user_bank_bind.bind_bank_account_owner_name as bindBank_account_owner_name, user_bank_bind.bind_card_type as bindCard_type, user_bank_bind.bind_card_attribute as bindCard_attribute, user_bank_bind.bind_bank_province as bindBank_province, user_bank_bind.bind_bank_city as bindBank_city, user_bank_bind.bind_bank_branch as bindBank_branch, user_bank_bind.bind_sina_card_id as bindSina_card_id, user_bank_bind.bind_sina_ticket as bindSina_ticket, user_bank_bind.bind_applytime as bindApplytime, user_bank_bind.bind_finishtime as bindFinishtime FROM dr_user_bank_bind AS user_bank_bind
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT user_bank_bind.bind_id as bindId, user_bank_bind.user_id as userId, user_bank_bind.bind_operate as bindOperate, user_bank_bind.bind_bank_code as bindBank_code, user_bank_bind.bind_bank_account as bindBank_account, user_bank_bind.bind_bank_account_owner_name as bindBank_account_owner_name, user_bank_bind.bind_card_type as bindCard_type, user_bank_bind.bind_card_attribute as bindCard_attribute, user_bank_bind.bind_bank_province as bindBank_province, user_bank_bind.bind_bank_city as bindBank_city, user_bank_bind.bind_bank_branch as bindBank_branch, user_bank_bind.bind_sina_card_id as bindSina_card_id, user_bank_bind.bind_sina_ticket as bindSina_ticket, user_bank_bind.bind_applytime as bindApplytime, user_bank_bind.bind_finishtime as bindFinishtime FROM dr_user_bank_bind AS user_bank_bind  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_user_bank_bind 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bindId != null">bind_id,</if><if test="userId != null">user_id,</if><if test="bindOperate != null">bind_operate,</if><if test="bindBank_code != null">bind_bank_code,</if><if test="bindBank_account != null">bind_bank_account,</if><if test="bindBank_account_owner_name != null">bind_bank_account_owner_name,</if><if test="bindCard_type != null">bind_card_type,</if><if test="bindCard_attribute != null">bind_card_attribute,</if><if test="bindBank_province != null">bind_bank_province,</if><if test="bindBank_city != null">bind_bank_city,</if><if test="bindBank_branch != null">bind_bank_branch,</if><if test="bindSina_card_id != null">bind_sina_card_id,</if><if test="bindSina_ticket != null">bind_sina_ticket,</if><if test="bindApplytime != null">bind_applytime,</if><if test="bindFinishtime != null">bind_finishtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="bindId != null">#{bindId},</if><if test="userId != null">#{userId},</if><if test="bindOperate != null">#{bindOperate},</if><if test="bindBank_code != null">#{bindBank_code},</if><if test="bindBank_account != null">#{bindBank_account},</if><if test="bindBank_account_owner_name != null">#{bindBank_account_owner_name},</if><if test="bindCard_type != null">#{bindCard_type},</if><if test="bindCard_attribute != null">#{bindCard_attribute},</if><if test="bindBank_province != null">#{bindBank_province},</if><if test="bindBank_city != null">#{bindBank_city},</if><if test="bindBank_branch != null">#{bindBank_branch},</if><if test="bindSina_card_id != null">#{bindSina_card_id},</if><if test="bindSina_ticket != null">#{bindSina_ticket},</if><if test="bindApplytime != null">#{bindApplytime},</if><if test="bindFinishtime != null">#{bindFinishtime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_user_bank_bind (bind_id,user_id,bind_operate,bind_bank_code,bind_bank_account,bind_bank_account_owner_name,bind_card_type,bind_card_attribute,bind_bank_province,bind_bank_city,bind_bank_branch,bind_sina_card_id,bind_sina_ticket,bind_applytime,bind_finishtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.bindId},#{item.userId},#{item.bindOperate},#{item.bindBank_code},#{item.bindBank_account},#{item.bindBank_account_owner_name},#{item.bindCard_type},#{item.bindCard_attribute},#{item.bindBank_province},#{item.bindBank_city},#{item.bindBank_branch},#{item.bindSina_card_id},#{item.bindSina_ticket},#{item.bindApplytime},#{item.bindFinishtime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_user_bank_bind
+    <set>
+     <if test="bindId != null" >  bind_id = #{bindId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="bindOperate != null" >  bind_operate = #{bindOperate}, </if><if test="bindBank_code != null" >  bind_bank_code = #{bindBank_code}, </if><if test="bindBank_account != null" >  bind_bank_account = #{bindBank_account}, </if><if test="bindBank_account_owner_name != null" >  bind_bank_account_owner_name = #{bindBank_account_owner_name}, </if><if test="bindCard_type != null" >  bind_card_type = #{bindCard_type}, </if><if test="bindCard_attribute != null" >  bind_card_attribute = #{bindCard_attribute}, </if><if test="bindBank_province != null" >  bind_bank_province = #{bindBank_province}, </if><if test="bindBank_city != null" >  bind_bank_city = #{bindBank_city}, </if><if test="bindBank_branch != null" >  bind_bank_branch = #{bindBank_branch}, </if><if test="bindSina_card_id != null" >  bind_sina_card_id = #{bindSina_card_id}, </if><if test="bindSina_ticket != null" >  bind_sina_ticket = #{bindSina_ticket}, </if><if test="bindApplytime != null" >  bind_applytime = #{bindApplytime}, </if><if test="bindFinishtime != null" >  bind_finishtime = #{bindFinishtime}, </if>
+      </set>
+	  WHERE bind_id = #{bindId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_user_bank_bind 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_user_bank_bind 
+		WHERE bind_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

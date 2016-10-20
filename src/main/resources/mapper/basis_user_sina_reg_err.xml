@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_user_sina_reg_err">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="usreId != null and '' != usreId" > AND user_sina_reg_err.usre_id = #{usreId}</if> <if test="userId != null and '' != userId" > AND user_sina_reg_err.user_id = #{userId}</if> <if test="usreState != null and '' != usreState" > AND user_sina_reg_err.usre_state = #{usreState}</if> <if test="usreCreate_dt != null and '' != usreCreate_dt" > AND user_sina_reg_err.usre_create_dt = #{usreCreate_dt}</if> <if test="usreModified_ts != null and '' != usreModified_ts" > AND user_sina_reg_err.usre_modified_ts = #{usreModified_ts}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="usreId != null and '' != usreId" > AND usre_id = #{usreId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="usreState != null and '' != usreState" > AND usre_state = #{usreState}</if> <if test="usreCreate_dt != null and '' != usreCreate_dt" > AND usre_create_dt = #{usreCreate_dt}</if> <if test="usreModified_ts != null and '' != usreModified_ts" > AND usre_modified_ts = #{usreModified_ts}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_user_sina_reg_err AS user_sina_reg_err
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT user_sina_reg_err.usre_id as usreId, user_sina_reg_err.user_id as userId, user_sina_reg_err.usre_state as usreState, user_sina_reg_err.usre_create_dt as usreCreate_dt, user_sina_reg_err.usre_modified_ts as usreModified_ts FROM dr_user_sina_reg_err AS user_sina_reg_err WHERE usre_id = #{usreId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT user_sina_reg_err.usre_id as usreId, user_sina_reg_err.user_id as userId, user_sina_reg_err.usre_state as usreState, user_sina_reg_err.usre_create_dt as usreCreate_dt, user_sina_reg_err.usre_modified_ts as usreModified_ts FROM dr_user_sina_reg_err AS user_sina_reg_err
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT user_sina_reg_err.usre_id as usreId, user_sina_reg_err.user_id as userId, user_sina_reg_err.usre_state as usreState, user_sina_reg_err.usre_create_dt as usreCreate_dt, user_sina_reg_err.usre_modified_ts as usreModified_ts FROM dr_user_sina_reg_err AS user_sina_reg_err  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_user_sina_reg_err 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usreId != null">usre_id,</if><if test="userId != null">user_id,</if><if test="usreState != null">usre_state,</if><if test="usreCreate_dt != null">usre_create_dt,</if><if test="usreModified_ts != null">usre_modified_ts,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="usreId != null">#{usreId},</if><if test="userId != null">#{userId},</if><if test="usreState != null">#{usreState},</if><if test="usreCreate_dt != null">#{usreCreate_dt},</if><if test="usreModified_ts != null">#{usreModified_ts},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_user_sina_reg_err (usre_id,user_id,usre_state,usre_create_dt,usre_modified_ts)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.usreId},#{item.userId},#{item.usreState},#{item.usreCreate_dt},#{item.usreModified_ts})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_user_sina_reg_err
+    <set>
+     <if test="usreId != null" >  usre_id = #{usreId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="usreState != null" >  usre_state = #{usreState}, </if><if test="usreCreate_dt != null" >  usre_create_dt = #{usreCreate_dt}, </if><if test="usreModified_ts != null" >  usre_modified_ts = #{usreModified_ts}, </if>
+      </set>
+	  WHERE usre_id = #{usreId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_user_sina_reg_err 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_user_sina_reg_err 
+		WHERE usre_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

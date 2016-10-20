@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_object_caches">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="name != null and '' != name" > AND object_caches.name = #{name}</if> <if test="createdDt != null and '' != createdDt" > AND object_caches.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND object_caches.last_modified_dt = #{lastModified_dt}</if> <if test="value != null and '' != value" > AND object_caches.value = #{value}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="name != null and '' != name" > AND name = #{name}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="value != null and '' != value" > AND value = #{value}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v3_object_caches AS object_caches
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT object_caches.name as name, object_caches.created_dt as createdDt, object_caches.last_modified_dt as lastModified_dt, object_caches.value as value FROM v3_object_caches AS object_caches WHERE name = #{name}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT object_caches.name as name, object_caches.created_dt as createdDt, object_caches.last_modified_dt as lastModified_dt, object_caches.value as value FROM v3_object_caches AS object_caches
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT object_caches.name as name, object_caches.created_dt as createdDt, object_caches.last_modified_dt as lastModified_dt, object_caches.value as value FROM v3_object_caches AS object_caches  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v3_object_caches 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">name,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="value != null">value,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="name != null">#{name},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="value != null">#{value},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v3_object_caches (name,created_dt,last_modified_dt,value)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.name},#{item.createdDt},#{item.lastModified_dt},#{item.value})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v3_object_caches
+    <set>
+     <if test="name != null" >  name = #{name}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="value != null" >  value = #{value}, </if>
+      </set>
+	  WHERE name = #{name}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v3_object_caches 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v3_object_caches 
+		WHERE name IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

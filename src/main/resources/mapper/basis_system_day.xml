@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_system_day">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="dayId != null and '' != dayId" > AND system_day.day_id = #{dayId}</if> <if test="dayDate != null and '' != dayDate" > AND system_day.day_date = #{dayDate}</if> <if test="dayWork != null and '' != dayWork" > AND system_day.day_work = #{dayWork}</if> <if test="dayTrade != null and '' != dayTrade" > AND system_day.day_trade = #{dayTrade}</if> <if test="dayCreatetime != null and '' != dayCreatetime" > AND system_day.day_createtime = #{dayCreatetime}</if> <if test="dayModifytime != null and '' != dayModifytime" > AND system_day.day_modifytime = #{dayModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="dayId != null and '' != dayId" > AND day_id = #{dayId}</if> <if test="dayDate != null and '' != dayDate" > AND day_date = #{dayDate}</if> <if test="dayWork != null and '' != dayWork" > AND day_work = #{dayWork}</if> <if test="dayTrade != null and '' != dayTrade" > AND day_trade = #{dayTrade}</if> <if test="dayCreatetime != null and '' != dayCreatetime" > AND day_createtime = #{dayCreatetime}</if> <if test="dayModifytime != null and '' != dayModifytime" > AND day_modifytime = #{dayModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_system_day AS system_day
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT system_day.day_id as dayId, system_day.day_date as dayDate, system_day.day_work as dayWork, system_day.day_trade as dayTrade, system_day.day_createtime as dayCreatetime, system_day.day_modifytime as dayModifytime FROM dr_system_day AS system_day WHERE day_id = #{dayId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT system_day.day_id as dayId, system_day.day_date as dayDate, system_day.day_work as dayWork, system_day.day_trade as dayTrade, system_day.day_createtime as dayCreatetime, system_day.day_modifytime as dayModifytime FROM dr_system_day AS system_day
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT system_day.day_id as dayId, system_day.day_date as dayDate, system_day.day_work as dayWork, system_day.day_trade as dayTrade, system_day.day_createtime as dayCreatetime, system_day.day_modifytime as dayModifytime FROM dr_system_day AS system_day  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_system_day 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dayId != null">day_id,</if><if test="dayDate != null">day_date,</if><if test="dayWork != null">day_work,</if><if test="dayTrade != null">day_trade,</if><if test="dayCreatetime != null">day_createtime,</if><if test="dayModifytime != null">day_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="dayId != null">#{dayId},</if><if test="dayDate != null">#{dayDate},</if><if test="dayWork != null">#{dayWork},</if><if test="dayTrade != null">#{dayTrade},</if><if test="dayCreatetime != null">#{dayCreatetime},</if><if test="dayModifytime != null">#{dayModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_system_day (day_id,day_date,day_work,day_trade,day_createtime,day_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.dayId},#{item.dayDate},#{item.dayWork},#{item.dayTrade},#{item.dayCreatetime},#{item.dayModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_system_day
+    <set>
+     <if test="dayId != null" >  day_id = #{dayId}, </if><if test="dayDate != null" >  day_date = #{dayDate}, </if><if test="dayWork != null" >  day_work = #{dayWork}, </if><if test="dayTrade != null" >  day_trade = #{dayTrade}, </if><if test="dayCreatetime != null" >  day_createtime = #{dayCreatetime}, </if><if test="dayModifytime != null" >  day_modifytime = #{dayModifytime}, </if>
+      </set>
+	  WHERE day_id = #{dayId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_system_day 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_system_day 
+		WHERE day_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_wx_share_record">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="wsrId != null and '' != wsrId" > AND wx_share_record.wsr_id = #{wsrId}</if> <if test="userId != null and '' != userId" > AND wx_share_record.user_id = #{userId}</if> <if test="wsrActive_code != null and '' != wsrActive_code" > AND wx_share_record.wsr_active_code = #{wsrActive_code}</if> <if test="wsrActive_name != null and '' != wsrActive_name" > AND wx_share_record.wsr_active_name = #{wsrActive_name}</if> <if test="wsrShare_count != null and '' != wsrShare_count" > AND wx_share_record.wsr_share_count = #{wsrShare_count}</if> <if test="wsrCreate_dt != null and '' != wsrCreate_dt" > AND wx_share_record.wsr_create_dt = #{wsrCreate_dt}</if> <if test="wsrModified_dt != null and '' != wsrModified_dt" > AND wx_share_record.wsr_modified_dt = #{wsrModified_dt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="wsrId != null and '' != wsrId" > AND wsr_id = #{wsrId}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="wsrActive_code != null and '' != wsrActive_code" > AND wsr_active_code = #{wsrActive_code}</if> <if test="wsrActive_name != null and '' != wsrActive_name" > AND wsr_active_name = #{wsrActive_name}</if> <if test="wsrShare_count != null and '' != wsrShare_count" > AND wsr_share_count = #{wsrShare_count}</if> <if test="wsrCreate_dt != null and '' != wsrCreate_dt" > AND wsr_create_dt = #{wsrCreate_dt}</if> <if test="wsrModified_dt != null and '' != wsrModified_dt" > AND wsr_modified_dt = #{wsrModified_dt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_wx_share_record AS wx_share_record
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT wx_share_record.wsr_id as wsrId, wx_share_record.user_id as userId, wx_share_record.wsr_active_code as wsrActive_code, wx_share_record.wsr_active_name as wsrActive_name, wx_share_record.wsr_share_count as wsrShare_count, wx_share_record.wsr_create_dt as wsrCreate_dt, wx_share_record.wsr_modified_dt as wsrModified_dt FROM dr_wx_share_record AS wx_share_record WHERE wsr_id = #{wsrId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT wx_share_record.wsr_id as wsrId, wx_share_record.user_id as userId, wx_share_record.wsr_active_code as wsrActive_code, wx_share_record.wsr_active_name as wsrActive_name, wx_share_record.wsr_share_count as wsrShare_count, wx_share_record.wsr_create_dt as wsrCreate_dt, wx_share_record.wsr_modified_dt as wsrModified_dt FROM dr_wx_share_record AS wx_share_record
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT wx_share_record.wsr_id as wsrId, wx_share_record.user_id as userId, wx_share_record.wsr_active_code as wsrActive_code, wx_share_record.wsr_active_name as wsrActive_name, wx_share_record.wsr_share_count as wsrShare_count, wx_share_record.wsr_create_dt as wsrCreate_dt, wx_share_record.wsr_modified_dt as wsrModified_dt FROM dr_wx_share_record AS wx_share_record  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_wx_share_record 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wsrId != null">wsr_id,</if><if test="userId != null">user_id,</if><if test="wsrActive_code != null">wsr_active_code,</if><if test="wsrActive_name != null">wsr_active_name,</if><if test="wsrShare_count != null">wsr_share_count,</if><if test="wsrCreate_dt != null">wsr_create_dt,</if><if test="wsrModified_dt != null">wsr_modified_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="wsrId != null">#{wsrId},</if><if test="userId != null">#{userId},</if><if test="wsrActive_code != null">#{wsrActive_code},</if><if test="wsrActive_name != null">#{wsrActive_name},</if><if test="wsrShare_count != null">#{wsrShare_count},</if><if test="wsrCreate_dt != null">#{wsrCreate_dt},</if><if test="wsrModified_dt != null">#{wsrModified_dt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_wx_share_record (wsr_id,user_id,wsr_active_code,wsr_active_name,wsr_share_count,wsr_create_dt,wsr_modified_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.wsrId},#{item.userId},#{item.wsrActive_code},#{item.wsrActive_name},#{item.wsrShare_count},#{item.wsrCreate_dt},#{item.wsrModified_dt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_wx_share_record
+    <set>
+     <if test="wsrId != null" >  wsr_id = #{wsrId}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="wsrActive_code != null" >  wsr_active_code = #{wsrActive_code}, </if><if test="wsrActive_name != null" >  wsr_active_name = #{wsrActive_name}, </if><if test="wsrShare_count != null" >  wsr_share_count = #{wsrShare_count}, </if><if test="wsrCreate_dt != null" >  wsr_create_dt = #{wsrCreate_dt}, </if><if test="wsrModified_dt != null" >  wsr_modified_dt = #{wsrModified_dt}, </if>
+      </set>
+	  WHERE wsr_id = #{wsrId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_wx_share_record 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_wx_share_record 
+		WHERE wsr_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

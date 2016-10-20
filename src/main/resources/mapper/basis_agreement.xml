@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_agreement">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="agreementId != null and '' != agreementId" > AND agreement.agreement_id = #{agreementId}</if> <if test="agreementName != null and '' != agreementName" > AND agreement.agreement_name = #{agreementName}</if> <if test="agreementIntroduction != null and '' != agreementIntroduction" > AND agreement.agreement_introduction = #{agreementIntroduction}</if> <if test="agreementContent != null and '' != agreementContent" > AND agreement.agreement_content = #{agreementContent}</if> <if test="agreementCreatetime != null and '' != agreementCreatetime" > AND agreement.agreement_createtime = #{agreementCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="agreementId != null and '' != agreementId" > AND agreement_id = #{agreementId}</if> <if test="agreementName != null and '' != agreementName" > AND agreement_name = #{agreementName}</if> <if test="agreementIntroduction != null and '' != agreementIntroduction" > AND agreement_introduction = #{agreementIntroduction}</if> <if test="agreementContent != null and '' != agreementContent" > AND agreement_content = #{agreementContent}</if> <if test="agreementCreatetime != null and '' != agreementCreatetime" > AND agreement_createtime = #{agreementCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_agreement AS agreement
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT agreement.agreement_id as agreementId, agreement.agreement_name as agreementName, agreement.agreement_introduction as agreementIntroduction, agreement.agreement_content as agreementContent, agreement.agreement_createtime as agreementCreatetime FROM dr_agreement AS agreement WHERE agreement_id = #{agreementId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT agreement.agreement_id as agreementId, agreement.agreement_name as agreementName, agreement.agreement_introduction as agreementIntroduction, agreement.agreement_content as agreementContent, agreement.agreement_createtime as agreementCreatetime FROM dr_agreement AS agreement
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT agreement.agreement_id as agreementId, agreement.agreement_name as agreementName, agreement.agreement_introduction as agreementIntroduction, agreement.agreement_content as agreementContent, agreement.agreement_createtime as agreementCreatetime FROM dr_agreement AS agreement  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_agreement 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="agreementId != null">agreement_id,</if><if test="agreementName != null">agreement_name,</if><if test="agreementIntroduction != null">agreement_introduction,</if><if test="agreementContent != null">agreement_content,</if><if test="agreementCreatetime != null">agreement_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="agreementId != null">#{agreementId},</if><if test="agreementName != null">#{agreementName},</if><if test="agreementIntroduction != null">#{agreementIntroduction},</if><if test="agreementContent != null">#{agreementContent},</if><if test="agreementCreatetime != null">#{agreementCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_agreement (agreement_id,agreement_name,agreement_introduction,agreement_content,agreement_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.agreementId},#{item.agreementName},#{item.agreementIntroduction},#{item.agreementContent},#{item.agreementCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_agreement
+    <set>
+     <if test="agreementId != null" >  agreement_id = #{agreementId}, </if><if test="agreementName != null" >  agreement_name = #{agreementName}, </if><if test="agreementIntroduction != null" >  agreement_introduction = #{agreementIntroduction}, </if><if test="agreementContent != null" >  agreement_content = #{agreementContent}, </if><if test="agreementCreatetime != null" >  agreement_createtime = #{agreementCreatetime}, </if>
+      </set>
+	  WHERE agreement_id = #{agreementId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_agreement 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_agreement 
+		WHERE agreement_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

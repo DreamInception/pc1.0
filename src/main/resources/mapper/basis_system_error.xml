@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_system_error">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="errorId != null and '' != errorId" > AND system_error.error_id = #{errorId}</if> <if test="errorCode != null and '' != errorCode" > AND system_error.error_code = #{errorCode}</if> <if test="errorMessage != null and '' != errorMessage" > AND system_error.error_message = #{errorMessage}</if> <if test="errorRemark != null and '' != errorRemark" > AND system_error.error_remark = #{errorRemark}</if> <if test="errorWarnning_tel != null and '' != errorWarnning_tel" > AND system_error.error_warnning_tel = #{errorWarnning_tel}</if> <if test="errorStatus != null and '' != errorStatus" > AND system_error.error_status = #{errorStatus}</if> <if test="errorCreatetime != null and '' != errorCreatetime" > AND system_error.error_createtime = #{errorCreatetime}</if> <if test="errorModifytime != null and '' != errorModifytime" > AND system_error.error_modifytime = #{errorModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="errorId != null and '' != errorId" > AND error_id = #{errorId}</if> <if test="errorCode != null and '' != errorCode" > AND error_code = #{errorCode}</if> <if test="errorMessage != null and '' != errorMessage" > AND error_message = #{errorMessage}</if> <if test="errorRemark != null and '' != errorRemark" > AND error_remark = #{errorRemark}</if> <if test="errorWarnning_tel != null and '' != errorWarnning_tel" > AND error_warnning_tel = #{errorWarnning_tel}</if> <if test="errorStatus != null and '' != errorStatus" > AND error_status = #{errorStatus}</if> <if test="errorCreatetime != null and '' != errorCreatetime" > AND error_createtime = #{errorCreatetime}</if> <if test="errorModifytime != null and '' != errorModifytime" > AND error_modifytime = #{errorModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_system_error AS system_error
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT system_error.error_id as errorId, system_error.error_code as errorCode, system_error.error_message as errorMessage, system_error.error_remark as errorRemark, system_error.error_warnning_tel as errorWarnning_tel, system_error.error_status as errorStatus, system_error.error_createtime as errorCreatetime, system_error.error_modifytime as errorModifytime FROM dr_system_error AS system_error WHERE error_id = #{errorId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT system_error.error_id as errorId, system_error.error_code as errorCode, system_error.error_message as errorMessage, system_error.error_remark as errorRemark, system_error.error_warnning_tel as errorWarnning_tel, system_error.error_status as errorStatus, system_error.error_createtime as errorCreatetime, system_error.error_modifytime as errorModifytime FROM dr_system_error AS system_error
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT system_error.error_id as errorId, system_error.error_code as errorCode, system_error.error_message as errorMessage, system_error.error_remark as errorRemark, system_error.error_warnning_tel as errorWarnning_tel, system_error.error_status as errorStatus, system_error.error_createtime as errorCreatetime, system_error.error_modifytime as errorModifytime FROM dr_system_error AS system_error  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_system_error 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="errorId != null">error_id,</if><if test="errorCode != null">error_code,</if><if test="errorMessage != null">error_message,</if><if test="errorRemark != null">error_remark,</if><if test="errorWarnning_tel != null">error_warnning_tel,</if><if test="errorStatus != null">error_status,</if><if test="errorCreatetime != null">error_createtime,</if><if test="errorModifytime != null">error_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="errorId != null">#{errorId},</if><if test="errorCode != null">#{errorCode},</if><if test="errorMessage != null">#{errorMessage},</if><if test="errorRemark != null">#{errorRemark},</if><if test="errorWarnning_tel != null">#{errorWarnning_tel},</if><if test="errorStatus != null">#{errorStatus},</if><if test="errorCreatetime != null">#{errorCreatetime},</if><if test="errorModifytime != null">#{errorModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_system_error (error_id,error_code,error_message,error_remark,error_warnning_tel,error_status,error_createtime,error_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.errorId},#{item.errorCode},#{item.errorMessage},#{item.errorRemark},#{item.errorWarnning_tel},#{item.errorStatus},#{item.errorCreatetime},#{item.errorModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_system_error
+    <set>
+     <if test="errorId != null" >  error_id = #{errorId}, </if><if test="errorCode != null" >  error_code = #{errorCode}, </if><if test="errorMessage != null" >  error_message = #{errorMessage}, </if><if test="errorRemark != null" >  error_remark = #{errorRemark}, </if><if test="errorWarnning_tel != null" >  error_warnning_tel = #{errorWarnning_tel}, </if><if test="errorStatus != null" >  error_status = #{errorStatus}, </if><if test="errorCreatetime != null" >  error_createtime = #{errorCreatetime}, </if><if test="errorModifytime != null" >  error_modifytime = #{errorModifytime}, </if>
+      </set>
+	  WHERE error_id = #{errorId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_system_error 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_system_error 
+		WHERE error_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

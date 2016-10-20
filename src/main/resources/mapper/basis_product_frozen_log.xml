@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_product_frozen_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND product_frozen_log.log_id = #{logId}</if> <if test="pdtId != null and '' != pdtId" > AND product_frozen_log.pdt_id = #{pdtId}</if> <if test="logOperate != null and '' != logOperate" > AND product_frozen_log.log_operate = #{logOperate}</if> <if test="logOperator != null and '' != logOperator" > AND product_frozen_log.log_operator = #{logOperator}</if> <if test="logProduct_stock_count != null and '' != logProduct_stock_count" > AND product_frozen_log.log_product_stock_count = #{logProduct_stock_count}</if> <if test="logProduct_frozen_count != null and '' != logProduct_frozen_count" > AND product_frozen_log.log_product_frozen_count = #{logProduct_frozen_count}</if> <if test="logProduct_available_count != null and '' != logProduct_available_count" > AND product_frozen_log.log_product_available_count = #{logProduct_available_count}</if> <if test="logProduct_sale_count != null and '' != logProduct_sale_count" > AND product_frozen_log.log_product_sale_count = #{logProduct_sale_count}</if> <if test="logTarget_id != null and '' != logTarget_id" > AND product_frozen_log.log_target_id = #{logTarget_id}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND product_frozen_log.log_createtime = #{logCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logId != null and '' != logId" > AND log_id = #{logId}</if> <if test="pdtId != null and '' != pdtId" > AND pdt_id = #{pdtId}</if> <if test="logOperate != null and '' != logOperate" > AND log_operate = #{logOperate}</if> <if test="logOperator != null and '' != logOperator" > AND log_operator = #{logOperator}</if> <if test="logProduct_stock_count != null and '' != logProduct_stock_count" > AND log_product_stock_count = #{logProduct_stock_count}</if> <if test="logProduct_frozen_count != null and '' != logProduct_frozen_count" > AND log_product_frozen_count = #{logProduct_frozen_count}</if> <if test="logProduct_available_count != null and '' != logProduct_available_count" > AND log_product_available_count = #{logProduct_available_count}</if> <if test="logProduct_sale_count != null and '' != logProduct_sale_count" > AND log_product_sale_count = #{logProduct_sale_count}</if> <if test="logTarget_id != null and '' != logTarget_id" > AND log_target_id = #{logTarget_id}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_product_frozen_log AS product_frozen_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT product_frozen_log.log_id as logId, product_frozen_log.pdt_id as pdtId, product_frozen_log.log_operate as logOperate, product_frozen_log.log_operator as logOperator, product_frozen_log.log_product_stock_count as logProduct_stock_count, product_frozen_log.log_product_frozen_count as logProduct_frozen_count, product_frozen_log.log_product_available_count as logProduct_available_count, product_frozen_log.log_product_sale_count as logProduct_sale_count, product_frozen_log.log_target_id as logTarget_id, product_frozen_log.log_createtime as logCreatetime FROM dr_product_frozen_log AS product_frozen_log WHERE log_id = #{logId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT product_frozen_log.log_id as logId, product_frozen_log.pdt_id as pdtId, product_frozen_log.log_operate as logOperate, product_frozen_log.log_operator as logOperator, product_frozen_log.log_product_stock_count as logProduct_stock_count, product_frozen_log.log_product_frozen_count as logProduct_frozen_count, product_frozen_log.log_product_available_count as logProduct_available_count, product_frozen_log.log_product_sale_count as logProduct_sale_count, product_frozen_log.log_target_id as logTarget_id, product_frozen_log.log_createtime as logCreatetime FROM dr_product_frozen_log AS product_frozen_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT product_frozen_log.log_id as logId, product_frozen_log.pdt_id as pdtId, product_frozen_log.log_operate as logOperate, product_frozen_log.log_operator as logOperator, product_frozen_log.log_product_stock_count as logProduct_stock_count, product_frozen_log.log_product_frozen_count as logProduct_frozen_count, product_frozen_log.log_product_available_count as logProduct_available_count, product_frozen_log.log_product_sale_count as logProduct_sale_count, product_frozen_log.log_target_id as logTarget_id, product_frozen_log.log_createtime as logCreatetime FROM dr_product_frozen_log AS product_frozen_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_product_frozen_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logId != null">log_id,</if><if test="pdtId != null">pdt_id,</if><if test="logOperate != null">log_operate,</if><if test="logOperator != null">log_operator,</if><if test="logProduct_stock_count != null">log_product_stock_count,</if><if test="logProduct_frozen_count != null">log_product_frozen_count,</if><if test="logProduct_available_count != null">log_product_available_count,</if><if test="logProduct_sale_count != null">log_product_sale_count,</if><if test="logTarget_id != null">log_target_id,</if><if test="logCreatetime != null">log_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logId != null">#{logId},</if><if test="pdtId != null">#{pdtId},</if><if test="logOperate != null">#{logOperate},</if><if test="logOperator != null">#{logOperator},</if><if test="logProduct_stock_count != null">#{logProduct_stock_count},</if><if test="logProduct_frozen_count != null">#{logProduct_frozen_count},</if><if test="logProduct_available_count != null">#{logProduct_available_count},</if><if test="logProduct_sale_count != null">#{logProduct_sale_count},</if><if test="logTarget_id != null">#{logTarget_id},</if><if test="logCreatetime != null">#{logCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_product_frozen_log (log_id,pdt_id,log_operate,log_operator,log_product_stock_count,log_product_frozen_count,log_product_available_count,log_product_sale_count,log_target_id,log_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logId},#{item.pdtId},#{item.logOperate},#{item.logOperator},#{item.logProduct_stock_count},#{item.logProduct_frozen_count},#{item.logProduct_available_count},#{item.logProduct_sale_count},#{item.logTarget_id},#{item.logCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_product_frozen_log
+    <set>
+     <if test="logId != null" >  log_id = #{logId}, </if><if test="pdtId != null" >  pdt_id = #{pdtId}, </if><if test="logOperate != null" >  log_operate = #{logOperate}, </if><if test="logOperator != null" >  log_operator = #{logOperator}, </if><if test="logProduct_stock_count != null" >  log_product_stock_count = #{logProduct_stock_count}, </if><if test="logProduct_frozen_count != null" >  log_product_frozen_count = #{logProduct_frozen_count}, </if><if test="logProduct_available_count != null" >  log_product_available_count = #{logProduct_available_count}, </if><if test="logProduct_sale_count != null" >  log_product_sale_count = #{logProduct_sale_count}, </if><if test="logTarget_id != null" >  log_target_id = #{logTarget_id}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if>
+      </set>
+	  WHERE log_id = #{logId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_product_frozen_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_product_frozen_log 
+		WHERE log_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

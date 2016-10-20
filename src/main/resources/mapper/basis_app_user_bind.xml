@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_app_user_bind">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND app_user_bind.id = #{id}</if> <if test="userId != null and '' != userId" > AND app_user_bind.user_id = #{userId}</if> <if test="userTelephone != null and '' != userTelephone" > AND app_user_bind.user_telephone = #{userTelephone}</if> <if test="deviceToken != null and '' != deviceToken" > AND app_user_bind.device_token = #{deviceToken}</if> <if test="registId != null and '' != registId" > AND app_user_bind.regist_id = #{registId}</if> <if test="endPoint != null and '' != endPoint" > AND app_user_bind.end_point = #{endPoint}</if> <if test="state != null and '' != state" > AND app_user_bind.state = #{state}</if> <if test="createDt != null and '' != createDt" > AND app_user_bind.create_dt = #{createDt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="userTelephone != null and '' != userTelephone" > AND user_telephone = #{userTelephone}</if> <if test="deviceToken != null and '' != deviceToken" > AND device_token = #{deviceToken}</if> <if test="registId != null and '' != registId" > AND regist_id = #{registId}</if> <if test="endPoint != null and '' != endPoint" > AND end_point = #{endPoint}</if> <if test="state != null and '' != state" > AND state = #{state}</if> <if test="createDt != null and '' != createDt" > AND create_dt = #{createDt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_app_user_bind AS app_user_bind
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT app_user_bind.id as id, app_user_bind.user_id as userId, app_user_bind.user_telephone as userTelephone, app_user_bind.device_token as deviceToken, app_user_bind.regist_id as registId, app_user_bind.end_point as endPoint, app_user_bind.state as state, app_user_bind.create_dt as createDt FROM dr_app_user_bind AS app_user_bind WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT app_user_bind.id as id, app_user_bind.user_id as userId, app_user_bind.user_telephone as userTelephone, app_user_bind.device_token as deviceToken, app_user_bind.regist_id as registId, app_user_bind.end_point as endPoint, app_user_bind.state as state, app_user_bind.create_dt as createDt FROM dr_app_user_bind AS app_user_bind
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT app_user_bind.id as id, app_user_bind.user_id as userId, app_user_bind.user_telephone as userTelephone, app_user_bind.device_token as deviceToken, app_user_bind.regist_id as registId, app_user_bind.end_point as endPoint, app_user_bind.state as state, app_user_bind.create_dt as createDt FROM dr_app_user_bind AS app_user_bind  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_app_user_bind 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="userId != null">user_id,</if><if test="userTelephone != null">user_telephone,</if><if test="deviceToken != null">device_token,</if><if test="registId != null">regist_id,</if><if test="endPoint != null">end_point,</if><if test="state != null">state,</if><if test="createDt != null">create_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="userId != null">#{userId},</if><if test="userTelephone != null">#{userTelephone},</if><if test="deviceToken != null">#{deviceToken},</if><if test="registId != null">#{registId},</if><if test="endPoint != null">#{endPoint},</if><if test="state != null">#{state},</if><if test="createDt != null">#{createDt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_app_user_bind (id,user_id,user_telephone,device_token,regist_id,end_point,state,create_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.userId},#{item.userTelephone},#{item.deviceToken},#{item.registId},#{item.endPoint},#{item.state},#{item.createDt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_app_user_bind
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="userTelephone != null" >  user_telephone = #{userTelephone}, </if><if test="deviceToken != null" >  device_token = #{deviceToken}, </if><if test="registId != null" >  regist_id = #{registId}, </if><if test="endPoint != null" >  end_point = #{endPoint}, </if><if test="state != null" >  state = #{state}, </if><if test="createDt != null" >  create_dt = #{createDt}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_app_user_bind 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_app_user_bind 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

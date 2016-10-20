@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_pay_response_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND pay_response_log.id = #{id}</if> <if test="reqId != null and '' != reqId" > AND pay_response_log.req_id = #{reqId}</if> <if test="code != null and '' != code" > AND pay_response_log.code = #{code}</if> <if test="name != null and '' != name" > AND pay_response_log.name = #{name}</if> <if test="respBody != null and '' != respBody" > AND pay_response_log.resp_body = #{respBody}</if> <if test="respData != null and '' != respData" > AND pay_response_log.resp_data = #{respData}</if> <if test="createDt != null and '' != createDt" > AND pay_response_log.create_dt = #{createDt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="reqId != null and '' != reqId" > AND req_id = #{reqId}</if> <if test="code != null and '' != code" > AND code = #{code}</if> <if test="name != null and '' != name" > AND name = #{name}</if> <if test="respBody != null and '' != respBody" > AND resp_body = #{respBody}</if> <if test="respData != null and '' != respData" > AND resp_data = #{respData}</if> <if test="createDt != null and '' != createDt" > AND create_dt = #{createDt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_pay_response_log AS pay_response_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT pay_response_log.id as id, pay_response_log.req_id as reqId, pay_response_log.code as code, pay_response_log.name as name, pay_response_log.resp_body as respBody, pay_response_log.resp_data as respData, pay_response_log.create_dt as createDt FROM dr_pay_response_log AS pay_response_log WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT pay_response_log.id as id, pay_response_log.req_id as reqId, pay_response_log.code as code, pay_response_log.name as name, pay_response_log.resp_body as respBody, pay_response_log.resp_data as respData, pay_response_log.create_dt as createDt FROM dr_pay_response_log AS pay_response_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT pay_response_log.id as id, pay_response_log.req_id as reqId, pay_response_log.code as code, pay_response_log.name as name, pay_response_log.resp_body as respBody, pay_response_log.resp_data as respData, pay_response_log.create_dt as createDt FROM dr_pay_response_log AS pay_response_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_pay_response_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="reqId != null">req_id,</if><if test="code != null">code,</if><if test="name != null">name,</if><if test="respBody != null">resp_body,</if><if test="respData != null">resp_data,</if><if test="createDt != null">create_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="reqId != null">#{reqId},</if><if test="code != null">#{code},</if><if test="name != null">#{name},</if><if test="respBody != null">#{respBody},</if><if test="respData != null">#{respData},</if><if test="createDt != null">#{createDt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_pay_response_log (id,req_id,code,name,resp_body,resp_data,create_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.reqId},#{item.code},#{item.name},#{item.respBody},#{item.respData},#{item.createDt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_pay_response_log
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="reqId != null" >  req_id = #{reqId}, </if><if test="code != null" >  code = #{code}, </if><if test="name != null" >  name = #{name}, </if><if test="respBody != null" >  resp_body = #{respBody}, </if><if test="respData != null" >  resp_data = #{respData}, </if><if test="createDt != null" >  create_dt = #{createDt}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_pay_response_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_pay_response_log 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

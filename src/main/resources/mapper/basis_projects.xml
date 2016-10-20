@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_projects">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND projects.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND projects.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND projects.last_modified_dt = #{lastModified_dt}</if> <if test="instId != null and '' != instId" > AND projects.inst_id = #{instId}</if> <if test="contractId != null and '' != contractId" > AND projects.contract_id = #{contractId}</if> <if test="name != null and '' != name" > AND projects.name = #{name}</if> <if test="sn != null and '' != sn" > AND projects.sn = #{sn}</if> <if test="endDt != null and '' != endDt" > AND projects.end_dt = #{endDt}</if> <if test="totalAmount != null and '' != totalAmount" > AND projects.total_amount = #{totalAmount}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="contractId != null and '' != contractId" > AND contract_id = #{contractId}</if> <if test="name != null and '' != name" > AND name = #{name}</if> <if test="sn != null and '' != sn" > AND sn = #{sn}</if> <if test="endDt != null and '' != endDt" > AND end_dt = #{endDt}</if> <if test="totalAmount != null and '' != totalAmount" > AND total_amount = #{totalAmount}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v3_projects AS projects
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT projects.id as id, projects.created_dt as createdDt, projects.last_modified_dt as lastModified_dt, projects.inst_id as instId, projects.contract_id as contractId, projects.name as name, projects.sn as sn, projects.end_dt as endDt, projects.total_amount as totalAmount FROM v3_projects AS projects WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT projects.id as id, projects.created_dt as createdDt, projects.last_modified_dt as lastModified_dt, projects.inst_id as instId, projects.contract_id as contractId, projects.name as name, projects.sn as sn, projects.end_dt as endDt, projects.total_amount as totalAmount FROM v3_projects AS projects
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT projects.id as id, projects.created_dt as createdDt, projects.last_modified_dt as lastModified_dt, projects.inst_id as instId, projects.contract_id as contractId, projects.name as name, projects.sn as sn, projects.end_dt as endDt, projects.total_amount as totalAmount FROM v3_projects AS projects  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v3_projects 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="instId != null">inst_id,</if><if test="contractId != null">contract_id,</if><if test="name != null">name,</if><if test="sn != null">sn,</if><if test="endDt != null">end_dt,</if><if test="totalAmount != null">total_amount,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="instId != null">#{instId},</if><if test="contractId != null">#{contractId},</if><if test="name != null">#{name},</if><if test="sn != null">#{sn},</if><if test="endDt != null">#{endDt},</if><if test="totalAmount != null">#{totalAmount},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v3_projects (id,created_dt,last_modified_dt,inst_id,contract_id,name,sn,end_dt,total_amount)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.instId},#{item.contractId},#{item.name},#{item.sn},#{item.endDt},#{item.totalAmount})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v3_projects
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="contractId != null" >  contract_id = #{contractId}, </if><if test="name != null" >  name = #{name}, </if><if test="sn != null" >  sn = #{sn}, </if><if test="endDt != null" >  end_dt = #{endDt}, </if><if test="totalAmount != null" >  total_amount = #{totalAmount}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v3_projects 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v3_projects 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_sinapay_sync_summary">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="createdDt != null and '' != createdDt" > AND sinapay_sync_summary.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND sinapay_sync_summary.last_modified_dt = #{lastModified_dt}</if> <if test="syncType != null and '' != syncType" > AND sinapay_sync_summary.sync_type = #{syncType}</if> <if test="breakpoint != null and '' != breakpoint" > AND sinapay_sync_summary.breakpoint = #{breakpoint}</if> <if test="lastCheck_dt != null and '' != lastCheck_dt" > AND sinapay_sync_summary.last_check_dt = #{lastCheck_dt}</if> <if test="lastCheck_runner != null and '' != lastCheck_runner" > AND sinapay_sync_summary.last_check_runner = #{lastCheck_runner}</if> <if test="lastSync_start_dt != null and '' != lastSync_start_dt" > AND sinapay_sync_summary.last_sync_start_dt = #{lastSync_start_dt}</if> <if test="lastSync_end_dt != null and '' != lastSync_end_dt" > AND sinapay_sync_summary.last_sync_end_dt = #{lastSync_end_dt}</if> <if test="lastSync_records != null and '' != lastSync_records" > AND sinapay_sync_summary.last_sync_records = #{lastSync_records}</if> <if test="lastSync_runner != null and '' != lastSync_runner" > AND sinapay_sync_summary.last_sync_runner = #{lastSync_runner}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="syncType != null and '' != syncType" > AND sync_type = #{syncType}</if> <if test="breakpoint != null and '' != breakpoint" > AND breakpoint = #{breakpoint}</if> <if test="lastCheck_dt != null and '' != lastCheck_dt" > AND last_check_dt = #{lastCheck_dt}</if> <if test="lastCheck_runner != null and '' != lastCheck_runner" > AND last_check_runner = #{lastCheck_runner}</if> <if test="lastSync_start_dt != null and '' != lastSync_start_dt" > AND last_sync_start_dt = #{lastSync_start_dt}</if> <if test="lastSync_end_dt != null and '' != lastSync_end_dt" > AND last_sync_end_dt = #{lastSync_end_dt}</if> <if test="lastSync_records != null and '' != lastSync_records" > AND last_sync_records = #{lastSync_records}</if> <if test="lastSync_runner != null and '' != lastSync_runner" > AND last_sync_runner = #{lastSync_runner}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_sinapay_sync_summary AS sinapay_sync_summary
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT sinapay_sync_summary.created_dt as createdDt, sinapay_sync_summary.last_modified_dt as lastModified_dt, sinapay_sync_summary.sync_type as syncType, sinapay_sync_summary.breakpoint as breakpoint, sinapay_sync_summary.last_check_dt as lastCheck_dt, sinapay_sync_summary.last_check_runner as lastCheck_runner, sinapay_sync_summary.last_sync_start_dt as lastSync_start_dt, sinapay_sync_summary.last_sync_end_dt as lastSync_end_dt, sinapay_sync_summary.last_sync_records as lastSync_records, sinapay_sync_summary.last_sync_runner as lastSync_runner FROM v2_sinapay_sync_summary AS sinapay_sync_summary WHERE created_dt = #{createdDt}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT sinapay_sync_summary.created_dt as createdDt, sinapay_sync_summary.last_modified_dt as lastModified_dt, sinapay_sync_summary.sync_type as syncType, sinapay_sync_summary.breakpoint as breakpoint, sinapay_sync_summary.last_check_dt as lastCheck_dt, sinapay_sync_summary.last_check_runner as lastCheck_runner, sinapay_sync_summary.last_sync_start_dt as lastSync_start_dt, sinapay_sync_summary.last_sync_end_dt as lastSync_end_dt, sinapay_sync_summary.last_sync_records as lastSync_records, sinapay_sync_summary.last_sync_runner as lastSync_runner FROM v2_sinapay_sync_summary AS sinapay_sync_summary
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT sinapay_sync_summary.created_dt as createdDt, sinapay_sync_summary.last_modified_dt as lastModified_dt, sinapay_sync_summary.sync_type as syncType, sinapay_sync_summary.breakpoint as breakpoint, sinapay_sync_summary.last_check_dt as lastCheck_dt, sinapay_sync_summary.last_check_runner as lastCheck_runner, sinapay_sync_summary.last_sync_start_dt as lastSync_start_dt, sinapay_sync_summary.last_sync_end_dt as lastSync_end_dt, sinapay_sync_summary.last_sync_records as lastSync_records, sinapay_sync_summary.last_sync_runner as lastSync_runner FROM v2_sinapay_sync_summary AS sinapay_sync_summary  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_sinapay_sync_summary 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="syncType != null">sync_type,</if><if test="breakpoint != null">breakpoint,</if><if test="lastCheck_dt != null">last_check_dt,</if><if test="lastCheck_runner != null">last_check_runner,</if><if test="lastSync_start_dt != null">last_sync_start_dt,</if><if test="lastSync_end_dt != null">last_sync_end_dt,</if><if test="lastSync_records != null">last_sync_records,</if><if test="lastSync_runner != null">last_sync_runner,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="syncType != null">#{syncType},</if><if test="breakpoint != null">#{breakpoint},</if><if test="lastCheck_dt != null">#{lastCheck_dt},</if><if test="lastCheck_runner != null">#{lastCheck_runner},</if><if test="lastSync_start_dt != null">#{lastSync_start_dt},</if><if test="lastSync_end_dt != null">#{lastSync_end_dt},</if><if test="lastSync_records != null">#{lastSync_records},</if><if test="lastSync_runner != null">#{lastSync_runner},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_sinapay_sync_summary (created_dt,last_modified_dt,sync_type,breakpoint,last_check_dt,last_check_runner,last_sync_start_dt,last_sync_end_dt,last_sync_records,last_sync_runner)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.createdDt},#{item.lastModified_dt},#{item.syncType},#{item.breakpoint},#{item.lastCheck_dt},#{item.lastCheck_runner},#{item.lastSync_start_dt},#{item.lastSync_end_dt},#{item.lastSync_records},#{item.lastSync_runner})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_sinapay_sync_summary
+    <set>
+     <if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="syncType != null" >  sync_type = #{syncType}, </if><if test="breakpoint != null" >  breakpoint = #{breakpoint}, </if><if test="lastCheck_dt != null" >  last_check_dt = #{lastCheck_dt}, </if><if test="lastCheck_runner != null" >  last_check_runner = #{lastCheck_runner}, </if><if test="lastSync_start_dt != null" >  last_sync_start_dt = #{lastSync_start_dt}, </if><if test="lastSync_end_dt != null" >  last_sync_end_dt = #{lastSync_end_dt}, </if><if test="lastSync_records != null" >  last_sync_records = #{lastSync_records}, </if><if test="lastSync_runner != null" >  last_sync_runner = #{lastSync_runner}, </if>
+      </set>
+	  WHERE created_dt = #{createdDt}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_sinapay_sync_summary 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_sinapay_sync_summary 
+		WHERE created_dt IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

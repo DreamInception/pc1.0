@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_recharge">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="rechargeId != null and '' != rechargeId" > AND recharge.recharge_id = #{rechargeId}</if> <if test="rechargeNo != null and '' != rechargeNo" > AND recharge.recharge_no = #{rechargeNo}</if> <if test="userId != null and '' != userId" > AND recharge.user_id = #{userId}</if> <if test="rechargeUser_type != null and '' != rechargeUser_type" > AND recharge.recharge_user_type = #{rechargeUser_type}</if> <if test="rechargeAmount != null and '' != rechargeAmount" > AND recharge.recharge_amount = #{rechargeAmount}</if> <if test="rechargeCharge != null and '' != rechargeCharge" > AND recharge.recharge_charge = #{rechargeCharge}</if> <if test="rechargeActual_amount != null and '' != rechargeActual_amount" > AND recharge.recharge_actual_amount = #{rechargeActual_amount}</if> <if test="rechargeBank_code != null and '' != rechargeBank_code" > AND recharge.recharge_bank_code = #{rechargeBank_code}</if> <if test="rechargeBank_account != null and '' != rechargeBank_account" > AND recharge.recharge_bank_account = #{rechargeBank_account}</if> <if test="rechargeBank_account_owner_name != null and '' != rechargeBank_account_owner_name" > AND recharge.recharge_bank_account_owner_name = #{rechargeBank_account_owner_name}</if> <if test="rechargeBank_telephone != null and '' != rechargeBank_telephone" > AND recharge.recharge_bank_telephone = #{rechargeBank_telephone}</if> <if test="rechargeCard_type != null and '' != rechargeCard_type" > AND recharge.recharge_card_type = #{rechargeCard_type}</if> <if test="rechargeCard_attribute != null and '' != rechargeCard_attribute" > AND recharge.recharge_card_attribute = #{rechargeCard_attribute}</if> <if test="rechargeBank_province != null and '' != rechargeBank_province" > AND recharge.recharge_bank_province = #{rechargeBank_province}</if> <if test="rechargeBank_city != null and '' != rechargeBank_city" > AND recharge.recharge_bank_city = #{rechargeBank_city}</if> <if test="rechargeBank_branch != null and '' != rechargeBank_branch" > AND recharge.recharge_bank_branch = #{rechargeBank_branch}</if> <if test="rechargeIp != null and '' != rechargeIp" > AND recharge.recharge_ip = #{rechargeIp}</if> <if test="rechargeRemark != null and '' != rechargeRemark" > AND recharge.recharge_remark = #{rechargeRemark}</if> <if test="rechargeTicket != null and '' != rechargeTicket" > AND recharge.recharge_ticket = #{rechargeTicket}</if> <if test="rechargeStatus != null and '' != rechargeStatus" > AND recharge.recharge_status = #{rechargeStatus}</if> <if test="rechargeCreatetime != null and '' != rechargeCreatetime" > AND recharge.recharge_createtime = #{rechargeCreatetime}</if> <if test="rechargeModifytime != null and '' != rechargeModifytime" > AND recharge.recharge_modifytime = #{rechargeModifytime}</if> <if test="v2Mirror_sn != null and '' != v2Mirror_sn" > AND recharge.v2_mirror_sn = #{v2Mirror_sn}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="rechargeId != null and '' != rechargeId" > AND recharge_id = #{rechargeId}</if> <if test="rechargeNo != null and '' != rechargeNo" > AND recharge_no = #{rechargeNo}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="rechargeUser_type != null and '' != rechargeUser_type" > AND recharge_user_type = #{rechargeUser_type}</if> <if test="rechargeAmount != null and '' != rechargeAmount" > AND recharge_amount = #{rechargeAmount}</if> <if test="rechargeCharge != null and '' != rechargeCharge" > AND recharge_charge = #{rechargeCharge}</if> <if test="rechargeActual_amount != null and '' != rechargeActual_amount" > AND recharge_actual_amount = #{rechargeActual_amount}</if> <if test="rechargeBank_code != null and '' != rechargeBank_code" > AND recharge_bank_code = #{rechargeBank_code}</if> <if test="rechargeBank_account != null and '' != rechargeBank_account" > AND recharge_bank_account = #{rechargeBank_account}</if> <if test="rechargeBank_account_owner_name != null and '' != rechargeBank_account_owner_name" > AND recharge_bank_account_owner_name = #{rechargeBank_account_owner_name}</if> <if test="rechargeBank_telephone != null and '' != rechargeBank_telephone" > AND recharge_bank_telephone = #{rechargeBank_telephone}</if> <if test="rechargeCard_type != null and '' != rechargeCard_type" > AND recharge_card_type = #{rechargeCard_type}</if> <if test="rechargeCard_attribute != null and '' != rechargeCard_attribute" > AND recharge_card_attribute = #{rechargeCard_attribute}</if> <if test="rechargeBank_province != null and '' != rechargeBank_province" > AND recharge_bank_province = #{rechargeBank_province}</if> <if test="rechargeBank_city != null and '' != rechargeBank_city" > AND recharge_bank_city = #{rechargeBank_city}</if> <if test="rechargeBank_branch != null and '' != rechargeBank_branch" > AND recharge_bank_branch = #{rechargeBank_branch}</if> <if test="rechargeIp != null and '' != rechargeIp" > AND recharge_ip = #{rechargeIp}</if> <if test="rechargeRemark != null and '' != rechargeRemark" > AND recharge_remark = #{rechargeRemark}</if> <if test="rechargeTicket != null and '' != rechargeTicket" > AND recharge_ticket = #{rechargeTicket}</if> <if test="rechargeStatus != null and '' != rechargeStatus" > AND recharge_status = #{rechargeStatus}</if> <if test="rechargeCreatetime != null and '' != rechargeCreatetime" > AND recharge_createtime = #{rechargeCreatetime}</if> <if test="rechargeModifytime != null and '' != rechargeModifytime" > AND recharge_modifytime = #{rechargeModifytime}</if> <if test="v2Mirror_sn != null and '' != v2Mirror_sn" > AND v2_mirror_sn = #{v2Mirror_sn}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_recharge AS recharge
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT recharge.recharge_id as rechargeId, recharge.recharge_no as rechargeNo, recharge.user_id as userId, recharge.recharge_user_type as rechargeUser_type, recharge.recharge_amount as rechargeAmount, recharge.recharge_charge as rechargeCharge, recharge.recharge_actual_amount as rechargeActual_amount, recharge.recharge_bank_code as rechargeBank_code, recharge.recharge_bank_account as rechargeBank_account, recharge.recharge_bank_account_owner_name as rechargeBank_account_owner_name, recharge.recharge_bank_telephone as rechargeBank_telephone, recharge.recharge_card_type as rechargeCard_type, recharge.recharge_card_attribute as rechargeCard_attribute, recharge.recharge_bank_province as rechargeBank_province, recharge.recharge_bank_city as rechargeBank_city, recharge.recharge_bank_branch as rechargeBank_branch, recharge.recharge_ip as rechargeIp, recharge.recharge_remark as rechargeRemark, recharge.recharge_ticket as rechargeTicket, recharge.recharge_status as rechargeStatus, recharge.recharge_createtime as rechargeCreatetime, recharge.recharge_modifytime as rechargeModifytime, recharge.v2_mirror_sn as v2Mirror_sn FROM dr_recharge AS recharge WHERE recharge_id = #{rechargeId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT recharge.recharge_id as rechargeId, recharge.recharge_no as rechargeNo, recharge.user_id as userId, recharge.recharge_user_type as rechargeUser_type, recharge.recharge_amount as rechargeAmount, recharge.recharge_charge as rechargeCharge, recharge.recharge_actual_amount as rechargeActual_amount, recharge.recharge_bank_code as rechargeBank_code, recharge.recharge_bank_account as rechargeBank_account, recharge.recharge_bank_account_owner_name as rechargeBank_account_owner_name, recharge.recharge_bank_telephone as rechargeBank_telephone, recharge.recharge_card_type as rechargeCard_type, recharge.recharge_card_attribute as rechargeCard_attribute, recharge.recharge_bank_province as rechargeBank_province, recharge.recharge_bank_city as rechargeBank_city, recharge.recharge_bank_branch as rechargeBank_branch, recharge.recharge_ip as rechargeIp, recharge.recharge_remark as rechargeRemark, recharge.recharge_ticket as rechargeTicket, recharge.recharge_status as rechargeStatus, recharge.recharge_createtime as rechargeCreatetime, recharge.recharge_modifytime as rechargeModifytime, recharge.v2_mirror_sn as v2Mirror_sn FROM dr_recharge AS recharge
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT recharge.recharge_id as rechargeId, recharge.recharge_no as rechargeNo, recharge.user_id as userId, recharge.recharge_user_type as rechargeUser_type, recharge.recharge_amount as rechargeAmount, recharge.recharge_charge as rechargeCharge, recharge.recharge_actual_amount as rechargeActual_amount, recharge.recharge_bank_code as rechargeBank_code, recharge.recharge_bank_account as rechargeBank_account, recharge.recharge_bank_account_owner_name as rechargeBank_account_owner_name, recharge.recharge_bank_telephone as rechargeBank_telephone, recharge.recharge_card_type as rechargeCard_type, recharge.recharge_card_attribute as rechargeCard_attribute, recharge.recharge_bank_province as rechargeBank_province, recharge.recharge_bank_city as rechargeBank_city, recharge.recharge_bank_branch as rechargeBank_branch, recharge.recharge_ip as rechargeIp, recharge.recharge_remark as rechargeRemark, recharge.recharge_ticket as rechargeTicket, recharge.recharge_status as rechargeStatus, recharge.recharge_createtime as rechargeCreatetime, recharge.recharge_modifytime as rechargeModifytime, recharge.v2_mirror_sn as v2Mirror_sn FROM dr_recharge AS recharge  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_recharge 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="rechargeId != null">recharge_id,</if><if test="rechargeNo != null">recharge_no,</if><if test="userId != null">user_id,</if><if test="rechargeUser_type != null">recharge_user_type,</if><if test="rechargeAmount != null">recharge_amount,</if><if test="rechargeCharge != null">recharge_charge,</if><if test="rechargeActual_amount != null">recharge_actual_amount,</if><if test="rechargeBank_code != null">recharge_bank_code,</if><if test="rechargeBank_account != null">recharge_bank_account,</if><if test="rechargeBank_account_owner_name != null">recharge_bank_account_owner_name,</if><if test="rechargeBank_telephone != null">recharge_bank_telephone,</if><if test="rechargeCard_type != null">recharge_card_type,</if><if test="rechargeCard_attribute != null">recharge_card_attribute,</if><if test="rechargeBank_province != null">recharge_bank_province,</if><if test="rechargeBank_city != null">recharge_bank_city,</if><if test="rechargeBank_branch != null">recharge_bank_branch,</if><if test="rechargeIp != null">recharge_ip,</if><if test="rechargeRemark != null">recharge_remark,</if><if test="rechargeTicket != null">recharge_ticket,</if><if test="rechargeStatus != null">recharge_status,</if><if test="rechargeCreatetime != null">recharge_createtime,</if><if test="rechargeModifytime != null">recharge_modifytime,</if><if test="v2Mirror_sn != null">v2_mirror_sn,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="rechargeId != null">#{rechargeId},</if><if test="rechargeNo != null">#{rechargeNo},</if><if test="userId != null">#{userId},</if><if test="rechargeUser_type != null">#{rechargeUser_type},</if><if test="rechargeAmount != null">#{rechargeAmount},</if><if test="rechargeCharge != null">#{rechargeCharge},</if><if test="rechargeActual_amount != null">#{rechargeActual_amount},</if><if test="rechargeBank_code != null">#{rechargeBank_code},</if><if test="rechargeBank_account != null">#{rechargeBank_account},</if><if test="rechargeBank_account_owner_name != null">#{rechargeBank_account_owner_name},</if><if test="rechargeBank_telephone != null">#{rechargeBank_telephone},</if><if test="rechargeCard_type != null">#{rechargeCard_type},</if><if test="rechargeCard_attribute != null">#{rechargeCard_attribute},</if><if test="rechargeBank_province != null">#{rechargeBank_province},</if><if test="rechargeBank_city != null">#{rechargeBank_city},</if><if test="rechargeBank_branch != null">#{rechargeBank_branch},</if><if test="rechargeIp != null">#{rechargeIp},</if><if test="rechargeRemark != null">#{rechargeRemark},</if><if test="rechargeTicket != null">#{rechargeTicket},</if><if test="rechargeStatus != null">#{rechargeStatus},</if><if test="rechargeCreatetime != null">#{rechargeCreatetime},</if><if test="rechargeModifytime != null">#{rechargeModifytime},</if><if test="v2Mirror_sn != null">#{v2Mirror_sn},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_recharge (recharge_id,recharge_no,user_id,recharge_user_type,recharge_amount,recharge_charge,recharge_actual_amount,recharge_bank_code,recharge_bank_account,recharge_bank_account_owner_name,recharge_bank_telephone,recharge_card_type,recharge_card_attribute,recharge_bank_province,recharge_bank_city,recharge_bank_branch,recharge_ip,recharge_remark,recharge_ticket,recharge_status,recharge_createtime,recharge_modifytime,v2_mirror_sn)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.rechargeId},#{item.rechargeNo},#{item.userId},#{item.rechargeUser_type},#{item.rechargeAmount},#{item.rechargeCharge},#{item.rechargeActual_amount},#{item.rechargeBank_code},#{item.rechargeBank_account},#{item.rechargeBank_account_owner_name},#{item.rechargeBank_telephone},#{item.rechargeCard_type},#{item.rechargeCard_attribute},#{item.rechargeBank_province},#{item.rechargeBank_city},#{item.rechargeBank_branch},#{item.rechargeIp},#{item.rechargeRemark},#{item.rechargeTicket},#{item.rechargeStatus},#{item.rechargeCreatetime},#{item.rechargeModifytime},#{item.v2Mirror_sn})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_recharge
+    <set>
+     <if test="rechargeId != null" >  recharge_id = #{rechargeId}, </if><if test="rechargeNo != null" >  recharge_no = #{rechargeNo}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="rechargeUser_type != null" >  recharge_user_type = #{rechargeUser_type}, </if><if test="rechargeAmount != null" >  recharge_amount = #{rechargeAmount}, </if><if test="rechargeCharge != null" >  recharge_charge = #{rechargeCharge}, </if><if test="rechargeActual_amount != null" >  recharge_actual_amount = #{rechargeActual_amount}, </if><if test="rechargeBank_code != null" >  recharge_bank_code = #{rechargeBank_code}, </if><if test="rechargeBank_account != null" >  recharge_bank_account = #{rechargeBank_account}, </if><if test="rechargeBank_account_owner_name != null" >  recharge_bank_account_owner_name = #{rechargeBank_account_owner_name}, </if><if test="rechargeBank_telephone != null" >  recharge_bank_telephone = #{rechargeBank_telephone}, </if><if test="rechargeCard_type != null" >  recharge_card_type = #{rechargeCard_type}, </if><if test="rechargeCard_attribute != null" >  recharge_card_attribute = #{rechargeCard_attribute}, </if><if test="rechargeBank_province != null" >  recharge_bank_province = #{rechargeBank_province}, </if><if test="rechargeBank_city != null" >  recharge_bank_city = #{rechargeBank_city}, </if><if test="rechargeBank_branch != null" >  recharge_bank_branch = #{rechargeBank_branch}, </if><if test="rechargeIp != null" >  recharge_ip = #{rechargeIp}, </if><if test="rechargeRemark != null" >  recharge_remark = #{rechargeRemark}, </if><if test="rechargeTicket != null" >  recharge_ticket = #{rechargeTicket}, </if><if test="rechargeStatus != null" >  recharge_status = #{rechargeStatus}, </if><if test="rechargeCreatetime != null" >  recharge_createtime = #{rechargeCreatetime}, </if><if test="rechargeModifytime != null" >  recharge_modifytime = #{rechargeModifytime}, </if><if test="v2Mirror_sn != null" >  v2_mirror_sn = #{v2Mirror_sn}, </if>
+      </set>
+	  WHERE recharge_id = #{rechargeId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_recharge 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_recharge 
+		WHERE recharge_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

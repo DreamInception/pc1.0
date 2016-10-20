@@ -1,0 +1,964 @@
+/**----------------------------- safeCenter/Common.css ------------------------------------**/
+.user-top-line{
+    width: 100%;
+    height: 2px;
+    background: #e0e3e5;
+}
+.user-active-tab{
+    border-bottom: solid 2px #e74d46 !important;
+}
+.ui-active-ghtab{
+    background: #e74d46!important;
+}
+.user-nav-list{
+    width: 209px;
+    position: relative;
+    height: 889px;
+    text-align: center;
+    overflow: hidden;
+    background: #efefef;
+    padding-top: 18px;
+    padding-left: 41px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+.user-nav-mid{
+    width: 122px;
+    height: 30px;
+    margin-top: 42.5px;
+    /*text-align: center;*/
+    padding-bottom: 12.5px;
+    /*border-bottom: solid 1px #e74d46;*/
+    border-bottom: solid 1px #808080;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+.user-nav-link{
+    font-size: 15px;
+    line-height: 15px;
+    color: #898989;
+    padding-left: 12.5px;
+}
+.user-nav-right{
+    width: 46px;
+    height: 30px;
+    margin-top: 42px;
+    border-bottom: solid 1px #fff;
+}
+.user-asset-icon,.user-account-icon,.user-asset-icon,.user-ticket-icon,.user-asset-icon,.user-asset-icon,.user-msg-icon,.user-asset-icon{
+    width: 18px;
+    padding-bottom: 3px;
+}
+.user-asset-link,.user-account-link ,.user-finance-link,.user-bonus-link,.user-message-link,.user-setting-link{
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.user-detail{
+    width: 791px;
+    overflow: auto;
+    background: #fff;
+}
+.user-index{
+    width: 100%;
+    /*height: 824px;*/
+    overflow: hidden;
+    padding: 0 35px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    background: #fff;
+}
+.user-msg-mid{
+    width: 122px;
+    height: 30px;
+    /*margin-top: 42.5px;*/
+    /*text-align: center;*/
+    padding-bottom: 12.5px;
+    /*border-bottom: solid 1px #e74d46;*/
+    border-bottom: solid 1px #808080;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+.user-msg-point{
+    margin-top: 35px;
+    margin-left: 104px;
+    color: #e64d46;
+    font-size: 13px;
+    line-height: 13px;
+    width: 13px;
+    display: block;
+}
+.user-msg-right{
+    width: 46px;
+    height: 30px;
+    /*margin-top: 42px;*/
+    border-bottom: solid 1px #fff;
+}
+/**----------------------------- safeCenter/safeGuard.html ------------------------------------**/
+
+.sg-contentWrap{
+    position: relative;
+    height: 523px;
+    width: 717px;
+    display: block;
+    margin: 0 auto;
+    padding: 0 33px;
+}
+.sg-title{
+    line-height: 16px;
+    font-size: 16px;
+    color: #727171;
+    margin-top: 30px;
+    padding-left: 12px;
+
+}
+.sg-contentWrap li{
+    line-height: 15px;
+    border-bottom: solid 1px #efefef;
+    font-size: 15px;
+    padding-top: 40px;
+    padding-bottom: 13px;
+}
+.sg-start-name{
+    margin-left: 26px;
+    width: 80px;
+    color: #595757;
+}
+.sg-middle-new{
+    width: 212px;
+    padding-left: 66px;
+    color: #9fa0a0;
+    display: none;
+    /*visibility: visible;*/
+}
+.sg-middle-origin{
+    width: 262px;
+    padding-left: 66px;
+    color: #595757;
+        display: block;
+    /*visibility: hidden;*/
+}
+
+/*.sg-phoneNum-number{*/
+    /*padding-left: 225px;*/
+    /*color: #6c6b6b;*/
+/*}*/
+/*.sg-username-ID{*/
+    /*padding-left: 128px;*/
+    /*color: #6c6b6b;*/
+/*}*/
+/*.sg-logininfo-status{*/
+    /*padding-left: 117px;*/
+    /*color: #6c6b6b;*/
+/*}*/
+/*.sg-finpsw-status{*/
+    /*padding-left: 55px;*/
+    /*color: #6c6b6b;*/
+/*}*/
+/*.sg-bankcard-status{*/
+    /*padding-left: 158px;*/
+    /*color: #6c6b6b;*/
+/*}*/
+/*.sg-logininfo-lasttime{*/
+    /*font-size: 12px;*/
+    /*color: #e74d46;*/
+/*}*/
+.sg-logininfo-link,.sg-finpsw-link,.sg-bankcard-link{
+    padding-right: 125px;
+    color: #ac9354;
+}
+
+/**----------------------------- safeCenter/resetLoginPsw.html ------------------------------------**/
+/**----------------------------- safeCenter/resetTransactPsw.html ------------------------------------**/
+.rlp-contentWrap{
+    position: relative;
+    /*height: 600px;*/
+    width: 337px;
+    overflow: hidden;
+    margin-top: 56px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 108px;
+    box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -moz-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+    -webkit-box-shadow:3px 0 4px #bababa,
+    0 3px 4px #c9c9c9;
+}
+
+.rlp-title{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    color: #fff;
+    background: #c2c2c2;
+}
+.rlp-resetLPswDiv{
+    width: 100%;
+    height: 420px;
+    text-align: center;
+    background: #f6f7f7;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 33px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.rtp-resetTPswDiv{
+    width: 100%;
+    height: 447px;
+    text-align: center;
+    background: #f6f7f7;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 33px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.rlp-phoneNum,.rlp-password,.rlp-confirmPsw{
+    width: 282px;
+    height: 38px;
+    font-size: 14px;
+ //   line-height: 38px;
+    text-indent: 22px;
+    display: block;
+    border: solid 1px #A8A8A8;
+}
+.rlp-msgCode{
+    display: block;
+    /*margin-top: 24px;*/
+    text-indent: 20px;
+    width: 55%;
+    height: 38px;
+    line-height: 38px;
+    border: solid 1px #A8A8A8;
+    font-size: 14px;
+}
+.rlp-gainPsw{
+    display: block;
+    /*margin-top: 24px;*/
+    width: 40%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #e74d46;
+    border: none;
+    color: #fff;
+	cursor: pointer;
+}
+.input-msgCode-error{
+    display: block;
+    margin-top: 20px;
+    line-height: 30px;
+    margin-left: 10px;
+    color: #e74d46;
+    visibility: hidden;
+}
+.rlp-submit{
+    display: block;
+    /*margin-top: 10px;*/
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #e74d46;
+    color: #fff;
+}
+.rlp-verifyCode{
+    width: 55%;
+    height: 38px;
+    line-height: 38px;
+    text-indent: 20px;
+    border: solid 1px #A8A8A8;
+    font-size: 14px;
+}
+.rlp-codeStyle{
+    width: 40%;
+    height: 40px;
+    /*margin-top: 10px;*/
+    font-size: 5px;
+    font-style: italic;
+    font-weight: bolder;
+    /*color: #e74d46;*/
+    text-align: center;
+    background: #ffffff;
+    border: solid 1px #A8A8A8;
+  //  padding: 2px 3px;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+/**----------------------------- safeCenter/alienLogin.html ------------------------------------**/
+.al-contentWrap {
+    position: relative;
+    height: 784px;
+    width: 791px;
+    /*background: grey;*/
+    font-size: 10px;
+    color: black;
+    overflow: hidden;
+    padding:25px 32px 20px 45px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	background-color:#fff;
+}
+.al-title{
+	font-size:16px;
+	color:#595757;
+}
+.al-remind{
+	float:right;
+	color:rgb(137,137,137);
+	font-size:13px;
+}
+.a-alter-pwd {
+	color:#ac9253;
+	}
+.al-login-detail{
+    margin-top: 32px;
+    background-color:#f6f7f7;
+
+}
+.al-title-list{
+	background-color:#c5c5c5;
+	color:#fff;
+	font-size:12px;
+	line-height:40px;
+}
+.al-container{
+    height: 602px;
+}
+.content_list {
+	line-height:45px;
+	color:#595757;
+	font-size:12px;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    width: 95%;
+    border-bottom: solid 1px #c5c5c5;
+	}
+.al-logtime-title{
+    padding-left:92px;
+}
+.al-location-title{
+    padding-left: 150px;
+}
+.al-ip-title{
+    padding-left: 135px;
+}
+.al-device-title{
+    padding-left: 100px;
+}
+.al-logtime-data{
+    text-indent: 50px;
+    width: 170px;
+    display: block;
+}
+.al-location-data{
+    text-align: right;
+    width: 130px;
+}
+.al-ip-data{
+    text-align: right;
+    width: 179px;
+}
+.al-device-data{
+    text-align: right;
+    width: 136px;
+}
+
+.p-page-a {
+	text-align:center;
+	margin-top:15px;}
+.p-page-a a {
+	font-size:10px;
+	color:#595757;
+	width:25px;
+	height:25px;
+	line-height:25px;
+	border: 1px solid #c5c5c5;
+	margin-left:5px; }
+#a-page-next {
+	width:55px;
+	}
+
+/**----------------------------- safeCenter/exchangeBind-Step1.html ------------------------------------**/
+.exchangeCardDiv{
+    width: 345px;
+    height: 605px;
+    margin-left:auto;
+    margin-right: auto;
+    position: relative;
+    padding: 0 26px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: url("../../Public/images/scInputBg.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.eb-title{
+    font-size: 16px;
+    padding-left: 45px;
+    padding-top: 30px;
+    line-height: 16px;
+    color: #727171;
+}
+.eb-bank-logo{
+    position: absolute;
+    width: 44px;
+    padding-left: 124px;
+    padding-top: 8px;
+}
+.eb-cardNum{
+    font-size: 14px;
+    padding-top: 69px;
+    line-height: 14px;
+    text-align: center;
+    color: #727171;
+}
+.eb-cardName{
+    text-align: center;
+    font-size: 14px;
+    padding-top: 22px;
+    line-height: 14px;
+    color: #727171;
+}
+.eb-firstline{
+    width: 100%;
+    height: 1px;
+    background: #d3d2d2;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+.eb-accountNum{
+    margin-top: 22px;
+    font-size: 28px;
+    color: #e74d46;
+    text-align: center;
+    line-height: 28px;
+}
+.eb-accountName{
+    margin-top: 13px;
+    font-size: 14px;
+    color: #727171;
+    text-align: center;
+    line-height: 14px;
+    margin-bottom: 16px;
+}
+.eb-contentWrap{
+    position: relative;
+    height: 600px;
+    width: 75%;
+    /*background: grey;*/
+    font-size: 10px;
+    color: black;
+    overflow: hidden;
+    border: 1px solid black;
+    padding: 30px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.eb-remind{
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: red;
+    margin-bottom: 30px;
+    text-indent: 40px;
+}
+.eb-step-tab{
+    width: 90px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    background: #d9d9d9;
+    margin-top: 28px;
+    display: inline-block;
+    font-size: 15px;
+    color: #fff;
+}
+
+.eb-phoneNum,.eb-password,.eb-confirmPsw{
+    width: 100%;
+    height: 36px;
+//    line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+}
+.eb-depositMoney,.eb-msgCode{
+    width: 67%;
+    height: 36px;
+//    line-height: 36px;
+    text-indent: 20px;
+    font-size: 14px;
+    color: #727171;
+}
+.eb-allMoney,.eb-gainPsw{
+    width: 31.6%;
+    height: 40px;
+    line-height: 36px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background: #e74d46;
+    color: #fff;
+    cursor: pointer;
+}
+.input-msgCode-error{
+    display: block;
+    margin-top: 20px;
+    line-height: 30px;
+    margin-left: 10px;
+    color: red;
+    visibility: hidden;
+}
+.eb-withdraw{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #fff;
+    margin-top: 42px;
+    background:  #e74d46;
+    text-align: center;
+}
+.eb-bindcard{
+    display: none;
+    margin-top: 60px;
+    width: 70%;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 15%;
+    text-align: center;
+    background: red;
+}
+
+.eb-withdraw-area{
+    display: block;
+    margin-top: 27px;
+    text-align: center;
+    margin-bottom: 52px;
+}
+.eb-withdraw-area p{
+    font-size: 10px;
+    color: #727171;
+    -webkit-transform: scale(0.8);
+    text-align: center;
+    line-height: 10px;
+    padding-bottom: 8px;
+}
+.eb-bind-area{
+    display: none;
+}
+/**----------------------------- safeCenter/exchangeBind-Step2.html ------------------------------------**/
+.exchangeCardDiv2{
+    width: 350px;
+    height: 509px;
+    margin-left:auto;
+    margin-right: auto;
+    position: relative;
+    padding: 0 26px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background: url("../../Public/images/scInputBg2.png") no-repeat;
+    background-size: 100% 100%;
+    margin-top: 22px;
+    margin-bottom: 81px;
+}
+.user-bc-title{
+    width: 100%;
+    font-size: 10px;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+    padding-top: 15px;
+}
+.bindCardDiv{
+    position: relative;
+    width: 350px;
+    height: 549px;
+    margin-left:auto;
+    margin-right: auto;
+    position: relative;
+    background: url("../../Public/images/scBindCardBg.png") no-repeat;
+    background-size: 100% 100%;
+    margin-top: 22px;
+    margin-bottom: 81px;
+    padding: 0 26px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.eb-card-name{
+    width: 100%;
+    height: 36px;
+ //   line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+    margin-top: 32px;
+}
+.eb-card-area{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.eb-province{
+    width: 49%;
+    height: 36px;
+ //   line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+    display: inline-block;
+}
+.eb-city{
+    width: 49%;
+    height: 36px;
+//    line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+    /*margin-left: 5%;*/
+    display: inline-block;
+}
+.eb-bankname,.eb-cardNumber{
+    width: 100%;
+    height: 36px;
+//    line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+    margin-top: 16px;
+}
+.eb-bank-phoneNum{
+    width: 100%;
+    height: 36px;
+//    line-height: 36px;
+    font-size: 14px;
+    color: #727171;
+    text-indent: 24px;
+}
+.eb-errorMsg{
+    color: #af5c46;
+    height: 10px;
+    line-height: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 12px;
+    visibility: hidden;
+    -webkit-transform: scale(0.8);
+  -webkit-transform-origin-x:0;
+}
+.eb-sms{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sms-gainCode{
+    width: 31.6%;
+    height: 40px;
+    line-height: 36px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background: #e74d46;
+    color: #fff;
+}
+.sms-msgCode{
+    width: 67%;
+    height: 36px;
+    line-height: 36px;
+    text-indent: 20px;
+    font-size: 14px;
+    color: #727171;
+}
+.eb-checkbox{
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
+    margin-top: 20px;
+    display: none;
+}
+.uia-agreement{
+    font-size: 11px;
+    line-height: 11px;
+    color: #727171;
+    /*margin-left: 10px;*/
+}
+.eb-agreeDiv{
+    margin-top: 12px;
+}
+.eb-agreement {
+    margin-left: 10px;
+}
+.eb-confirm{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #fff;
+    margin-top: 10px;
+    background:  #e74d46;
+    text-align: center;
+}
+.agreement{
+    display: inline-block;
+    color: #a78e54;
+}
+.eb-safeinfo{
+    line-height: 11px;
+    font-size: 11px;
+    color: #727171;
+    margin-top: 21px;
+    text-align: center;
+}
+
+
+/**----------------------------- safeCenter/bindCardSuccess.html ------------------------------------**/
+.bc-contentWrap{
+    position: relative;
+    height: 510px;
+}
+.bc-face{
+    margin-top: 142px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45px;;
+    display: block;
+}
+.bc-title{
+    margin-top: 16px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 22px;
+    color: #727171;
+    text-indent: 20px;
+}
+.bc-return{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    color: #727171;
+}
+.bc-return-link{
+    color: #a78e54;
+}
+.bc-mid-content{
+    margin-top: 36px;
+}
+.bc-mid-content li{
+    font-size: 14px;
+    line-height: 14px;
+    padding-bottom: 15px;
+    color: #727171;
+    text-align: center;
+}
+.bc-back-btn{
+    width: 159px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #e74d46;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 29px;
+}
+/**----------------------------- safeCenter/resetLoginPsw-Success.html ------------------------------------**/
+.rlp-success-content{
+    position: relative;
+    height: 510px;
+}
+.user-rlp-img{
+    margin-top: 142px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45px;;
+    display: block;
+}
+.rlp-success-title{
+    margin-top: 16px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 22px;
+    color: #727171;
+    text-indent: 20px;
+}
+.rlp-return{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    color: #727171;
+}
+.user-rlp-link{
+    color: #a78e54;
+}
+/**----------------------------- safeCenter/resetTransactPsw-Success.html ------------------------------------**/
+.rtp-success-content{
+    position: relative;
+    height: 510px;
+}
+.user-rtp-img{
+    margin-top: 142px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45px;;
+    display: block;
+}
+.rtp-title{
+    margin-top: 16px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 22px;
+    color: #727171;
+    text-indent: 20px;
+}
+.rtp-return{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    color: #727171;
+}
+.user-rtp-link{
+    color: #a78e54;
+}
+
+/**----------------------------- safeCenter/withdrawFail.html ------------------------------------**/
+.wf-contentWrap{
+    position: relative;
+    height: 510px;
+}
+.wf-face{
+    margin-top: 142px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45px;;
+    display: block;
+}
+.wf-title{
+    margin-top: 16px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 22px;
+    color: #727171;
+    text-indent: 20px;
+}
+.wf-mid-content{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    color: #727171;
+}
+
+.wf-mid-content li{
+    font-size: 14px;
+    line-height: 14px;
+    padding-bottom: 15px;
+    color: #727171;
+    text-align: center;
+}
+.wf-back-btn{
+    width: 159px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #e74d46;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 29px;
+}
+
+/**----------------------------- safeCenter/accountFrozen.html ------------------------------------**/
+.af-contentWrap{
+    position: relative;
+    height: 510px;
+    margin-top: 142px;
+}
+.af-face{
+    margin-left: auto;
+    margin-right: auto;
+    width: 45px;;
+    display: block;
+}
+.af-wenhao{
+	width:12px;
+	height:12px;
+	margin:0 10px 15px;
+}
+.af-title{
+    margin-top: 16px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 22px;
+    color: #727171;
+    text-indent: 20px;
+}
+.af-content{
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 14px;
+    color: #727171;
+}
+.af-content li {
+    font-size: 14px;
+    line-height: 14px;
+    padding-bottom: 15px;
+    color: #727171;
+    text-align: center;
+}
+.s-red-prompt {
+	color:#e74d46;
+	}
+.af-retry{
+    width: 159px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #e74d46;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 29px;
+}

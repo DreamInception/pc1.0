@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_plan_trigger_related">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND tiyan_plan_trigger_related.id = #{id}</if> <if test="planId != null and '' != planId" > AND tiyan_plan_trigger_related.plan_id = #{planId}</if> <if test="triggerCondition_id != null and '' != triggerCondition_id" > AND tiyan_plan_trigger_related.trigger_condition_id = #{triggerCondition_id}</if> <if test="triggerOrder != null and '' != triggerOrder" > AND tiyan_plan_trigger_related.trigger_order = #{triggerOrder}</if> <if test="state != null and '' != state" > AND tiyan_plan_trigger_related.state = #{state}</if> <if test="createTime != null and '' != createTime" > AND tiyan_plan_trigger_related.create_time = #{createTime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="planId != null and '' != planId" > AND plan_id = #{planId}</if> <if test="triggerCondition_id != null and '' != triggerCondition_id" > AND trigger_condition_id = #{triggerCondition_id}</if> <if test="triggerOrder != null and '' != triggerOrder" > AND trigger_order = #{triggerOrder}</if> <if test="state != null and '' != state" > AND state = #{state}</if> <if test="createTime != null and '' != createTime" > AND create_time = #{createTime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_plan_trigger_related AS tiyan_plan_trigger_related
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_plan_trigger_related.id as id, tiyan_plan_trigger_related.plan_id as planId, tiyan_plan_trigger_related.trigger_condition_id as triggerCondition_id, tiyan_plan_trigger_related.trigger_order as triggerOrder, tiyan_plan_trigger_related.state as state, tiyan_plan_trigger_related.create_time as createTime FROM dr_tiyan_plan_trigger_related AS tiyan_plan_trigger_related WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_plan_trigger_related.id as id, tiyan_plan_trigger_related.plan_id as planId, tiyan_plan_trigger_related.trigger_condition_id as triggerCondition_id, tiyan_plan_trigger_related.trigger_order as triggerOrder, tiyan_plan_trigger_related.state as state, tiyan_plan_trigger_related.create_time as createTime FROM dr_tiyan_plan_trigger_related AS tiyan_plan_trigger_related
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_plan_trigger_related.id as id, tiyan_plan_trigger_related.plan_id as planId, tiyan_plan_trigger_related.trigger_condition_id as triggerCondition_id, tiyan_plan_trigger_related.trigger_order as triggerOrder, tiyan_plan_trigger_related.state as state, tiyan_plan_trigger_related.create_time as createTime FROM dr_tiyan_plan_trigger_related AS tiyan_plan_trigger_related  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_plan_trigger_related 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="planId != null">plan_id,</if><if test="triggerCondition_id != null">trigger_condition_id,</if><if test="triggerOrder != null">trigger_order,</if><if test="state != null">state,</if><if test="createTime != null">create_time,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="planId != null">#{planId},</if><if test="triggerCondition_id != null">#{triggerCondition_id},</if><if test="triggerOrder != null">#{triggerOrder},</if><if test="state != null">#{state},</if><if test="createTime != null">#{createTime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_plan_trigger_related (id,plan_id,trigger_condition_id,trigger_order,state,create_time)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.planId},#{item.triggerCondition_id},#{item.triggerOrder},#{item.state},#{item.createTime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_plan_trigger_related
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="planId != null" >  plan_id = #{planId}, </if><if test="triggerCondition_id != null" >  trigger_condition_id = #{triggerCondition_id}, </if><if test="triggerOrder != null" >  trigger_order = #{triggerOrder}, </if><if test="state != null" >  state = #{state}, </if><if test="createTime != null" >  create_time = #{createTime}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_plan_trigger_related 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_plan_trigger_related 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

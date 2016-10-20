@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_areas">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="areaId != null and '' != areaId" > AND areas.area_id = #{areaId}</if> <if test="parentId != null and '' != parentId" > AND areas.parent_id = #{parentId}</if> <if test="areaName != null and '' != areaName" > AND areas.area_name = #{areaName}</if> <if test="pyName != null and '' != pyName" > AND areas.py_name = #{pyName}</if> <if test="headPy_name != null and '' != headPy_name" > AND areas.head_py_name = #{headPy_name}</if> <if test="zipcode != null and '' != zipcode" > AND areas.zipcode = #{zipcode}</if> <if test="areaType != null and '' != areaType" > AND areas.area_type = #{areaType}</if> <if test="special != null and '' != special" > AND areas.special = #{special}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="areaId != null and '' != areaId" > AND area_id = #{areaId}</if> <if test="parentId != null and '' != parentId" > AND parent_id = #{parentId}</if> <if test="areaName != null and '' != areaName" > AND area_name = #{areaName}</if> <if test="pyName != null and '' != pyName" > AND py_name = #{pyName}</if> <if test="headPy_name != null and '' != headPy_name" > AND head_py_name = #{headPy_name}</if> <if test="zipcode != null and '' != zipcode" > AND zipcode = #{zipcode}</if> <if test="areaType != null and '' != areaType" > AND area_type = #{areaType}</if> <if test="special != null and '' != special" > AND special = #{special}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_areas AS areas
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT areas.area_id as areaId, areas.parent_id as parentId, areas.area_name as areaName, areas.py_name as pyName, areas.head_py_name as headPy_name, areas.zipcode as zipcode, areas.area_type as areaType, areas.special as special FROM dr_areas AS areas WHERE area_id = #{areaId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT areas.area_id as areaId, areas.parent_id as parentId, areas.area_name as areaName, areas.py_name as pyName, areas.head_py_name as headPy_name, areas.zipcode as zipcode, areas.area_type as areaType, areas.special as special FROM dr_areas AS areas
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT areas.area_id as areaId, areas.parent_id as parentId, areas.area_name as areaName, areas.py_name as pyName, areas.head_py_name as headPy_name, areas.zipcode as zipcode, areas.area_type as areaType, areas.special as special FROM dr_areas AS areas  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_areas 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="areaId != null">area_id,</if><if test="parentId != null">parent_id,</if><if test="areaName != null">area_name,</if><if test="pyName != null">py_name,</if><if test="headPy_name != null">head_py_name,</if><if test="zipcode != null">zipcode,</if><if test="areaType != null">area_type,</if><if test="special != null">special,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="areaId != null">#{areaId},</if><if test="parentId != null">#{parentId},</if><if test="areaName != null">#{areaName},</if><if test="pyName != null">#{pyName},</if><if test="headPy_name != null">#{headPy_name},</if><if test="zipcode != null">#{zipcode},</if><if test="areaType != null">#{areaType},</if><if test="special != null">#{special},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_areas (area_id,parent_id,area_name,py_name,head_py_name,zipcode,area_type,special)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.areaId},#{item.parentId},#{item.areaName},#{item.pyName},#{item.headPy_name},#{item.zipcode},#{item.areaType},#{item.special})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_areas
+    <set>
+     <if test="areaId != null" >  area_id = #{areaId}, </if><if test="parentId != null" >  parent_id = #{parentId}, </if><if test="areaName != null" >  area_name = #{areaName}, </if><if test="pyName != null" >  py_name = #{pyName}, </if><if test="headPy_name != null" >  head_py_name = #{headPy_name}, </if><if test="zipcode != null" >  zipcode = #{zipcode}, </if><if test="areaType != null" >  area_type = #{areaType}, </if><if test="special != null" >  special = #{special}, </if>
+      </set>
+	  WHERE area_id = #{areaId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_areas 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_areas 
+		WHERE area_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,26 @@
+package {service_package}.impl;
+
+
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import {service_package}.Basis{简化大写首字母表名}Service;
+import dr.web.common.base.InterfaceServiceImpl;
+
+/**
+ * 
+ * @包名 :{service_package}.impl
+ * @文件名 :{文件名称}
+ * @系统名称 : {系统名称}
+ * @Author: {Author}
+ * @Date: 2016-3-16下午5:00:00
+ * @版本号 :{版本号}
+ */
+@Service(value = "basis{简化大写首字母表名}Service")
+public class Basis{简化大写首字母表名}ServiceImpl extends InterfaceServiceImpl<Map<String, Object>>  implements Basis{简化大写首字母表名}Service {
+	public static final String nameSpace = "basis_{简化小写表名}";
+
+	@Override
+	public String getNamespace() {
+		return nameSpace;
+	}
+}

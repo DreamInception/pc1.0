@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_contract">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="contractId != null and '' != contractId" > AND contract.contract_id = #{contractId}</if> <if test="contractNo != null and '' != contractNo" > AND contract.contract_no = #{contractNo}</if> <if test="instId != null and '' != instId" > AND contract.inst_id = #{instId}</if> <if test="contractProvisions != null and '' != contractProvisions" > AND contract.contract_provisions = #{contractProvisions}</if> <if test="contractInsurancepolicy != null and '' != contractInsurancepolicy" > AND contract.contract_insurancepolicy = #{contractInsurancepolicy}</if> <if test="contractCreatetime != null and '' != contractCreatetime" > AND contract.contract_createtime = #{contractCreatetime}</if> <if test="contractModifytime != null and '' != contractModifytime" > AND contract.contract_modifytime = #{contractModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="contractId != null and '' != contractId" > AND contract_id = #{contractId}</if> <if test="contractNo != null and '' != contractNo" > AND contract_no = #{contractNo}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="contractProvisions != null and '' != contractProvisions" > AND contract_provisions = #{contractProvisions}</if> <if test="contractInsurancepolicy != null and '' != contractInsurancepolicy" > AND contract_insurancepolicy = #{contractInsurancepolicy}</if> <if test="contractCreatetime != null and '' != contractCreatetime" > AND contract_createtime = #{contractCreatetime}</if> <if test="contractModifytime != null and '' != contractModifytime" > AND contract_modifytime = #{contractModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_contract AS contract
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT contract.contract_id as contractId, contract.contract_no as contractNo, contract.inst_id as instId, contract.contract_provisions as contractProvisions, contract.contract_insurancepolicy as contractInsurancepolicy, contract.contract_createtime as contractCreatetime, contract.contract_modifytime as contractModifytime FROM dr_contract AS contract WHERE contract_id = #{contractId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT contract.contract_id as contractId, contract.contract_no as contractNo, contract.inst_id as instId, contract.contract_provisions as contractProvisions, contract.contract_insurancepolicy as contractInsurancepolicy, contract.contract_createtime as contractCreatetime, contract.contract_modifytime as contractModifytime FROM dr_contract AS contract
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT contract.contract_id as contractId, contract.contract_no as contractNo, contract.inst_id as instId, contract.contract_provisions as contractProvisions, contract.contract_insurancepolicy as contractInsurancepolicy, contract.contract_createtime as contractCreatetime, contract.contract_modifytime as contractModifytime FROM dr_contract AS contract  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_contract 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="contractId != null">contract_id,</if><if test="contractNo != null">contract_no,</if><if test="instId != null">inst_id,</if><if test="contractProvisions != null">contract_provisions,</if><if test="contractInsurancepolicy != null">contract_insurancepolicy,</if><if test="contractCreatetime != null">contract_createtime,</if><if test="contractModifytime != null">contract_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="contractId != null">#{contractId},</if><if test="contractNo != null">#{contractNo},</if><if test="instId != null">#{instId},</if><if test="contractProvisions != null">#{contractProvisions},</if><if test="contractInsurancepolicy != null">#{contractInsurancepolicy},</if><if test="contractCreatetime != null">#{contractCreatetime},</if><if test="contractModifytime != null">#{contractModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_contract (contract_id,contract_no,inst_id,contract_provisions,contract_insurancepolicy,contract_createtime,contract_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.contractId},#{item.contractNo},#{item.instId},#{item.contractProvisions},#{item.contractInsurancepolicy},#{item.contractCreatetime},#{item.contractModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_contract
+    <set>
+     <if test="contractId != null" >  contract_id = #{contractId}, </if><if test="contractNo != null" >  contract_no = #{contractNo}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="contractProvisions != null" >  contract_provisions = #{contractProvisions}, </if><if test="contractInsurancepolicy != null" >  contract_insurancepolicy = #{contractInsurancepolicy}, </if><if test="contractCreatetime != null" >  contract_createtime = #{contractCreatetime}, </if><if test="contractModifytime != null" >  contract_modifytime = #{contractModifytime}, </if>
+      </set>
+	  WHERE contract_id = #{contractId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_contract 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_contract 
+		WHERE contract_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_pay_user_recharge">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND pay_user_recharge.id = #{id}</if> <if test="userId != null and '' != userId" > AND pay_user_recharge.user_id = #{userId}</if> <if test="channelId != null and '' != channelId" > AND pay_user_recharge.channel_id = #{channelId}</if> <if test="mchntId != null and '' != mchntId" > AND pay_user_recharge.mchnt_id = #{mchntId}</if> <if test="transId != null and '' != transId" > AND pay_user_recharge.trans_id = #{transId}</if> <if test="tradeNo != null and '' != tradeNo" > AND pay_user_recharge.trade_no = #{tradeNo}</if> <if test="orderAmt != null and '' != orderAmt" > AND pay_user_recharge.order_amt = #{orderAmt}</if> <if test="state != null and '' != state" > AND pay_user_recharge.state = #{state}</if> <if test="returnCode != null and '' != returnCode" > AND pay_user_recharge.return_code = #{returnCode}</if> <if test="returnMsg != null and '' != returnMsg" > AND pay_user_recharge.return_msg = #{returnMsg}</if> <if test="createDt != null and '' != createDt" > AND pay_user_recharge.create_dt = #{createDt}</if> <if test="modifiedTs != null and '' != modifiedTs" > AND pay_user_recharge.modified_ts = #{modifiedTs}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="userId != null and '' != userId" > AND user_id = #{userId}</if> <if test="channelId != null and '' != channelId" > AND channel_id = #{channelId}</if> <if test="mchntId != null and '' != mchntId" > AND mchnt_id = #{mchntId}</if> <if test="transId != null and '' != transId" > AND trans_id = #{transId}</if> <if test="tradeNo != null and '' != tradeNo" > AND trade_no = #{tradeNo}</if> <if test="orderAmt != null and '' != orderAmt" > AND order_amt = #{orderAmt}</if> <if test="state != null and '' != state" > AND state = #{state}</if> <if test="returnCode != null and '' != returnCode" > AND return_code = #{returnCode}</if> <if test="returnMsg != null and '' != returnMsg" > AND return_msg = #{returnMsg}</if> <if test="createDt != null and '' != createDt" > AND create_dt = #{createDt}</if> <if test="modifiedTs != null and '' != modifiedTs" > AND modified_ts = #{modifiedTs}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_pay_user_recharge AS pay_user_recharge
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT pay_user_recharge.id as id, pay_user_recharge.user_id as userId, pay_user_recharge.channel_id as channelId, pay_user_recharge.mchnt_id as mchntId, pay_user_recharge.trans_id as transId, pay_user_recharge.trade_no as tradeNo, pay_user_recharge.order_amt as orderAmt, pay_user_recharge.state as state, pay_user_recharge.return_code as returnCode, pay_user_recharge.return_msg as returnMsg, pay_user_recharge.create_dt as createDt, pay_user_recharge.modified_ts as modifiedTs FROM dr_pay_user_recharge AS pay_user_recharge WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT pay_user_recharge.id as id, pay_user_recharge.user_id as userId, pay_user_recharge.channel_id as channelId, pay_user_recharge.mchnt_id as mchntId, pay_user_recharge.trans_id as transId, pay_user_recharge.trade_no as tradeNo, pay_user_recharge.order_amt as orderAmt, pay_user_recharge.state as state, pay_user_recharge.return_code as returnCode, pay_user_recharge.return_msg as returnMsg, pay_user_recharge.create_dt as createDt, pay_user_recharge.modified_ts as modifiedTs FROM dr_pay_user_recharge AS pay_user_recharge
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT pay_user_recharge.id as id, pay_user_recharge.user_id as userId, pay_user_recharge.channel_id as channelId, pay_user_recharge.mchnt_id as mchntId, pay_user_recharge.trans_id as transId, pay_user_recharge.trade_no as tradeNo, pay_user_recharge.order_amt as orderAmt, pay_user_recharge.state as state, pay_user_recharge.return_code as returnCode, pay_user_recharge.return_msg as returnMsg, pay_user_recharge.create_dt as createDt, pay_user_recharge.modified_ts as modifiedTs FROM dr_pay_user_recharge AS pay_user_recharge  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_pay_user_recharge 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="userId != null">user_id,</if><if test="channelId != null">channel_id,</if><if test="mchntId != null">mchnt_id,</if><if test="transId != null">trans_id,</if><if test="tradeNo != null">trade_no,</if><if test="orderAmt != null">order_amt,</if><if test="state != null">state,</if><if test="returnCode != null">return_code,</if><if test="returnMsg != null">return_msg,</if><if test="createDt != null">create_dt,</if><if test="modifiedTs != null">modified_ts,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="userId != null">#{userId},</if><if test="channelId != null">#{channelId},</if><if test="mchntId != null">#{mchntId},</if><if test="transId != null">#{transId},</if><if test="tradeNo != null">#{tradeNo},</if><if test="orderAmt != null">#{orderAmt},</if><if test="state != null">#{state},</if><if test="returnCode != null">#{returnCode},</if><if test="returnMsg != null">#{returnMsg},</if><if test="createDt != null">#{createDt},</if><if test="modifiedTs != null">#{modifiedTs},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_pay_user_recharge (id,user_id,channel_id,mchnt_id,trans_id,trade_no,order_amt,state,return_code,return_msg,create_dt,modified_ts)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.userId},#{item.channelId},#{item.mchntId},#{item.transId},#{item.tradeNo},#{item.orderAmt},#{item.state},#{item.returnCode},#{item.returnMsg},#{item.createDt},#{item.modifiedTs})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_pay_user_recharge
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="userId != null" >  user_id = #{userId}, </if><if test="channelId != null" >  channel_id = #{channelId}, </if><if test="mchntId != null" >  mchnt_id = #{mchntId}, </if><if test="transId != null" >  trans_id = #{transId}, </if><if test="tradeNo != null" >  trade_no = #{tradeNo}, </if><if test="orderAmt != null" >  order_amt = #{orderAmt}, </if><if test="state != null" >  state = #{state}, </if><if test="returnCode != null" >  return_code = #{returnCode}, </if><if test="returnMsg != null" >  return_msg = #{returnMsg}, </if><if test="createDt != null" >  create_dt = #{createDt}, </if><if test="modifiedTs != null" >  modified_ts = #{modifiedTs}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_pay_user_recharge 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_pay_user_recharge 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

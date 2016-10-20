@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_system_config">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="configId != null and '' != configId" > AND system_config.config_id = #{configId}</if> <if test="configName != null and '' != configName" > AND system_config.config_name = #{configName}</if> <if test="configValue != null and '' != configValue" > AND system_config.config_value = #{configValue}</if> <if test="configCreate_dt != null and '' != configCreate_dt" > AND system_config.config_create_dt = #{configCreate_dt}</if> <if test="configModified_dt != null and '' != configModified_dt" > AND system_config.config_modified_dt = #{configModified_dt}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="configId != null and '' != configId" > AND config_id = #{configId}</if> <if test="configName != null and '' != configName" > AND config_name = #{configName}</if> <if test="configValue != null and '' != configValue" > AND config_value = #{configValue}</if> <if test="configCreate_dt != null and '' != configCreate_dt" > AND config_create_dt = #{configCreate_dt}</if> <if test="configModified_dt != null and '' != configModified_dt" > AND config_modified_dt = #{configModified_dt}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_system_config AS system_config
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT system_config.config_id as configId, system_config.config_name as configName, system_config.config_value as configValue, system_config.config_create_dt as configCreate_dt, system_config.config_modified_dt as configModified_dt FROM dr_system_config AS system_config WHERE config_id = #{configId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT system_config.config_id as configId, system_config.config_name as configName, system_config.config_value as configValue, system_config.config_create_dt as configCreate_dt, system_config.config_modified_dt as configModified_dt FROM dr_system_config AS system_config
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT system_config.config_id as configId, system_config.config_name as configName, system_config.config_value as configValue, system_config.config_create_dt as configCreate_dt, system_config.config_modified_dt as configModified_dt FROM dr_system_config AS system_config  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_system_config 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="configId != null">config_id,</if><if test="configName != null">config_name,</if><if test="configValue != null">config_value,</if><if test="configCreate_dt != null">config_create_dt,</if><if test="configModified_dt != null">config_modified_dt,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="configId != null">#{configId},</if><if test="configName != null">#{configName},</if><if test="configValue != null">#{configValue},</if><if test="configCreate_dt != null">#{configCreate_dt},</if><if test="configModified_dt != null">#{configModified_dt},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_system_config (config_id,config_name,config_value,config_create_dt,config_modified_dt)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.configId},#{item.configName},#{item.configValue},#{item.configCreate_dt},#{item.configModified_dt})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_system_config
+    <set>
+     <if test="configId != null" >  config_id = #{configId}, </if><if test="configName != null" >  config_name = #{configName}, </if><if test="configValue != null" >  config_value = #{configValue}, </if><if test="configCreate_dt != null" >  config_create_dt = #{configCreate_dt}, </if><if test="configModified_dt != null" >  config_modified_dt = #{configModified_dt}, </if>
+      </set>
+	  WHERE config_id = #{configId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_system_config 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_system_config 
+		WHERE config_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

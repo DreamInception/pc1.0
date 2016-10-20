@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_institution_file">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="fileId != null and '' != fileId" > AND institution_file.file_id = #{fileId}</if> <if test="instId != null and '' != instId" > AND institution_file.inst_id = #{instId}</if> <if test="instNo != null and '' != instNo" > AND institution_file.inst_no = #{instNo}</if> <if test="fileRemote_path != null and '' != fileRemote_path" > AND institution_file.file_remote_path = #{fileRemote_path}</if> <if test="fileLocal_path != null and '' != fileLocal_path" > AND institution_file.file_local_path = #{fileLocal_path}</if> <if test="fileName != null and '' != fileName" > AND institution_file.file_name = #{fileName}</if> <if test="fileDate != null and '' != fileDate" > AND institution_file.file_date = #{fileDate}</if> <if test="fileSize != null and '' != fileSize" > AND institution_file.file_size = #{fileSize}</if> <if test="fileAtime != null and '' != fileAtime" > AND institution_file.file_atime = #{fileAtime}</if> <if test="fileMtime != null and '' != fileMtime" > AND institution_file.file_mtime = #{fileMtime}</if> <if test="fileType != null and '' != fileType" > AND institution_file.file_type = #{fileType}</if> <if test="fileNo != null and '' != fileNo" > AND institution_file.file_no = #{fileNo}</if> <if test="fileFrom != null and '' != fileFrom" > AND institution_file.file_from = #{fileFrom}</if> <if test="fileStatus != null and '' != fileStatus" > AND institution_file.file_status = #{fileStatus}</if> <if test="fileHandle_msg != null and '' != fileHandle_msg" > AND institution_file.file_handle_msg = #{fileHandle_msg}</if> <if test="fileCreatetime != null and '' != fileCreatetime" > AND institution_file.file_createtime = #{fileCreatetime}</if> <if test="fileModifytime != null and '' != fileModifytime" > AND institution_file.file_modifytime = #{fileModifytime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="fileId != null and '' != fileId" > AND file_id = #{fileId}</if> <if test="instId != null and '' != instId" > AND inst_id = #{instId}</if> <if test="instNo != null and '' != instNo" > AND inst_no = #{instNo}</if> <if test="fileRemote_path != null and '' != fileRemote_path" > AND file_remote_path = #{fileRemote_path}</if> <if test="fileLocal_path != null and '' != fileLocal_path" > AND file_local_path = #{fileLocal_path}</if> <if test="fileName != null and '' != fileName" > AND file_name = #{fileName}</if> <if test="fileDate != null and '' != fileDate" > AND file_date = #{fileDate}</if> <if test="fileSize != null and '' != fileSize" > AND file_size = #{fileSize}</if> <if test="fileAtime != null and '' != fileAtime" > AND file_atime = #{fileAtime}</if> <if test="fileMtime != null and '' != fileMtime" > AND file_mtime = #{fileMtime}</if> <if test="fileType != null and '' != fileType" > AND file_type = #{fileType}</if> <if test="fileNo != null and '' != fileNo" > AND file_no = #{fileNo}</if> <if test="fileFrom != null and '' != fileFrom" > AND file_from = #{fileFrom}</if> <if test="fileStatus != null and '' != fileStatus" > AND file_status = #{fileStatus}</if> <if test="fileHandle_msg != null and '' != fileHandle_msg" > AND file_handle_msg = #{fileHandle_msg}</if> <if test="fileCreatetime != null and '' != fileCreatetime" > AND file_createtime = #{fileCreatetime}</if> <if test="fileModifytime != null and '' != fileModifytime" > AND file_modifytime = #{fileModifytime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_institution_file AS institution_file
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT institution_file.file_id as fileId, institution_file.inst_id as instId, institution_file.inst_no as instNo, institution_file.file_remote_path as fileRemote_path, institution_file.file_local_path as fileLocal_path, institution_file.file_name as fileName, institution_file.file_date as fileDate, institution_file.file_size as fileSize, institution_file.file_atime as fileAtime, institution_file.file_mtime as fileMtime, institution_file.file_type as fileType, institution_file.file_no as fileNo, institution_file.file_from as fileFrom, institution_file.file_status as fileStatus, institution_file.file_handle_msg as fileHandle_msg, institution_file.file_createtime as fileCreatetime, institution_file.file_modifytime as fileModifytime FROM dr_institution_file AS institution_file WHERE file_id = #{fileId}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT institution_file.file_id as fileId, institution_file.inst_id as instId, institution_file.inst_no as instNo, institution_file.file_remote_path as fileRemote_path, institution_file.file_local_path as fileLocal_path, institution_file.file_name as fileName, institution_file.file_date as fileDate, institution_file.file_size as fileSize, institution_file.file_atime as fileAtime, institution_file.file_mtime as fileMtime, institution_file.file_type as fileType, institution_file.file_no as fileNo, institution_file.file_from as fileFrom, institution_file.file_status as fileStatus, institution_file.file_handle_msg as fileHandle_msg, institution_file.file_createtime as fileCreatetime, institution_file.file_modifytime as fileModifytime FROM dr_institution_file AS institution_file
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT institution_file.file_id as fileId, institution_file.inst_id as instId, institution_file.inst_no as instNo, institution_file.file_remote_path as fileRemote_path, institution_file.file_local_path as fileLocal_path, institution_file.file_name as fileName, institution_file.file_date as fileDate, institution_file.file_size as fileSize, institution_file.file_atime as fileAtime, institution_file.file_mtime as fileMtime, institution_file.file_type as fileType, institution_file.file_no as fileNo, institution_file.file_from as fileFrom, institution_file.file_status as fileStatus, institution_file.file_handle_msg as fileHandle_msg, institution_file.file_createtime as fileCreatetime, institution_file.file_modifytime as fileModifytime FROM dr_institution_file AS institution_file  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_institution_file 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fileId != null">file_id,</if><if test="instId != null">inst_id,</if><if test="instNo != null">inst_no,</if><if test="fileRemote_path != null">file_remote_path,</if><if test="fileLocal_path != null">file_local_path,</if><if test="fileName != null">file_name,</if><if test="fileDate != null">file_date,</if><if test="fileSize != null">file_size,</if><if test="fileAtime != null">file_atime,</if><if test="fileMtime != null">file_mtime,</if><if test="fileType != null">file_type,</if><if test="fileNo != null">file_no,</if><if test="fileFrom != null">file_from,</if><if test="fileStatus != null">file_status,</if><if test="fileHandle_msg != null">file_handle_msg,</if><if test="fileCreatetime != null">file_createtime,</if><if test="fileModifytime != null">file_modifytime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="fileId != null">#{fileId},</if><if test="instId != null">#{instId},</if><if test="instNo != null">#{instNo},</if><if test="fileRemote_path != null">#{fileRemote_path},</if><if test="fileLocal_path != null">#{fileLocal_path},</if><if test="fileName != null">#{fileName},</if><if test="fileDate != null">#{fileDate},</if><if test="fileSize != null">#{fileSize},</if><if test="fileAtime != null">#{fileAtime},</if><if test="fileMtime != null">#{fileMtime},</if><if test="fileType != null">#{fileType},</if><if test="fileNo != null">#{fileNo},</if><if test="fileFrom != null">#{fileFrom},</if><if test="fileStatus != null">#{fileStatus},</if><if test="fileHandle_msg != null">#{fileHandle_msg},</if><if test="fileCreatetime != null">#{fileCreatetime},</if><if test="fileModifytime != null">#{fileModifytime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_institution_file (file_id,inst_id,inst_no,file_remote_path,file_local_path,file_name,file_date,file_size,file_atime,file_mtime,file_type,file_no,file_from,file_status,file_handle_msg,file_createtime,file_modifytime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.fileId},#{item.instId},#{item.instNo},#{item.fileRemote_path},#{item.fileLocal_path},#{item.fileName},#{item.fileDate},#{item.fileSize},#{item.fileAtime},#{item.fileMtime},#{item.fileType},#{item.fileNo},#{item.fileFrom},#{item.fileStatus},#{item.fileHandle_msg},#{item.fileCreatetime},#{item.fileModifytime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_institution_file
+    <set>
+     <if test="fileId != null" >  file_id = #{fileId}, </if><if test="instId != null" >  inst_id = #{instId}, </if><if test="instNo != null" >  inst_no = #{instNo}, </if><if test="fileRemote_path != null" >  file_remote_path = #{fileRemote_path}, </if><if test="fileLocal_path != null" >  file_local_path = #{fileLocal_path}, </if><if test="fileName != null" >  file_name = #{fileName}, </if><if test="fileDate != null" >  file_date = #{fileDate}, </if><if test="fileSize != null" >  file_size = #{fileSize}, </if><if test="fileAtime != null" >  file_atime = #{fileAtime}, </if><if test="fileMtime != null" >  file_mtime = #{fileMtime}, </if><if test="fileType != null" >  file_type = #{fileType}, </if><if test="fileNo != null" >  file_no = #{fileNo}, </if><if test="fileFrom != null" >  file_from = #{fileFrom}, </if><if test="fileStatus != null" >  file_status = #{fileStatus}, </if><if test="fileHandle_msg != null" >  file_handle_msg = #{fileHandle_msg}, </if><if test="fileCreatetime != null" >  file_createtime = #{fileCreatetime}, </if><if test="fileModifytime != null" >  file_modifytime = #{fileModifytime}, </if>
+      </set>
+	  WHERE file_id = #{fileId}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_institution_file 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_institution_file 
+		WHERE file_id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_api_sms_verify">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND api_sms_verify.id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND api_sms_verify.created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND api_sms_verify.last_modified_dt = #{lastModified_dt}</if> <if test="phone != null and '' != phone" > AND api_sms_verify.phone = #{phone}</if> <if test="tpl != null and '' != tpl" > AND api_sms_verify.tpl = #{tpl}</if> <if test="mock != null and '' != mock" > AND api_sms_verify.mock = #{mock}</if> <if test="sentDt != null and '' != sentDt" > AND api_sms_verify.sent_dt = #{sentDt}</if> <if test="expireDt != null and '' != expireDt" > AND api_sms_verify.expire_dt = #{expireDt}</if> <if test="ticket != null and '' != ticket" > AND api_sms_verify.ticket = #{ticket}</if> <if test="code != null and '' != code" > AND api_sms_verify.code = #{code}</if> <if test="submailReq != null and '' != submailReq" > AND api_sms_verify.submail_req = #{submailReq}</if> <if test="submailRsp != null and '' != submailRsp" > AND api_sms_verify.submail_rsp = #{submailRsp}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createdDt != null and '' != createdDt" > AND created_dt = #{createdDt}</if> <if test="lastModified_dt != null and '' != lastModified_dt" > AND last_modified_dt = #{lastModified_dt}</if> <if test="phone != null and '' != phone" > AND phone = #{phone}</if> <if test="tpl != null and '' != tpl" > AND tpl = #{tpl}</if> <if test="mock != null and '' != mock" > AND mock = #{mock}</if> <if test="sentDt != null and '' != sentDt" > AND sent_dt = #{sentDt}</if> <if test="expireDt != null and '' != expireDt" > AND expire_dt = #{expireDt}</if> <if test="ticket != null and '' != ticket" > AND ticket = #{ticket}</if> <if test="code != null and '' != code" > AND code = #{code}</if> <if test="submailReq != null and '' != submailReq" > AND submail_req = #{submailReq}</if> <if test="submailRsp != null and '' != submailRsp" > AND submail_rsp = #{submailRsp}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM v2_api_sms_verify AS api_sms_verify
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT api_sms_verify.id as id, api_sms_verify.created_dt as createdDt, api_sms_verify.last_modified_dt as lastModified_dt, api_sms_verify.phone as phone, api_sms_verify.tpl as tpl, api_sms_verify.mock as mock, api_sms_verify.sent_dt as sentDt, api_sms_verify.expire_dt as expireDt, api_sms_verify.ticket as ticket, api_sms_verify.code as code, api_sms_verify.submail_req as submailReq, api_sms_verify.submail_rsp as submailRsp FROM v2_api_sms_verify AS api_sms_verify WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT api_sms_verify.id as id, api_sms_verify.created_dt as createdDt, api_sms_verify.last_modified_dt as lastModified_dt, api_sms_verify.phone as phone, api_sms_verify.tpl as tpl, api_sms_verify.mock as mock, api_sms_verify.sent_dt as sentDt, api_sms_verify.expire_dt as expireDt, api_sms_verify.ticket as ticket, api_sms_verify.code as code, api_sms_verify.submail_req as submailReq, api_sms_verify.submail_rsp as submailRsp FROM v2_api_sms_verify AS api_sms_verify
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT api_sms_verify.id as id, api_sms_verify.created_dt as createdDt, api_sms_verify.last_modified_dt as lastModified_dt, api_sms_verify.phone as phone, api_sms_verify.tpl as tpl, api_sms_verify.mock as mock, api_sms_verify.sent_dt as sentDt, api_sms_verify.expire_dt as expireDt, api_sms_verify.ticket as ticket, api_sms_verify.code as code, api_sms_verify.submail_req as submailReq, api_sms_verify.submail_rsp as submailRsp FROM v2_api_sms_verify AS api_sms_verify  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO v2_api_sms_verify 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createdDt != null">created_dt,</if><if test="lastModified_dt != null">last_modified_dt,</if><if test="phone != null">phone,</if><if test="tpl != null">tpl,</if><if test="mock != null">mock,</if><if test="sentDt != null">sent_dt,</if><if test="expireDt != null">expire_dt,</if><if test="ticket != null">ticket,</if><if test="code != null">code,</if><if test="submailReq != null">submail_req,</if><if test="submailRsp != null">submail_rsp,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createdDt != null">#{createdDt},</if><if test="lastModified_dt != null">#{lastModified_dt},</if><if test="phone != null">#{phone},</if><if test="tpl != null">#{tpl},</if><if test="mock != null">#{mock},</if><if test="sentDt != null">#{sentDt},</if><if test="expireDt != null">#{expireDt},</if><if test="ticket != null">#{ticket},</if><if test="code != null">#{code},</if><if test="submailReq != null">#{submailReq},</if><if test="submailRsp != null">#{submailRsp},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO v2_api_sms_verify (id,created_dt,last_modified_dt,phone,tpl,mock,sent_dt,expire_dt,ticket,code,submail_req,submail_rsp)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createdDt},#{item.lastModified_dt},#{item.phone},#{item.tpl},#{item.mock},#{item.sentDt},#{item.expireDt},#{item.ticket},#{item.code},#{item.submailReq},#{item.submailRsp})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE v2_api_sms_verify
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createdDt != null" >  created_dt = #{createdDt}, </if><if test="lastModified_dt != null" >  last_modified_dt = #{lastModified_dt}, </if><if test="phone != null" >  phone = #{phone}, </if><if test="tpl != null" >  tpl = #{tpl}, </if><if test="mock != null" >  mock = #{mock}, </if><if test="sentDt != null" >  sent_dt = #{sentDt}, </if><if test="expireDt != null" >  expire_dt = #{expireDt}, </if><if test="ticket != null" >  ticket = #{ticket}, </if><if test="code != null" >  code = #{code}, </if><if test="submailReq != null" >  submail_req = #{submailReq}, </if><if test="submailRsp != null" >  submail_rsp = #{submailRsp}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM v2_api_sms_verify 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM v2_api_sms_verify 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

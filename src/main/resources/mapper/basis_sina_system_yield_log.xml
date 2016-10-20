@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_sina_system_yield_log">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="logDate != null and '' != logDate" > AND sina_system_yield_log.log_date = #{logDate}</if> <if test="logSina_7days_yield_rate != null and '' != logSina_7days_yield_rate" > AND sina_system_yield_log.log_sina_7days_yield_rate = #{logSina_7days_yield_rate}</if> <if test="logSina_net_float != null and '' != logSina_net_float" > AND sina_system_yield_log.log_sina_net_float = #{logSina_net_float}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND sina_system_yield_log.log_createtime = #{logCreatetime}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="logDate != null and '' != logDate" > AND log_date = #{logDate}</if> <if test="logSina_7days_yield_rate != null and '' != logSina_7days_yield_rate" > AND log_sina_7days_yield_rate = #{logSina_7days_yield_rate}</if> <if test="logSina_net_float != null and '' != logSina_net_float" > AND log_sina_net_float = #{logSina_net_float}</if> <if test="logCreatetime != null and '' != logCreatetime" > AND log_createtime = #{logCreatetime}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_sina_system_yield_log AS sina_system_yield_log
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT sina_system_yield_log.log_date as logDate, sina_system_yield_log.log_sina_7days_yield_rate as logSina_7days_yield_rate, sina_system_yield_log.log_sina_net_float as logSina_net_float, sina_system_yield_log.log_createtime as logCreatetime FROM dr_sina_system_yield_log AS sina_system_yield_log WHERE log_date = #{logDate}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT sina_system_yield_log.log_date as logDate, sina_system_yield_log.log_sina_7days_yield_rate as logSina_7days_yield_rate, sina_system_yield_log.log_sina_net_float as logSina_net_float, sina_system_yield_log.log_createtime as logCreatetime FROM dr_sina_system_yield_log AS sina_system_yield_log
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT sina_system_yield_log.log_date as logDate, sina_system_yield_log.log_sina_7days_yield_rate as logSina_7days_yield_rate, sina_system_yield_log.log_sina_net_float as logSina_net_float, sina_system_yield_log.log_createtime as logCreatetime FROM dr_sina_system_yield_log AS sina_system_yield_log  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_sina_system_yield_log 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="logDate != null">log_date,</if><if test="logSina_7days_yield_rate != null">log_sina_7days_yield_rate,</if><if test="logSina_net_float != null">log_sina_net_float,</if><if test="logCreatetime != null">log_createtime,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="logDate != null">#{logDate},</if><if test="logSina_7days_yield_rate != null">#{logSina_7days_yield_rate},</if><if test="logSina_net_float != null">#{logSina_net_float},</if><if test="logCreatetime != null">#{logCreatetime},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_sina_system_yield_log (log_date,log_sina_7days_yield_rate,log_sina_net_float,log_createtime)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.logDate},#{item.logSina_7days_yield_rate},#{item.logSina_net_float},#{item.logCreatetime})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_sina_system_yield_log
+    <set>
+     <if test="logDate != null" >  log_date = #{logDate}, </if><if test="logSina_7days_yield_rate != null" >  log_sina_7days_yield_rate = #{logSina_7days_yield_rate}, </if><if test="logSina_net_float != null" >  log_sina_net_float = #{logSina_net_float}, </if><if test="logCreatetime != null" >  log_createtime = #{logCreatetime}, </if>
+      </set>
+	  WHERE log_date = #{logDate}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_sina_system_yield_log 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_sina_system_yield_log 
+		WHERE log_date IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

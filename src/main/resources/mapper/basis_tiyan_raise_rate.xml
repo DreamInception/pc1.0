@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basis_tiyan_raise_rate">
+
+	<sql id="Example_Where_Select" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND tiyan_raise_rate.id = #{id}</if> <if test="createDt != null and '' != createDt" > AND tiyan_raise_rate.create_dt = #{createDt}</if> <if test="modifiedTs != null and '' != modifiedTs" > AND tiyan_raise_rate.modified_ts = #{modifiedTs}</if> <if test="state != null and '' != state" > AND tiyan_raise_rate.state = #{state}</if>
+	     </where>
+	</sql>
+
+	
+	<sql id="Example_Where_Delete" >
+		<where>
+		1=1  <if test="id != null and '' != id" > AND id = #{id}</if> <if test="createDt != null and '' != createDt" > AND create_dt = #{createDt}</if> <if test="modifiedTs != null and '' != modifiedTs" > AND modified_ts = #{modifiedTs}</if> <if test="state != null and '' != state" > AND state = #{state}</if>
+		</where>
+	</sql>
+
+	<select id="count" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT count(1) AS count FROM dr_tiyan_raise_rate AS tiyan_raise_rate
+		<include refid="Example_Where_Select" />
+	</select>
+	
+	<select id="findbyid" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		 SELECT tiyan_raise_rate.id as id, tiyan_raise_rate.create_dt as createDt, tiyan_raise_rate.modified_ts as modifiedTs, tiyan_raise_rate.state as state FROM dr_tiyan_raise_rate AS tiyan_raise_rate WHERE id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	     SELECT tiyan_raise_rate.id as id, tiyan_raise_rate.create_dt as createDt, tiyan_raise_rate.modified_ts as modifiedTs, tiyan_raise_rate.state as state FROM dr_tiyan_raise_rate AS tiyan_raise_rate
+		 <include refid="Example_Where_Select" />
+		 <if test="orderby != null and '' != orderby">
+			${orderby}
+		 </if>
+	</select>
+	
+	<select id="findPageList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT tiyan_raise_rate.id as id, tiyan_raise_rate.create_dt as createDt, tiyan_raise_rate.modified_ts as modifiedTs, tiyan_raise_rate.state as state FROM dr_tiyan_raise_rate AS tiyan_raise_rate  
+		<include refid="Example_Where_Select" />
+		<if test="orderby != null and '' != orderby">
+			${orderby}
+		</if>
+	    LIMIT #{start},#{end}
+	</select>
+	
+	<insert id="save" parameterType="java.util.HashMap">
+		INSERT INTO dr_tiyan_raise_rate 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if><if test="createDt != null">create_dt,</if><if test="modifiedTs != null">modified_ts,</if><if test="state != null">state,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+     		<if test="id != null">#{id},</if><if test="createDt != null">#{createDt},</if><if test="modifiedTs != null">#{modifiedTs},</if><if test="state != null">#{state},</if>
+		</trim>
+	</insert>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+		INSERT INTO dr_tiyan_raise_rate (id,create_dt,modified_ts,state)
+	    VALUES 
+	    <foreach collection="list" item="item" separator=",">
+	   	  (#{item.id},#{item.createDt},#{item.modifiedTs},#{item.state})
+	    </foreach>
+	</insert>
+	
+	
+	<update id="update" parameterType="java.util.HashMap">
+		 UPDATE dr_tiyan_raise_rate
+    <set>
+     <if test="id != null" >  id = #{id}, </if><if test="createDt != null" >  create_dt = #{createDt}, </if><if test="modifiedTs != null" >  modified_ts = #{modifiedTs}, </if><if test="state != null" >  state = #{state}, </if>
+      </set>
+	  WHERE id = #{id}
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM dr_tiyan_raise_rate 
+		<include refid="Example_Where_Delete" />
+	</delete>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+		DELETE FROM dr_tiyan_raise_rate 
+		WHERE id IN
+		<foreach collection="list" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>
